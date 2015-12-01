@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 
 import app.estat.mob.R;
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import app.estat.mob.mvp.presenter.MainPresenter;
-import app.estat.mob.mvp.view.MainView;
+import app.estat.mob.mvp.presenter.DashboardPresenter;
+import app.estat.mob.mvp.view.DashboardView;
 
-public class MainActivity extends MvpBaseActivity<MainPresenter, MainView> implements MainView {
+public class DashboardActivity extends MvpBaseActivity<DashboardPresenter, DashboardView>
+        implements DashboardView {
 
     @Override
     public int getLayoutResId() {
@@ -17,8 +18,8 @@ public class MainActivity extends MvpBaseActivity<MainPresenter, MainView> imple
 
     @NonNull
     @Override
-    public MainPresenter createPresenter() {
-        return new MainPresenter();
+    public DashboardPresenter createPresenter() {
+        return new DashboardPresenter();
     }
 
     @Override

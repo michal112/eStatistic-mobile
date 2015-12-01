@@ -1,6 +1,5 @@
 package app.estat.mob.mvp.core;
 
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
