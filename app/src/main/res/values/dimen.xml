@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cow_cv_height">42dp</dimen>
+    <dimen name="cow_cv_padding">4dp</dimen>
+    <dimen name="cow_cv_iv_width">36dp</dimen>
+
+    <dimen name="recycler_vertical_padding">6dp</dimen>
+    <dimen name="recycler_horizontal_padding">6dp</dimen>
+</resources>
