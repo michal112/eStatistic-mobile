@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="farm_card_name">Karta gospodarstwa</string>
+    <string name="farm_card_description">Informacje o mnie i moim gospodarstwie</string>
+    <string name="average_productivity_name">Przeciętne wydajności</string>
+    <string name="average_productivity_description">Wyniki i wydajności mojego gospodarstwa</string>
+    <string name="my_cows_name">Moje krowy</string>
+    <string name="my_cows_description">Zarządzaj swoimi krowami</string>
+    <string name="milk_production">Produkcja mleka</string>
+    <string name="milk_production_description">Informacje o produkcji mleka w moim gospodarstwie</string>
+</resources>

@@ -1,23 +1,14 @@
 package app.estat.mob;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 public class ApplicationCore extends Application {
-
-    private static String TAG = ApplicationCore.class.getCanonicalName();
-
-    private static Context context;
-
-    public static Context getContext() {
-        return context;
-    }
+    private static String TAG = ApplicationCore.class.getName();
 
     @Override
     public void onCreate() {
         Log.i(TAG, "Application started");
-        context = getApplicationContext();
 
         super.onCreate();
     }
@@ -28,5 +19,4 @@ public class ApplicationCore extends Application {
 
         Log.i(TAG, "Application terminated");
     }
-
 }

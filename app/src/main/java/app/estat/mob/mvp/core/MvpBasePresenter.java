@@ -1,10 +1,19 @@
 package app.estat.mob.mvp.core;
 
+import android.support.annotation.Nullable;
 import java.lang.ref.WeakReference;
+import javax.inject.Inject;
+import app.estat.mob.db.DbCache;
+import app.estat.mob.db.DbManager;
 
 public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
+    private WeakReference<V> view;
 
-    private WeakReference<V> view = null;
+    @Inject
+    public DbManager mManager;
+
+    @Inject
+    public DbCache mCache;
 
     @Override
     public void attachView(V view) {
@@ -15,7 +24,6 @@ public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresente
     public void detachView() {
         if (isViewAttached()) {
             view.clear();
-            view = null;
         }
     }
 
@@ -24,9 +32,9 @@ public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresente
         return view != null && view.get() != null;
     }
 
+    @Nullable
     @Override
     public V getView() {
         return view != null ? view.get() : null;
     }
-
 }
