@@ -1,30 +1,37 @@
 package app.estat.mob.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
 import app.estat.mob.R;
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import app.estat.mob.mvp.presenter.DashboardPresenter;
-import app.estat.mob.mvp.view.DashboardView;
+import app.estat.mob.mvp.presenter.DashboardActivityPresenter;
+import app.estat.mob.mvp.view.DashboardActivityView;
 
-public class DashboardActivity extends MvpBaseActivity<DashboardPresenter, DashboardView>
-        implements DashboardView {
+public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresenter, DashboardActivityView>
+        implements DashboardActivityView {
+
+    public static void newIntent(@NonNull Context context) {
+        Intent intent = new Intent(context, DashboardActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     public int getLayoutResId() {
-        return R.layout.main_activity;
+        return R.layout.activity_dashboard;
     }
 
     @NonNull
     @Override
-    public DashboardPresenter createPresenter() {
-        return new DashboardPresenter();
+    public DashboardActivityPresenter createPresenter() {
+        return new DashboardActivityPresenter();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
 
+        addFragment(R.id.activity_dashboard_container, DashboardFragment.newInstance(), true);
+    }
 }
