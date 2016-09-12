@@ -39,14 +39,14 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.ModuleView
 
     @Override
     public void onBindViewHolder(ModuleViewHolder holder, int position) {
-        holder.bindName(ViewUtils.getResId(mContext, mModules.get(position).getNameRes()));
-        holder.bindDescription(ViewUtils.getResId(mContext, mModules.get(position).getDescriptionRes()));
-        holder.bindImage(ViewUtils.getResId(mContext, mModules.get(position).getIconRes()));
+        holder.bindName(ViewUtils.getResId(mContext, mModules.get(position % 4).getNameRes()));
+        holder.bindDescription(ViewUtils.getResId(mContext, mModules.get(position % 4).getDescriptionRes()));
+        holder.bindImage(ViewUtils.getResId(mContext, mModules.get(position % 4).getIconRes()));
     }
 
     @Override
     public int getItemCount() {
-        return mModules.size();
+        return mModules.size() * 4;
     }
 
     public static class ModuleViewHolder extends RecyclerView.ViewHolder {
