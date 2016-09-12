@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import app.estat.mob.ApplicationCore;
+import app.estat.mob.component.ApplicationComponent;
 import butterknife.ButterKnife;
 
 public abstract class MvpBaseFragment<P extends MvpPresenter<V>, V extends MvpBaseFragmentView>
@@ -23,7 +26,7 @@ public abstract class MvpBaseFragment<P extends MvpPresenter<V>, V extends MvpBa
     public abstract int getLayoutResId();
 
     @NonNull
-    public abstract P createPresenter();
+    public abstract P createPresenter(ApplicationComponent applicationComponent);
 
     @NonNull
     @Override
@@ -32,7 +35,7 @@ public abstract class MvpBaseFragment<P extends MvpPresenter<V>, V extends MvpBa
         View view = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, view);
 
-        presenter = createPresenter();
+        presenter = createPresenter(((ApplicationCore) getActivity().getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
 
         return view;

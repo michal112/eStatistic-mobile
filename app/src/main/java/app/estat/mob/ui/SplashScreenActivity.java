@@ -10,16 +10,17 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
+import app.estat.mob.ApplicationCore;
 import app.estat.mob.R;
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
 
 public class SplashScreenActivity extends AppCompatActivity {
     @Inject
-    private DbCache mCache;
+    DbCache mCache;
 
     @Inject
-    private DbManager mManager;
+    DbManager mManager;
 
     private final static int PREFETCH_DATA = 1;
 
@@ -33,10 +34,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         Log.d(TAG, "Loading data to cache");
+        ((ApplicationCore) getApplication()).getApplicationComponent().inject(this);
         mStarterThread = new StarterThread(new Handler(Looper.getMainLooper()));
         mStarterThread.start();
         mStarterThread.getLooper();
-        mStarterThread.prefetchData();
     }
 
     private void startDashboardActivity() {
@@ -46,7 +47,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private class StarterThread extends HandlerThread {
-        private final static int MIN_PREFETCH_TIME = 3000;
+        private final static int MIN_PREFETCH_TIME = 1500;
 
         private Handler mHandler;
 
@@ -77,9 +78,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                     }
                 }
             };
+
+            prefetchData();
         }
 
-        public void prefetchData() {
+        private void prefetchData() {
             mHandler.obtainMessage(PREFETCH_DATA).sendToTarget();
         }
     }

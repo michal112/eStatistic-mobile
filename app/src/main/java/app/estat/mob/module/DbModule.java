@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
+
 import dagger.Module;
 import dagger.Provides;
 

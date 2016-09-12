@@ -3,14 +3,17 @@ package app.estat.mob.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import app.estat.mob.R;
+import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.adapter.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.DashboardFragmentPresenter;
 import app.estat.mob.mvp.view.DashboardFragmentView;
+
 import butterknife.BindView;
 
 public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresenter, DashboardFragmentView>
@@ -30,12 +33,14 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
     @NonNull
     @Override
-    public DashboardFragmentPresenter createPresenter() {
-        return new DashboardFragmentPresenter();
+    public DashboardFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
+        return new DashboardFragmentPresenter(applicationComponent);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ModuleAdapter moduleAdapter = new ModuleAdapter(getPresenter().requestModules(), getActivity());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(moduleAdapter);
     }
 }

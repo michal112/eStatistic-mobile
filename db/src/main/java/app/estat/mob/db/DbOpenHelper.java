@@ -3,10 +3,13 @@ package app.estat.mob.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import org.greenrobot.greendao.DbUtils;
 import org.greenrobot.greendao.database.Database;
+
 import java.io.IOException;
 import java.util.Locale;
+
 import app.estat.mob.db.dao.DaoMaster;
 
 public class DbOpenHelper extends DaoMaster.OpenHelper {

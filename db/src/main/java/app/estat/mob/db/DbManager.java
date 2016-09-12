@@ -1,6 +1,7 @@
 package app.estat.mob.db;
 
 import android.content.Context;
+
 import app.estat.mob.db.dao.DaoMaster;
 import app.estat.mob.db.dao.DaoSession;
 

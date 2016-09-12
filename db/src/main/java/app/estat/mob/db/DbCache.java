@@ -1,6 +1,7 @@
 package app.estat.mob.db;
 
 import java.util.List;
+
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.entity.Module;
 import app.estat.mob.db.service.ModuleService;

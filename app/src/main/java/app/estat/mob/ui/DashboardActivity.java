@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import app.estat.mob.R;
+import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.DashboardActivityPresenter;
 import app.estat.mob.mvp.view.DashboardActivityView;
@@ -24,8 +26,8 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
 
     @NonNull
     @Override
-    public DashboardActivityPresenter createPresenter() {
-        return new DashboardActivityPresenter();
+    public DashboardActivityPresenter createPresenter(ApplicationComponent applicationComponent) {
+        return new DashboardActivityPresenter(applicationComponent);
     }
 
     @Override

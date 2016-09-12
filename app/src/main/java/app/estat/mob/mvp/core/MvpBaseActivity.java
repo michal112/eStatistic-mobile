@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import app.estat.mob.ApplicationCore;
+import app.estat.mob.component.ApplicationComponent;
 import butterknife.ButterKnife;
 
 public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBaseActivityView>
@@ -23,7 +25,7 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
     public abstract int getLayoutResId();
 
     @NonNull
-    public abstract P createPresenter();
+    public abstract P createPresenter(ApplicationComponent applicationComponent);
 
     @Override
     @SuppressWarnings("unchecked")
@@ -32,7 +34,7 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
 
-        presenter = createPresenter();
+        presenter = createPresenter(((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
     }
 
