@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_app_bar_height">224dp</dimen>
-    <dimen name="activity_app_bar_logo_height">108dp</dimen>
-    <dimen name="activity_app_bar_logo_width">108dp</dimen>
+    <dimen name="activity_app_bar_belt_height">48dp</dimen>
+    <dimen name="activity_app_bar_height">244dp</dimen>
+    <dimen name="activity_app_bar_logo_height">104dp</dimen>
+    <dimen name="activity_app_bar_logo_width">104dp</dimen>
 
     <dimen name="activity_splash_screen_text_layout_width">240dp</dimen>
     <dimen name="activity_splash_screen_image_width">240dp</dimen>
@@ -16,4 +17,6 @@
     <dimen name="fragment_dashboard_item_radius">4dp</dimen>
     <dimen name="fragment_dashboard_item_card_margin">12dp</dimen>
     <dimen name="fragment_dashboard_item_name_text_size">16sp</dimen>
+    <dimen name="activity_app_bar_logo_layout_width">112dp</dimen>
+    <dimen name="activity_app_bar_logo_layout_height">112dp</dimen>
 </resources>

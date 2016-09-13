@@ -26,44 +26,53 @@
                 android:id="@+id/activity_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="parallax">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/im_farm"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:alpha="0.5"
-                        android:background="?attr/colorPrimary"/>
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/farm_photo"
+                    app:layout_collapseMode="parallax" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.5"
+                    android:background="?attr/colorPrimary" />
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom">
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="@dimen/activity_app_bar_belt_height"
                         android:layout_gravity="bottom"
-                        android:background="@drawable/activity_app_bar_belt"/>
-                    <LinearLayout android:layout_width="116dp"
-                        android:layout_height="116dp"
-                        android:layout_gravity="bottom|center_horizontal"
-                        android:gravity="center"
-                        android:background="@drawable/activity_app_bar_circle">
+                        android:background="@drawable/activity_app_bar_belt" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/activity_app_bar_logo_layout_width"
+                        android:layout_height="@dimen/activity_app_bar_logo_layout_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/activity_app_bar_circle"
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/activity_app_bar_logo"
                             android:layout_width="@dimen/activity_app_bar_logo_width"
                             android:layout_height="@dimen/activity_app_bar_logo_height"
                             android:src="@drawable/ic_launcher" />
+
                     </LinearLayout>
+
                 </FrameLayout>
+
             </FrameLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </me.henrytao.smoothappbarlayout.SmoothAppBarLayout>
