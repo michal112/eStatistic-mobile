@@ -2,27 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/splashScreenBackground">
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="@dimen/activity_splash_screen_image_width"
-        android:layout_height="@dimen/activity_splash_screen_image_height"
-        android:src="@drawable/ic_launcher"/>
-
-    <LinearLayout
-        android:layout_width="@dimen/activity_splash_screen_text_layout_width"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-    <TextView android:layout_height="wrap_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:text="@string/main_title"
-        />
-        <TextView android:layout_height="wrap_content"
+        android:layout_height="match_parent">
+
+        <View
             android:layout_width="match_parent"
-            android:text="@string/main_description"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="@color/splashScreenBackground"
+            android:alpha="0.5"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/activity_splash_screen_layout_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/activity_splash_screen_image_width"
+                android:layout_height="@dimen/activity_splash_screen_image_height"
+                android:src="@drawable/ic_launcher"/>
+
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/splash_screen_text_size"
+                android:text="@string/splash_screen_text" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
 </LinearLayout>

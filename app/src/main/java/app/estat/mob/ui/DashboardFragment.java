@@ -39,6 +39,7 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         ModuleAdapter moduleAdapter = new ModuleAdapter(getPresenter().requestModules(), getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(moduleAdapter);
