@@ -16,6 +16,6 @@
 
     <style name="TextView" />
     <style name="SplashScreenTextView" parent="TextView">
-        <item
+
     </style>
 </resources>
