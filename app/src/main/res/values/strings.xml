@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eStatistic</string>
+    <string name="drawer_user_unknown">Unknown user</string>
+    <string name="splash_screen_text">Manage your dairy farm easy</string>
 </resources>

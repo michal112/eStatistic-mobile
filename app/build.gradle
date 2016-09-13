@@ -28,6 +28,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.android.support:cardview-v7:23.2.0'
 
+    //Circle Image Library
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    //Smooth AppBarLayout
     compile "me.henrytao:smooth-app-bar-layout:24.2.0.2"
 
     //Butter Knife

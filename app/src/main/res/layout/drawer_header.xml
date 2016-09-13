@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/drawer_header_height"
+              android:layout_marginBottom="@dimen/drawer_header_bottom_margin"
+              android:background="?attr/colorPrimary"
+              android:orientation="vertical"
+              android:paddingEnd="@dimen/drawer_horizontal_margin"
+              android:paddingLeft="@dimen/drawer_horizontal_margin"
+              android:paddingRight="@dimen/drawer_horizontal_margin"
+              android:paddingStart="@dimen/drawer_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_header_avatar_layout_height"
+        android:gravity="center_vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/drawer_user_avatar"
+            android:layout_width="@dimen/drawer_header_user_avatar_width"
+            android:layout_height="@dimen/drawer_header_user_avatar_height"
+            android:src="@drawable/avatar_circle"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_header_user_layout_height"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/drawer_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_user_unknown"
+            android:textColor="@color/white"
+            android:textSize="@dimen/drawer_header_text_size"
+            android:textStyle="bold"
+            tools:text="Michał Szubert"/>
+
+    </LinearLayout>
+
+</LinearLayout>
