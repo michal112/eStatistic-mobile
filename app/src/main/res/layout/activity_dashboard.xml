@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/activity_dashboard_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" />
+
     <me.henrytao.smoothappbarlayout.SmoothAppBarLayout
         android:id="@+id/smooth_app_bar_layout"
         android:layout_width="match_parent"
@@ -13,9 +19,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="0dp"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/activity_appbar_logo"
@@ -27,16 +32,8 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/activity_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways" />
+                android:layout_height="?attr/actionBarSize" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </me.henrytao.smoothappbarlayout.SmoothAppBarLayout>
-
-    <LinearLayout
-        android:id="@+id/activity_dashboard_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

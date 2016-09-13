@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_appbar_height">212dp</dimen>
+
+    <dimen name="activity_splash_screen_image_width">240dp</dimen>
+    <dimen name="activity_splash_screen_image_height">240dp</dimen>
+
     <dimen name="fragment_dashboard_item_height">76dp</dimen>
     <dimen name="fragment_dashboard_item_image_height">48dp</dimen>
     <dimen name="fragment_dashboard_item_image_width">48dp</dimen>
     <dimen name="fragment_dashboard_item_elevation">2dp</dimen>
-    <dimen name="fragment_dashboard_item_vertical_padding">12dp</dimen>
-    <dimen name="fragment_dashboard_item_radius">2dp</dimen>
+    <dimen name="fragment_dashboard_item_vertical_margin">4dp</dimen>
+    <dimen name="fragment_dashboard_item_radius">4dp</dimen>
     <dimen name="fragment_dashboard_item_card_margin">12dp</dimen>
     <dimen name="fragment_dashboard_item_name_text_size">16sp</dimen>
 </resources>

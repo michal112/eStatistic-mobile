@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#5e2b2b">
+    
+    android:background=>
 
-    <ProgressBar
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:indeterminate="true" />
+    <ImageView
+        android:layout_width="@dimen/activity_splash_screen_image_width"
+        android:layout_height="@dimen/activity_splash_screen_image_height"
+        android:src="@drawable/ic_launcher"/>
 
 </LinearLayout>
