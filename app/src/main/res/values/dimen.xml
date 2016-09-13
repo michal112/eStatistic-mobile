@@ -2,6 +2,7 @@
 <resources>
     <dimen name="activity_appbar_height">212dp</dimen>
 
+    <dimen name="activity_splash_screen_text_layout_width">240dp</dimen>
     <dimen name="activity_splash_screen_image_width">240dp</dimen>
     <dimen name="activity_splash_screen_image_height">240dp</dimen>
 
