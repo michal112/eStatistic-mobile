@@ -7,13 +7,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import app.estat.mob.ApplicationCore;
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBaseActivityView>
         extends AppCompatActivity implements MvpBaseActivityView {
+    @BindView(R.id.activity_toolbar)
+    Toolbar mToolbar;
+
     private P presenter;
 
     @NonNull
@@ -34,6 +40,7 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
 
+        setSupportActionBar(mToolbar);
         presenter = createPresenter(((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
     }
@@ -43,6 +50,10 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
         super.onDestroy();
 
         presenter.detachView();
+    }
+
+    public Toolbar getMainToolbar() {
+        return mToolbar;
     }
 
     @Override

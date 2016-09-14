@@ -1,9 +1,13 @@
 package app.estat.mob.db.entity;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
+
+import app.estat.mob.db.converter.ActivityConverter;
+import app.estat.mob.db.type.Activity;
 
 @Entity(nameInDb = "MODULE")
 public class Module {
@@ -19,12 +23,18 @@ public class Module {
     @Property(nameInDb = "DESCRIPTION")
     private String descriptionRes;
 
-    @Generated(hash = 205690572)
-    public Module(long id, String nameRes, String iconRes, String descriptionRes) {
+    @Property(nameInDb = "ACTIVITY")
+    @Convert(columnType = String.class, converter = ActivityConverter.class)
+    private Activity activity;
+
+    @Generated(hash = 2041164382)
+    public Module(long id, String nameRes, String iconRes, String descriptionRes,
+            Activity activity) {
         this.id = id;
         this.nameRes = nameRes;
         this.iconRes = iconRes;
         this.descriptionRes = descriptionRes;
+        this.activity = activity;
     }
 
     @Generated(hash = 300059863)
@@ -61,5 +71,13 @@ public class Module {
 
     public void setDescriptionRes(String descriptionRes) {
         this.descriptionRes = descriptionRes;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public Activity getActivity() {
+        return this.activity;
     }
 }

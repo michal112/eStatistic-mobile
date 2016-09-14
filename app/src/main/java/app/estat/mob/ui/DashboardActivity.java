@@ -22,10 +22,6 @@ import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
 
 public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresenter, DashboardActivityView>
         implements DashboardActivityView {
-
-    @BindView(R.id.activity_toolbar)
-    Toolbar mToolbar;
-
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
@@ -59,17 +55,17 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSupportActionBar(mToolbar);
         mDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         mAppBarLayout.addOnOffsetChangedListener(new ModuleOffsetListener(mAppBarLayout));
 
-        addFragment(R.id.activity_dashboard_container, DashboardFragment.newInstance(), true);
+        addFragment(R.id.activity_dashboard_container, DashboardFragment.newInstance(), false);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, mDrawerLayout,
+                getMainToolbar(), R.string.drawer_open, R.string.drawer_close);
     }
 
     @Override

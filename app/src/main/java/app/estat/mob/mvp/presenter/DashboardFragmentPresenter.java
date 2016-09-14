@@ -18,4 +18,12 @@ public class DashboardFragmentPresenter extends MvpBasePresenter<DashboardFragme
         mModules = getModuleWrapper().getCache().getModules();
         return mModules;
     }
+
+    public Module getModule(int position) {
+        if (mModules.isEmpty()) {
+            return null;
+        }
+
+        return mModules.get(position);
+    }
 }

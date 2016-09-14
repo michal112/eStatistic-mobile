@@ -9,11 +9,11 @@
         android:layout_height="match_parent">
 
         <FrameLayout
-            android:id="@+id/activity_dashboard_container"
+            android:id="@+id/activity_farm_card_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <include layout="@layout/activity_dashboard_app_bar"/>
+        <include layout="@layout/activity_farm_card_app_bar"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

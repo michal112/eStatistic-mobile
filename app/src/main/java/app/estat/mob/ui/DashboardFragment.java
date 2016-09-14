@@ -22,6 +22,14 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
     @BindView(R.id.fragment_dashboard_recycler_view)
     RecyclerView mRecyclerView;
 
+    private final ModuleAdapter.ModuleClickListener
+            mModuleClickListener = new ModuleAdapter.ModuleClickListener() {
+        @Override
+        public void onClick(int position) {
+            getPresenter().getModule(position);
+        }
+    };
+
     public static DashboardFragment newInstance() {
         return new DashboardFragment();
     }
@@ -40,7 +48,8 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        ModuleAdapter moduleAdapter = new ModuleAdapter(getPresenter().requestModules(), getActivity());
+        ModuleAdapter moduleAdapter = new ModuleAdapter(getActivity(),
+                getPresenter().requestModules(), mModuleClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(moduleAdapter);
     }

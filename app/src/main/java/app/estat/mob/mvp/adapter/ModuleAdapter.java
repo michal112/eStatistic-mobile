@@ -21,6 +21,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public interface ModuleClickListener {
+        void onClick(int position);
+    }
+
     private final static int HEADER = 0;
 
     private final static int MODULE = 1;
@@ -29,9 +33,12 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private final List<Module> mModules;
 
-    public ModuleAdapter(List<Module> modules, Context context) {
-        this.mModules = modules;
-        this.mContext = context;
+    private final ModuleClickListener mModuleClickListener;
+
+    public ModuleAdapter(Context mContext, List<Module> mModules, ModuleClickListener mModuleClickListener) {
+        this.mContext = mContext;
+        this.mModules = mModules;
+        this.mModuleClickListener = mModuleClickListener;
     }
 
     @Override
@@ -42,7 +49,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         R.layout.recycler_view_header, parent, false));
             case MODULE:
                 return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.fragment_dashboard_item, parent, false));
+                    R.layout.fragment_dashboard_item, parent, false), mModuleClickListener);
             default:
                 return null;
         }
@@ -52,9 +59,10 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ModuleViewHolder) {
             ModuleViewHolder moduleViewHolder = ((ModuleViewHolder) holder);
-            moduleViewHolder.bindName(ViewUtils.getResId(mContext, mModules.get(position % 4).getNameRes()));
-            moduleViewHolder.bindDescription(ViewUtils.getResId(mContext, mModules.get(position % 4).getDescriptionRes()));
-            moduleViewHolder.bindImage(ViewUtils.getResId(mContext, mModules.get(position % 4).getIconRes()));
+            Module module = mModules.get(position - 1);
+            moduleViewHolder.bindName(ViewUtils.getResId(mContext, module.getNameRes()));
+            moduleViewHolder.bindDescription(ViewUtils.getResId(mContext, module.getDescriptionRes()));
+            moduleViewHolder.bindImage(ViewUtils.getResId(mContext, module.getIconRes()));
         }
     }
 
@@ -65,10 +73,11 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mModules.size() * 4 + 1;
+        return mModules.size() + 1;
     }
 
-    public static class ModuleViewHolder extends RecyclerView.ViewHolder {
+    public static class ModuleViewHolder extends RecyclerView.ViewHolder
+            implements RecyclerView.OnClickListener {
         @BindView(R.id.fragment_dashboard_item_image)
         ImageView mImage;
 
@@ -78,10 +87,14 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @BindView(R.id.fragment_dashboard_item_description)
         TextView mDescription;
 
-        public ModuleViewHolder(View itemView) {
-            super(itemView);
+        private ModuleClickListener mModuleClickListener;
 
+        public ModuleViewHolder(View itemView, ModuleClickListener moduleClickListener) {
+            super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+
+            this.mModuleClickListener = moduleClickListener;
         }
 
         public void bindName(@StringRes int resId) {
@@ -94,6 +107,11 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void bindImage(@DrawableRes int resId) {
            mImage.setImageResource(resId);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mModuleClickListener.onClick(getAdapterPosition() - 1);
         }
     }
 
