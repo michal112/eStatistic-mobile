@@ -41,8 +41,18 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
+        displayTittle(false);
+
         presenter = createPresenter(((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
+    }
+
+    protected void displayTittle(boolean show) {
+        getSupportActionBar().setDisplayShowTitleEnabled(show);
+    }
+
+    protected void setTittle(String tittle) {
+        getSupportActionBar().setTitle(tittle);
     }
 
     @Override

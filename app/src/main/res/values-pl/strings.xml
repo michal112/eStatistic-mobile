@@ -5,4 +5,5 @@
     <string name="splash_screen_text">Łatwo zarządzaj swoim gospodarstwem!</string>
     <string name="drawer_open">Otwórz nawigację</string>
     <string name="drawer_close">Zamknij nawigację</string>
+    <string name="transition_module_image">Ikona modułu</string>
 </resources>

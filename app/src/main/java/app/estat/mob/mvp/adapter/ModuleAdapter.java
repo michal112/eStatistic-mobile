@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public interface ModuleClickListener {
-        void onClick(int position);
+        void onClick(ImageView imageView, int position);
     }
 
     private final static int HEADER = 0;
@@ -59,7 +59,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ModuleViewHolder) {
             ModuleViewHolder moduleViewHolder = ((ModuleViewHolder) holder);
-            Module module = mModules.get(position - 1);
+            Module module = mModules.get(position % 3);
             moduleViewHolder.bindName(ViewUtils.getResId(mContext, module.getNameRes()));
             moduleViewHolder.bindDescription(ViewUtils.getResId(mContext, module.getDescriptionRes()));
             moduleViewHolder.bindImage(ViewUtils.getResId(mContext, module.getIconRes()));
@@ -73,7 +73,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mModules.size() + 1;
+        return mModules.size() * 2 + 1;
     }
 
     public static class ModuleViewHolder extends RecyclerView.ViewHolder
@@ -111,7 +111,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            mModuleClickListener.onClick(getAdapterPosition() - 1);
+            mModuleClickListener.onClick(mImage, getAdapterPosition() - 1);
         }
     }
 

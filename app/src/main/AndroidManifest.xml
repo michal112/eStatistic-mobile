@@ -5,12 +5,12 @@
         android:name="app.estat.mob.ApplicationCore"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/ApplicationTheme">
 
         <activity
             android:name=".ui.SplashScreenActivity"
             android:label="@string/application_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/ApplicationTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,6 +18,8 @@
         </activity>
 
         <activity android:name=".ui.DashboardActivity" />
+
+        <activity android:name=".ui.FarmCardActivity" />
     </application>
 
 </manifest>
