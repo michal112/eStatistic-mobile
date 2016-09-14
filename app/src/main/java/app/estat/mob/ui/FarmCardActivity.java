@@ -2,6 +2,7 @@ package app.estat.mob.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import app.estat.mob.R;
@@ -20,6 +21,13 @@ public class FarmCardActivity extends MvpBaseActivity<FarmCardActivityPresenter,
     public static void newIntent(@NonNull Context context) {
         Intent intent = new Intent(context, FarmCardActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        addFragment(R.id.activity_farm_card_container, FarmCardFragment.newInstance(), false);
     }
 
     @NonNull

@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.db.entity.Module;
 import app.estat.mob.mvp.adapter.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.DashboardFragmentPresenter;
@@ -18,6 +20,7 @@ import butterknife.BindView;
 
 public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresenter, DashboardFragmentView>
         implements DashboardFragmentView {
+    private static final String TAG = DashboardFragment.class.getName();
 
     @BindView(R.id.fragment_dashboard_recycler_view)
     RecyclerView mRecyclerView;
@@ -26,9 +29,23 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
             mModuleClickListener = new ModuleAdapter.ModuleClickListener() {
         @Override
         public void onClick(int position) {
-            getPresenter().getModule(position);
+            moduleClicked(getPresenter().getModule(position));
         }
     };
+
+    private void moduleClicked(Module module) {
+        if (module == null) {
+            return;
+        }
+
+        switch (module.getActivity()) {
+            case FARM_CARD:
+                FarmCardActivity.newIntent(getActivity());
+                break;
+            default:
+                Log.d(TAG, "Unknown module clicked");
+        }
+    }
 
     public static DashboardFragment newInstance() {
         return new DashboardFragment();

@@ -19,7 +19,7 @@ public class ApplicationCore extends Application {
     public void onCreate() {
         Log.i(TAG, "Application started");
 
-        //load dagger ApplicationComponent (EventBusInstance, DbCache, DbSession, ...)
+        //load dagger ApplicationComponent (EventBus, DbCache, DbSession, ...)
         mApplicationComponent = DaggerApplicationComponent.create();
 
         super.onCreate();
