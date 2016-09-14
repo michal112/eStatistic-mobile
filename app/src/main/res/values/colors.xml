@@ -277,11 +277,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <!-- Colors for the app -->
     <color name="colorPrimary">@color/indigo_500</color>
     <color name="colorPrimaryDark">@color/indigo_700</color>
     <color name="colorAccent">@color/pink_A200</color>
-
-    <color name="splashScreenBackground">@color/indigo_400</color>
-    <color name="appBarBeltColor">@color/indigo_400</color>
 </resources>

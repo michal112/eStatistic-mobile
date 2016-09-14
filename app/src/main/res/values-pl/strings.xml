@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">eStatistic</string>
+    <string name="application_name">eStatystyk</string>
     <string name="drawer_user_unknown">Nieznany użytkownik</string>
-    <string name="splash_screen_text">Manage your dairy farm easy</string>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="splash_screen_text">Łatwo zarządzaj swoim gospodarstwem!</string>
+    <string name="drawer_open">Otwórz nawigację</string>
+    <string name="drawer_close">Zamknij nawigację</string>
 </resources>

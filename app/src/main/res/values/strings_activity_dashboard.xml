@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="farm_card_name">Dairy farm card</string>
-    <string name="farm_card_description">Information about me and mine farm</string>
+    <string name="farm_card_description">Information about me and my farm</string>
     <string name="average_productivity_name">Average productivity</string>
-    <string name="average_productivity_description">Wyniki i wydajności mojego gospodarstwa</string>
+    <string name="average_productivity_description">Results of production in my farm</string>
     <string name="my_cows_name">My cows</string>
-    <string name="my_cows_description">Zarządzaj swoimi krowami</string>
+    <string name="my_cows_description">Manage your cows</string>
     <string name="milk_production">Production of milk</string>
-    <string name="milk_production_description">Informacje o produkcji mleka w moim gospodarstwie</string>
+    <string name="milk_production_description">Information about production of milk in my dairy farm</string>
 </resources>

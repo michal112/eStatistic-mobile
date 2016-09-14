@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/splashScreenBackground"
-            android:alpha="0.5"/>
+            android:background="?attr/colorPrimary"/>
 
         <LinearLayout
             android:layout_width="@dimen/activity_splash_screen_layout_width"
@@ -26,14 +21,14 @@
                 android:layout_height="@dimen/activity_splash_screen_image_height"
                 android:src="@drawable/ic_launcher"/>
 
-            <TextView android:layout_height="wrap_content"
+            <app.estat.mob.ui.widget.SplashScreenTextView android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
+                widget:fontName="splash_screen_font.otf"
                 android:textSize="@dimen/splash_screen_text_size"
+                android:textColor="@color/white"
                 android:text="@string/splash_screen_text" />
 
         </LinearLayout>
 
     </FrameLayout>
-
-</LinearLayout>
