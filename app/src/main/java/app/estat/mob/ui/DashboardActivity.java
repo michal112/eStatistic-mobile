@@ -79,7 +79,7 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
 
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-            displayTittle(isToolbarCollapsed(verticalOffset));
+            displayActionBarTittle(isToolbarCollapsed(verticalOffset));
         }
 
         private boolean isToolbarCollapsed(int verticalOffset) {

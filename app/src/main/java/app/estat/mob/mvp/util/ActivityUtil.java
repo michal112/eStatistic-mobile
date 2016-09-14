@@ -9,7 +9,6 @@ import android.widget.ImageView;
 public abstract class ActivityUtil {
     public static void animateModuleActivity(FragmentActivity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
-        // Check if we're running on Android 5.0 or higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // animate activity transition
             ActivityOptionsCompat activityOptionsCompat =

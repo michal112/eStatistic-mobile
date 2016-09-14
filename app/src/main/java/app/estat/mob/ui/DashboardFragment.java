@@ -47,7 +47,8 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
         switch (module.getActivity()) {
             case FARM_CARD:
                 ActivityUtil.animateModuleActivity(getActivity(),
-                    FarmCardActivity.newIntent(getActivity(), module.getIconRes()), imageView, mTransitionName);
+                    FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                        module.getNameRes()), imageView, mTransitionName);
                 break;
             default:
                 Log.d(TAG, "Unknown module clicked");
