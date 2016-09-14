@@ -3,4 +3,5 @@
     <declare-styleable name="SplashScreenTextView">
         <attr name="fontName" format="string" />
     </declare-styleable>
+    <attr name="recyclerBackground" format="reference|color" />
 </resources>

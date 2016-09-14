@@ -7,7 +7,7 @@ import android.widget.TextView;
 import java.io.File;
 
 public abstract class ViewUtils {
-    private final static String DIR_FONT_NAME = "fonts";
+    private final static String DIR_FONT_NAME = "font";
 
     public static int getResId(Context context, String res) {
         return context.getResources().getIdentifier(res.substring(res.indexOf(".", 2) + 1),

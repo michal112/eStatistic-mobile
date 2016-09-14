@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public interface ModuleClickListener {
-        void onClick(int position);
+        void onClick(ImageView imageView, int position);
     }
 
     private final static int HEADER = 0;
@@ -111,7 +111,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            mModuleClickListener.onClick(getAdapterPosition() - 1);
+            mModuleClickListener.onClick(mImage, getAdapterPosition() - 1);
         }
     }
 

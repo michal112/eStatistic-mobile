@@ -2,6 +2,7 @@ package app.estat.mob.ui;
 
 import android.support.annotation.NonNull;
 
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.FarmCardFragmentPresenter;
@@ -15,7 +16,7 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
 
     @Override
     public int getLayoutResId() {
-        return 0;
+        return R.layout.fragment_farm_card;
     }
 
     @NonNull

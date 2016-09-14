@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.henrytao.smoothappbarlayout.SmoothAppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<me.henrytao.smoothappbarlayout.SmoothAppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/smooth_app_bar_layout"
     android:layout_width="match_parent"
@@ -7,11 +8,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:contentScrim="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:titleEnabled="false">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -22,13 +23,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/farm_photo" />
+                android:src="@drawable/farm_photo"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.6"
-                android:background="?attr/colorPrimary" />
+                android:background="?attr/colorPrimary"/>
 
         </FrameLayout>
 
@@ -36,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
-            android:background="@drawable/activity_app_bar_belt" />
+            android:background="@drawable/activity_app_bar_belt"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
                 <ImageView
                     android:layout_width="@dimen/activity_app_bar_logo_width"
                     android:layout_height="@dimen/activity_app_bar_logo_height"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_launcher"/>
 
             </LinearLayout>
 
@@ -63,7 +64,7 @@
             android:id="@+id/activity_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin" />
+            app:layout_collapseMode="pin"/>
 
     </android.support.design.widget.CollapsingToolbarLayout>
 
