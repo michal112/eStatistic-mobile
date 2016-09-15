@@ -53,8 +53,8 @@
 
                 <ImageView
                     android:id="@+id/activity_app_bar_logo"
-                    android:layout_width="@dimen/activity_app_bar_logo_width"
-                    android:layout_height="@dimen/activity_app_bar_logo_height"
+                    android:layout_width="@dimen/activity_module_app_bar_logo_width"
+                    android:layout_height="@dimen/activity_module_app_bar_logo_height"
                     android:transitionName="@string/transition_module_image"/>
 
             </LinearLayout>

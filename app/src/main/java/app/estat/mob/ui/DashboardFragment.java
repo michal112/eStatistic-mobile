@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
@@ -52,21 +54,22 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
                 break;
             case AVERAGE_PRODUCTIVITY:
                 ActivityUtil.animateModuleActivity(getActivity(),
-                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                        AverageProductivityActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             case MY_COWS:
                 ActivityUtil.animateModuleActivity(getActivity(),
-                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                        MyCowsActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             case MILK_PRODUCTION:
                 ActivityUtil.animateModuleActivity(getActivity(),
-                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                        MilkProductionActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             default:
                 Log.d(TAG, "Unknown module clicked");
+                break;
         }
     }
 
@@ -88,8 +91,13 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        ModuleAdapter moduleAdapter = new ModuleAdapter(getActivity(),
-                getPresenter().requestModules(), mModuleClickListener);
+
+        getPresenter().requestModules();
+    }
+
+    @Override
+    public void showModules(List<Module> modules) {
+        ModuleAdapter moduleAdapter = new ModuleAdapter(getActivity(), modules, mModuleClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(moduleAdapter);
     }

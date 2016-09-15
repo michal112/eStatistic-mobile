@@ -2,10 +2,12 @@
 <resources>
     <dimen name="activity_app_bar_belt_height">60dp</dimen>
     <dimen name="activity_app_bar_height">212dp</dimen>
-    <dimen name="activity_app_bar_logo_height">100dp</dimen>
-    <dimen name="activity_app_bar_logo_width">100dp</dimen>
-    <dimen name="activity_app_bar_logo_layout_width">112dp</dimen>
-    <dimen name="activity_app_bar_logo_layout_height">112dp</dimen>
+    <dimen name="activity_dashboard_app_bar_logo_height">104dp</dimen>
+    <dimen name="activity_dashboard_app_bar_logo_width">104dp</dimen>
+    <dimen name="activity_module_app_bar_logo_height">80dp</dimen>
+    <dimen name="activity_module_app_bar_logo_width">80dp</dimen>
+    <dimen name="activity_app_bar_logo_layout_width">114dp</dimen>
+    <dimen name="activity_app_bar_logo_layout_height">114dp</dimen>
     <dimen name="activity_app_bar_image_layout_height">152dp</dimen>
 
     <dimen name="activity_splash_screen_layout_width">236dp</dimen>

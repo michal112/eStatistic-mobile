@@ -47,7 +47,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private class StarterThread extends HandlerThread {
-        private final static int MIN_PREFETCH_TIME = 1500;
+        private final static int MIN_PREFETCH_TIME = 1000;
 
         private Handler mHandler;
 

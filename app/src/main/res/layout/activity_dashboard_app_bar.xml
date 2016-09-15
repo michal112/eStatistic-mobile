@@ -52,8 +52,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/activity_app_bar_logo_width"
-                    android:layout_height="@dimen/activity_app_bar_logo_height"
+                    android:layout_width="@dimen/activity_dashboard_app_bar_logo_width"
+                    android:layout_height="@dimen/activity_dashboard_app_bar_logo_height"
                     android:src="@drawable/ic_launcher"/>
 
             </LinearLayout>

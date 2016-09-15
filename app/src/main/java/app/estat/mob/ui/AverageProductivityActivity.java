@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import app.estat.mob.R;
 
-public class FarmCardActivity extends ModuleActivity {
+public class AverageProductivityActivity extends ModuleActivity {
     public static Intent newIntent(@NonNull Context context, String iconRes, String nameRes) {
-        return newIntent(context, FarmCardActivity.class, iconRes, nameRes);
+        return newIntent(context, AverageProductivityActivity.class, iconRes, nameRes);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container, FarmCardFragment.newInstance(), false);
+        addFragment(R.id.activity_module_container, AverageProductivityFragment.newInstance(), false);
     }
 }

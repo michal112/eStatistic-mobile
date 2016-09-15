@@ -12,11 +12,16 @@ public class DashboardFragmentPresenter extends MvpBasePresenter<DashboardFragme
 
     public DashboardFragmentPresenter(ApplicationComponent applicationComponent) {
         super(applicationComponent);
+
+        mModules = getModuleWrapper().getCache().getModules();
     }
 
-    public List<Module> requestModules() {
-        mModules = getModuleWrapper().getCache().getModules();
-        return mModules;
+    public void requestModules() {
+        if (!isViewAttached()) {
+            return;
+        }
+
+        getView().showModules(mModules);
     }
 
     public Module getModule(int position) {
