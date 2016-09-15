@@ -48,7 +48,7 @@ public abstract class MvpBaseActivity<P extends MvpPresenter<V>, V extends MvpBa
         presenter.attachView((V) this);
     }
 
-    protected void displayActionBarTittle(boolean show) {
+    public void displayActionBarTittle(boolean show) {
         getSupportActionBar().setDisplayShowTitleEnabled(show);
     }
 

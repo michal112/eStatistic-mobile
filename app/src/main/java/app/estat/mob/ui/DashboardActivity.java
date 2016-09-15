@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
@@ -13,6 +12,7 @@ import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.DashboardActivityPresenter;
+import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.DashboardActivityView;
 import butterknife.BindView;
 import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
@@ -48,7 +48,7 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
         super.onCreate(savedInstanceState);
         mDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-        mAppBarLayout.addOnOffsetChangedListener(new ModuleOffsetListener(mAppBarLayout));
+        mAppBarLayout.addOnOffsetChangedListener(ViewUtils.getAppBarOffsetListener(this, mAppBarLayout));
 
         addFragment(R.id.activity_dashboard_container, DashboardFragment.newInstance(), false);
     }
@@ -68,22 +68,5 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    private class ModuleOffsetListener implements AppBarLayout.OnOffsetChangedListener {
-        private final SmoothAppBarLayout mAppBarLayout;
-
-        public ModuleOffsetListener(SmoothAppBarLayout appBarLayout) {
-            this.mAppBarLayout = appBarLayout;
-        }
-
-        @Override
-        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-            displayActionBarTittle(isToolbarCollapsed(verticalOffset));
-        }
-
-        private boolean isToolbarCollapsed(int verticalOffset) {
-            return  Math.abs(verticalOffset) == mAppBarLayout.getTotalScrollRange();
-        }
     }
 }

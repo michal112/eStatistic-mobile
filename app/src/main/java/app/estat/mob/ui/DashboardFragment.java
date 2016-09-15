@@ -50,6 +50,21 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
                     FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
                         module.getNameRes()), imageView, mTransitionName);
                 break;
+            case AVERAGE_PRODUCTIVITY:
+                ActivityUtil.animateModuleActivity(getActivity(),
+                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                                module.getNameRes()), imageView, mTransitionName);
+                break;
+            case MY_COWS:
+                ActivityUtil.animateModuleActivity(getActivity(),
+                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                                module.getNameRes()), imageView, mTransitionName);
+                break;
+            case MILK_PRODUCTION:
+                ActivityUtil.animateModuleActivity(getActivity(),
+                        FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
+                                module.getNameRes()), imageView, mTransitionName);
+                break;
             default:
                 Log.d(TAG, "Unknown module clicked");
         }
