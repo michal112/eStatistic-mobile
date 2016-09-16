@@ -1,4 +1,4 @@
-package app.estat.mob.mvp.view;
+package app.estat.mob.mvp.view.dashboard;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package app.estat.mob.ui;
+package app.estat.mob.ui.module;
 
 import android.content.Context;
 import android.content.Intent;

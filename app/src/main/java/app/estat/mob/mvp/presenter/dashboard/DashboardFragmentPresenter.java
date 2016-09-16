@@ -1,11 +1,11 @@
-package app.estat.mob.mvp.presenter;
+package app.estat.mob.mvp.presenter.dashboard;
 
 import java.util.List;
 
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
 import app.estat.mob.mvp.core.MvpBasePresenter;
-import app.estat.mob.mvp.view.DashboardFragmentView;
+import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 
 public class DashboardFragmentPresenter extends MvpBasePresenter<DashboardFragmentView> {
     private List<Module> mModules;

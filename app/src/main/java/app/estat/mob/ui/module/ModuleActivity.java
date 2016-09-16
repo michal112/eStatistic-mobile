@@ -1,4 +1,4 @@
-package app.estat.mob.ui;
+package app.estat.mob.ui.module;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,17 +11,17 @@ import android.widget.ImageView;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import app.estat.mob.mvp.presenter.ModuleActivityPresenter;
+import app.estat.mob.mvp.presenter.module.ModuleActivityPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
-import app.estat.mob.mvp.view.ModuleActivityView;
+import app.estat.mob.mvp.view.module.ModuleActivityView;
 import butterknife.BindView;
 import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
 
 public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPresenter, ModuleActivityView>
         implements ModuleActivityView {
-    private final static String ICON_LOGO_KEY = "app.estat.mob.ui.ModuleActivity.ICON_LOGO_KEY";
+    private final static String ICON_LOGO_KEY = "app.estat.mob.ui.module.ModuleActivity.ICON_LOGO_KEY";
 
-    private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.ModuleActivity.TOOLBAR_TEXT_KEY";
+    private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.module.ModuleActivity.TOOLBAR_TEXT_KEY";
 
     private static final String TAG = ModuleActivity.class.getName();
 
@@ -67,7 +67,7 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                supportFinishAfterTransition();
                 break;
             default:
                 Log.d(TAG, "Unknown option was clicked");

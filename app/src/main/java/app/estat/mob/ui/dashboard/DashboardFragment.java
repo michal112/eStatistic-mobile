@@ -1,4 +1,4 @@
-package app.estat.mob.ui;
+package app.estat.mob.ui.dashboard;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +16,14 @@ import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
 import app.estat.mob.mvp.adapter.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
-import app.estat.mob.mvp.presenter.DashboardFragmentPresenter;
+import app.estat.mob.mvp.presenter.dashboard.DashboardFragmentPresenter;
 import app.estat.mob.mvp.util.ActivityUtil;
-import app.estat.mob.mvp.view.DashboardFragmentView;
+import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 
+import app.estat.mob.ui.module.AverageProductivityActivity;
+import app.estat.mob.ui.module.FarmCardActivity;
+import app.estat.mob.ui.module.MilkProductionActivity;
+import app.estat.mob.ui.module.MyCowsActivity;
 import butterknife.BindString;
 import butterknife.BindView;
 

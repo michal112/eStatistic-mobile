@@ -1,4 +1,4 @@
-package app.estat.mob.ui;
+package app.estat.mob.ui.dashboard;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import app.estat.mob.mvp.presenter.DashboardActivityPresenter;
+import app.estat.mob.mvp.presenter.dashboard.DashboardActivityPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
-import app.estat.mob.mvp.view.DashboardActivityView;
+import app.estat.mob.mvp.view.dashboard.DashboardActivityView;
 import butterknife.BindView;
 import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
 

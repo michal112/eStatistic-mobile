@@ -17,9 +17,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.DashboardActivity" />
+        <activity android:name=".ui.dashboard.DashboardActivity" />
 
-        <activity android:name=".ui.FarmCardActivity" />
+        <activity android:name=".ui.module.FarmCardActivity" />
+
+        <activity android:name=".ui.module.AverageProductivityActivity" />
+
+        <activity android:name=".ui.module.MyCowsActivity" />
+
+        <activity android:name=".ui.module.MilkProductionActivity" />
     </application>
 
 </manifest>

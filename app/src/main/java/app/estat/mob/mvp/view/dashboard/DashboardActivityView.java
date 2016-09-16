@@ -1,4 +1,4 @@
-package app.estat.mob.mvp.view;
+package app.estat.mob.mvp.view.dashboard;
 
 import app.estat.mob.mvp.core.MvpBaseActivityView;
 

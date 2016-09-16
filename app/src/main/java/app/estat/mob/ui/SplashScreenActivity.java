@@ -14,6 +14,7 @@ import app.estat.mob.ApplicationCore;
 import app.estat.mob.R;
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
+import app.estat.mob.ui.dashboard.DashboardActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     @Inject
