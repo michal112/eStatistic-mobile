@@ -20,7 +20,7 @@
             android:id="@+id/drawer_user_avatar"
             android:layout_width="@dimen/drawer_header_user_avatar_width"
             android:layout_height="@dimen/drawer_header_user_avatar_height"
-            android:src="@drawable/avatar_circle"/>
+            android:src="@drawable/ic_account_circle"/>
 
     </LinearLayout>
 
