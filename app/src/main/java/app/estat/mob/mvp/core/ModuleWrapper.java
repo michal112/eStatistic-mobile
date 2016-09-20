@@ -5,23 +5,31 @@ import javax.inject.Inject;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
+import app.estat.mob.mvp.model.ImageManager;
 
 public class ModuleWrapper {
     @Inject
-    DbManager mManager;
+    DbManager mDbManager;
 
     @Inject
-    DbCache mCache;
+    DbCache mDbCache;
+
+    @Inject
+    ImageManager mImageManager;
 
     public ModuleWrapper(ApplicationComponent applicationComponent) {
         applicationComponent.inject(this);
     }
 
-    public DbCache getCache() {
-        return mCache;
+    public DbCache getDbCache() {
+        return mDbCache;
     }
 
-    public DbManager getManager() {
-        return mManager;
+    public DbManager getDbManager() {
+        return mDbManager;
+    }
+
+    public ImageManager getImageManager() {
+        return mImageManager;
     }
 }

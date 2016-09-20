@@ -10,12 +10,10 @@ public abstract class ActivityUtil {
     public static void animateModuleActivity(FragmentActivity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // animate activity transition
             ActivityOptionsCompat activityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, transitionName);
             activity.startActivity(intent, activityOptionsCompat.toBundle());
         } else {
-            // start activity without animation
             activity.startActivity(intent);
         }
     }

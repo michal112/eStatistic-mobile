@@ -4,4 +4,7 @@
     <string name="fragment_farm_card_user_tab">Owner</string>
     <string name="fragment_farm_card_user_hint">Name</string>
     <string name="fragment_farm_card_button_text">CHANGE</string>
+    <string name="fragment_farm_card_context_photo_button">Take a photo</string>
+    <string name="fragment_farm_card_context_choose_button">Choose a photo</string>
+    <string name="fragment_farm_card_form_icon_alpha">0.54</string>
 </resources>

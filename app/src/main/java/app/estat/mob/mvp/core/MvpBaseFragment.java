@@ -12,7 +12,7 @@ import app.estat.mob.ApplicationCore;
 import app.estat.mob.component.ApplicationComponent;
 import butterknife.ButterKnife;
 
-public abstract class MvpBaseFragment<P extends MvpPresenter<V>, V extends MvpBaseFragmentView>
+public abstract class MvpBaseFragment<P extends MvpBasePresenter<V>, V extends MvpBaseFragmentView>
         extends Fragment implements MvpBaseFragmentView {
 
     private P presenter;

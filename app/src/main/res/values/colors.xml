@@ -275,6 +275,7 @@
     <color name="grey_900">#212121</color>
 
     <color name="black">#000000</color>
+    <color name="blackIcon">#26000000</color>
     <color name="white">#FFFFFF</color>
 
     <color name="colorPrimary">@color/indigo_500</color>

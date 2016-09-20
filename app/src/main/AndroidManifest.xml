@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.estat.mob">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="18" />
+
     <application
         android:name="app.estat.mob.ApplicationCore"
         android:icon="@drawable/ic_launcher"
@@ -26,6 +29,22 @@
         <activity android:name=".ui.module.MyCowsActivity" />
 
         <activity android:name=".ui.module.MilkProductionActivity" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <provider
+            android:authorities="app.estat.mob.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths"/>
+        </provider>
+
     </application>
 
 </manifest>
