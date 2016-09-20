@@ -3,11 +3,15 @@ package app.estat.mob.mvp.core;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+
+import org.greenrobot.eventbus.NoSubscriberEvent;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.lang.ref.WeakReference;
 
 import app.estat.mob.component.ApplicationComponent;
 
-public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
+abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private WeakReference<V> view;
 
     private final ModuleWrapper mModuleWrapper;
@@ -19,6 +23,10 @@ public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresente
     @Override
     public void attachView(V view) {
         this.view = new WeakReference<>(view);
+
+        if (!isRegistered()) {
+            register();
+        }
     }
 
     @Override
@@ -26,6 +34,22 @@ public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresente
         if (isViewAttached()) {
             view.clear();
         }
+
+        if (isRegistered()) {
+            unregister();
+        }
+    }
+
+    private boolean isRegistered() {
+        return getModuleWrapper().getEventBus().isRegistered(this);
+    }
+
+    private void register() {
+        getModuleWrapper().getEventBus().register(this);
+    }
+
+    private void unregister() {
+        getModuleWrapper().getEventBus().unregister(this);
     }
 
     @Override
@@ -44,10 +68,14 @@ public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresente
     }
 
     public Uri getUserImageUri(Context context) {
-        return mModuleWrapper.getImageManager().getUserImageUri(context);
+        return getModuleWrapper().getImageManager().getUserImageUri(context);
     }
 
     public boolean isUserImageExists(Context context) {
-        return mModuleWrapper.getImageManager().isUserImageExists(context);
+        return getModuleWrapper().getImageManager().isUserImageExists(context);
+    }
+
+    @Subscribe
+    public void onNoSubscriberEvent(NoSubscriberEvent noSubscriberEvent) {
     }
 }

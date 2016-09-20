@@ -15,6 +15,7 @@ public class FarmCardActivity extends ModuleActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container, FarmCardFragment.newInstance(), false);
+        addFragment(R.id.activity_module_container,
+                FarmCardFragment.newInstance(getPresenter().getUserImageUri(this)), false);
     }
 }

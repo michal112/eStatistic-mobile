@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 
 public abstract class MvpBaseFragment<P extends MvpBasePresenter<V>, V extends MvpBaseFragmentView>
         extends Fragment implements MvpBaseFragmentView {
-
     private P presenter;
 
     @NonNull

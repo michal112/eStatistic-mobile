@@ -95,8 +95,15 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-
+Log.d("sd","sdd");
         getPresenter().requestModules();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Log.d("sd","sdtred");
     }
 
     @Override
