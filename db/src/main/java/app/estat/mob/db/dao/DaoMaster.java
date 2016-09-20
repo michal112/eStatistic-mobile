@@ -21,22 +21,22 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        CowDao.createTable(db, ifNotExists);
-        LactationDao.createTable(db, ifNotExists);
         MateDao.createTable(db, ifNotExists);
-        SireDao.createTable(db, ifNotExists);
         BullDao.createTable(db, ifNotExists);
+        LactationDao.createTable(db, ifNotExists);
         ModuleDao.createTable(db, ifNotExists);
+        SireDao.createTable(db, ifNotExists);
+        CowDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        CowDao.dropTable(db, ifExists);
-        LactationDao.dropTable(db, ifExists);
         MateDao.dropTable(db, ifExists);
-        SireDao.dropTable(db, ifExists);
         BullDao.dropTable(db, ifExists);
+        LactationDao.dropTable(db, ifExists);
         ModuleDao.dropTable(db, ifExists);
+        SireDao.dropTable(db, ifExists);
+        CowDao.dropTable(db, ifExists);
     }
 
     /**
@@ -55,12 +55,12 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(CowDao.class);
-        registerDaoClass(LactationDao.class);
         registerDaoClass(MateDao.class);
-        registerDaoClass(SireDao.class);
         registerDaoClass(BullDao.class);
+        registerDaoClass(LactationDao.class);
         registerDaoClass(ModuleDao.class);
+        registerDaoClass(SireDao.class);
+        registerDaoClass(CowDao.class);
     }
 
     public DaoSession newSession() {

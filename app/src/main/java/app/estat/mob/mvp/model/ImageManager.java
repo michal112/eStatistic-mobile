@@ -28,6 +28,7 @@ public class ImageManager {
     }
 
     public void scaleUserImage(Context context, Uri imageUri) {
+        FileOutputStream fileOutputStream = null;
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
             float ratio = Math.min(MAX_USER_IMAGE_SIZE / bitmap.getWidth(), MAX_USER_IMAGE_SIZE / bitmap.getHeight());
@@ -36,12 +37,19 @@ public class ImageManager {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
 
             File image = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILE_NAME);
-            FileOutputStream fileOutputStream = new FileOutputStream(image);
+            fileOutputStream = new FileOutputStream(image);
             scaledBitmap.compress(Bitmap.CompressFormat.PNG, IMAGE_SAVE_QUALITY, fileOutputStream);
             fileOutputStream.flush();
-            fileOutputStream.close();
         } catch (IOException e) {
             Log.w(TAG, "Unable to scale image", e);
+        }  finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    Log.w(TAG, "Unable to close stream", e);
+                }
+            }
         }
     }
 
@@ -49,12 +57,12 @@ public class ImageManager {
         File directory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = new File(directory, FILE_NAME);
 
-        if (!image.exists()) {
-            try {
-                image.createNewFile();
-            } catch (IOException e) {
-                Log.w(TAG, "Unable to create file for photo", e);
+        try {
+            if (image.createNewFile()) {
+                Log.d(TAG, "New empty file created [" + image.getAbsolutePath() + "]");
             }
+        } catch (IOException e) {
+            Log.w(TAG, "Unable to create file for photo", e);
         }
 
         return FileProvider.getUriForFile(context, AUTHORITY, image);

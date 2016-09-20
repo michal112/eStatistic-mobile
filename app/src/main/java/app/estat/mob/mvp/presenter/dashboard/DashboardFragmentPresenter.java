@@ -4,10 +4,10 @@ import java.util.List;
 
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
-import app.estat.mob.mvp.core.MvpBasePresenter;
+import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 
-public class DashboardFragmentPresenter extends MvpBasePresenter<DashboardFragmentView> {
+public class DashboardFragmentPresenter extends MvpBaseFragmentPresenter<DashboardFragmentView> {
     private List<Module> mModules;
 
     public DashboardFragmentPresenter(ApplicationComponent applicationComponent) {

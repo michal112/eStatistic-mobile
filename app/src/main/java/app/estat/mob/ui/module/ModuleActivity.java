@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,16 +25,6 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
     private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.module.ModuleActivity.TOOLBAR_TEXT_KEY";
 
     private static final String TAG = ModuleActivity.class.getName();
-
-    private final static double IMAGE_SCALE_FACTOR = 0.1;
-
-    private final static int CROP_LINE_WIDTH = 2;
-
-    private final static int CROP_CORNER_WIDTH = 3;
-
-    private final static int CROP_IMAGE_WIDTH = 256;
-
-    private final static int CROP_IMAGE_HEIGHT = 256;
 
     @BindView(R.id.smooth_app_bar_layout)
     SmoothAppBarLayout mAppBarLayout;
@@ -92,13 +80,10 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FarmCardFragment.REQUEST_IMAGE_CAPTURE) {
+        if (requestCode == FarmCardFragment.REQUEST_USER_IMAGE_CAPTURE) {
             if (resultCode == Activity.RESULT_OK) {
-getPresenter().getModuleWrapper().getImageManager().scaleUserImage(this, getPresenter().getUserImageUri(this));
-                refreshUserImage();
+                getPresenter().scaleUserImage(this, getPresenter().getUserImageUri(this));
             }
         }
     }
-
-
 }

@@ -1,6 +1,5 @@
 package app.estat.mob.mvp.core;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -14,15 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import app.estat.mob.ApplicationCore;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.mvp.util.ViewUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public abstract class MvpBaseActivity<P extends MvpBasePresenter<V>, V extends MvpBaseActivityView>
+public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V extends MvpBaseActivityView>
         extends AppCompatActivity implements MvpBaseActivityView {
     @BindView(R.id.activity_toolbar)
     Toolbar mToolbar;
@@ -59,23 +57,20 @@ public abstract class MvpBaseActivity<P extends MvpBasePresenter<V>, V extends M
 
         presenter = createPresenter(((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
-        refreshUserImage();
+        requestUserImage();
     }
 
+    @Override
     public void refreshUserImage() {
+        requestUserImage();
+    }
+
+    protected void requestUserImage() {
         if (presenter.isUserImageExists(this)) {
-            Uri imageUri = presenter.getUserImageUri(this);
-            //mUserImage.setImageURI(imageUri);
-            Picasso.Builder builder = new Picasso.Builder(getApplicationContext());
-            builder.listener(new Picasso.Listener() {
-                @Override
-                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                    exception.printStackTrace();
-                }
-            });
-            builder.build().load(imageUri).fit().into(mUserImage);
-}
-}
+            ViewUtils.insertImage(this, presenter.getUserImageUri(this),
+                    R.drawable.ic_account_circle, mUserImage);
+        }
+    }
 
     public void displayActionBarTittle(boolean show) {
         if (getSupportActionBar() != null) {

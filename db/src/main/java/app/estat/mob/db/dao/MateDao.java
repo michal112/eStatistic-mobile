@@ -40,8 +40,8 @@ public class MateDao extends AbstractDao<Mate, Long> {
 
     private DaoSession daoSession;
 
-    private Query<Mate> cow_MatesQuery;
     private Query<Mate> bull_MatesQuery;
+    private Query<Mate> cow_MatesQuery;
 
     public MateDao(DaoConfig config) {
         super(config);
@@ -173,20 +173,6 @@ public class MateDao extends AbstractDao<Mate, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "mates" to-many relationship of Cow. */
-    public List<Mate> _queryCow_Mates(Long id) {
-        synchronized (this) {
-            if (cow_MatesQuery == null) {
-                QueryBuilder<Mate> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.Id.eq(null));
-                cow_MatesQuery = queryBuilder.build();
-            }
-        }
-        Query<Mate> query = cow_MatesQuery.forCurrentThread();
-        query.setParameter(0, id);
-        return query.list();
-    }
-
     /** Internal query to resolve the "mates" to-many relationship of Bull. */
     public List<Mate> _queryBull_Mates(Long id) {
         synchronized (this) {
@@ -197,6 +183,20 @@ public class MateDao extends AbstractDao<Mate, Long> {
             }
         }
         Query<Mate> query = bull_MatesQuery.forCurrentThread();
+        query.setParameter(0, id);
+        return query.list();
+    }
+
+    /** Internal query to resolve the "mates" to-many relationship of Cow. */
+    public List<Mate> _queryCow_Mates(Long id) {
+        synchronized (this) {
+            if (cow_MatesQuery == null) {
+                QueryBuilder<Mate> queryBuilder = queryBuilder();
+                queryBuilder.where(Properties.Id.eq(null));
+                cow_MatesQuery = queryBuilder.build();
+            }
+        }
+        Query<Mate> query = cow_MatesQuery.forCurrentThread();
         query.setParameter(0, id);
         return query.list();
     }

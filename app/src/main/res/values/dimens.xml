@@ -39,6 +39,8 @@
     <dimen name="fragment_farm_card_card_user_image_width">24dp</dimen>
     <dimen name="fragment_farm_card_image_thumbnail_left_margin">4dp</dimen>
     <dimen name="fragment_farm_card_image_thumbnail_right_margin">6dp</dimen>
+    <dimen name="fragment_farm_card_image_progress_width">28dp</dimen>
+    <dimen name="fragment_farm_card_image_progress_height">28dp</dimen>
     <dimen name="fragment_farm_card_image_width">72dp</dimen>
     <dimen name="fragment_farm_card_image_height">72dp</dimen>
     <dimen name="fragment_farm_card_image_padding">16dp</dimen>
