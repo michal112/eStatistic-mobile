@@ -6,9 +6,12 @@ import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -21,7 +24,12 @@ public abstract class ViewUtils {
 
     private final static String DIR_FONT_NAME = "font";
 
-    public static void insertImage(Context context, Uri imageUri, @DrawableRes int errorImage, ImageView destView) {
+    private static final float IMAGE_LOADING_ALPHA = 0.5f;
+
+    private static final float IMAGE_LOADED_ALPHA = 1f;
+
+    public static void insertImage(Context context, Uri imageUri, @DrawableRes int errorImage,
+                                   final ImageView destView, final ProgressBar imageProgress) {
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.listener(new Picasso.Listener() {
             @Override
@@ -29,7 +37,28 @@ public abstract class ViewUtils {
                 Log.d(TAG, "Unable to load image", exception);
             }
         });
-        builder.build().load(imageUri).error(errorImage).centerCrop().fit().into(destView);
+        builder.build().load(imageUri).error(errorImage)
+                .centerCrop().fit().into(destView, new Callback() {
+            @Override
+            public void onSuccess() {
+                hideProgress(destView, imageProgress);
+            }
+
+            @Override
+            public void onError() {
+                hideProgress(destView, imageProgress);
+            }
+        });
+    }
+
+    public static void showProgress(ImageView imageView, ProgressBar imageProgress) {
+        imageView.setAlpha(IMAGE_LOADING_ALPHA);
+        imageProgress.setVisibility(View.VISIBLE);
+    }
+
+    public static void hideProgress(ImageView imageView, ProgressBar imageProgress) {
+        imageView.setAlpha(IMAGE_LOADED_ALPHA);
+        imageProgress.setVisibility(View.GONE);
     }
 
     public static int getResId(Context context, String res) {

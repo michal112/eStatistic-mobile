@@ -39,8 +39,8 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
 
     @NonNull
     @Override
-    public DashboardActivityPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new DashboardActivityPresenter(applicationComponent);
+    public DashboardActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new DashboardActivityPresenter(context, applicationComponent);
     }
 
     @Override

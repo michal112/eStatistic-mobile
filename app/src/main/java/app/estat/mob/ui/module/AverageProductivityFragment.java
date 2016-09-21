@@ -1,5 +1,6 @@
 package app.estat.mob.ui.module;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,7 +32,7 @@ public class AverageProductivityFragment extends MvpBaseFragment<AverageProducti
 
     @NonNull
     @Override
-    public AverageProductivityFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new AverageProductivityFragmentPresenter(applicationComponent);
+    public AverageProductivityFragmentPresenter createPresenter(Context context,  ApplicationComponent applicationComponent) {
+        return new AverageProductivityFragmentPresenter(context, applicationComponent);
     }
 }

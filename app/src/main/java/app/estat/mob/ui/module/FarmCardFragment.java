@@ -1,6 +1,7 @@
 package app.estat.mob.ui.module;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
@@ -38,10 +38,6 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     private static final int REQUEST_USER_IMAGE_CAPTURE = 0;
 
     private static final int REQUEST_FARM_IMAGE_CAPTURE = 1;
-
-    private static final float IMAGE_LOADING_ALPHA = 0.5f;
-
-    private static final float IMAGE_LOADED_ALPHA = 1f;
 
     @BindView(R.id.fragment_farm_card_user_image_progress)
     ProgressBar mUserImageProgress;
@@ -145,40 +141,37 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @Override
     public void refreshImage(int imageType, Uri imageUri) {
         if (imageType == ImageManager.USER_IMAGE) {
-            hideProgress(mUserImage, mUserImageProgress);
-            ViewUtils.insertImage(getActivity(), imageUri, mUserImage);
+            ViewUtils.hideProgress(mUserImage, mUserImageProgress);
+            ViewUtils.insertImage(getActivity(), imageUri,
+                    R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
-
+            ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
+            ViewUtils.insertImage(getActivity(), imageUri,
+                    R.drawable.fragment_farm_card_form_farm_image, mUserImage, mUserImageProgress);
         }
     }
 
-    private void hideProgress(ImageView imageView, ProgressBar imageProgress) {
-        imageView.setAlpha(IMAGE_LOADED_ALPHA);
-        imageProgress.setVisibility(View.GONE);
-    }
+
 
     @Override
     public void showImageProgress(int imageType) {
         if (imageType == ImageManager.USER_IMAGE) {
-            showProgress(mUserImage, mUserImageProgress);
+            ViewUtils.showProgress(mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
-
+            ViewUtils.showProgress(mFarmImage, mFarmImageProgress);
         }
     }
 
-    private void showProgress(ImageView imageView, ProgressBar imageProgress) {
-        imageView.setAlpha(IMAGE_LOADING_ALPHA);
-        imageProgress.setVisibility(View.VISIBLE);
-    }
+
 
     private void requestImage(int imageType) {
         if (imageType == ImageManager.USER_IMAGE) {
-            showProgress(mUserImage, mUserImageProgress);
-            if (getPresenter().isUserImageExists(getActivity())) {
+            ViewUtils.showProgress(mUserImage, mUserImageProgress);
+            if (getPresenter().isUserImageExists()) {
                 ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
-                        R.drawable.fragment_farm_card_form_user_image, mUserImage);
+                        R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
             }
-            hideProgress(mUserImage, mUserImageProgress);
+            ViewUtils.hideProgress(mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
 
         }
@@ -227,7 +220,7 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
 
     @NonNull
     @Override
-    public FarmCardFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new FarmCardFragmentPresenter(applicationComponent);
+    public FarmCardFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new FarmCardFragmentPresenter(context, applicationComponent);
     }
 }

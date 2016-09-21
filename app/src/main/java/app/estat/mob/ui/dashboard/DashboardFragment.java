@@ -1,5 +1,6 @@
 package app.estat.mob.ui.dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -96,8 +97,8 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
     @NonNull
     @Override
-    public DashboardFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new DashboardFragmentPresenter(applicationComponent);
+    public DashboardFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new DashboardFragmentPresenter(context, applicationComponent);
     }
 
     @Override

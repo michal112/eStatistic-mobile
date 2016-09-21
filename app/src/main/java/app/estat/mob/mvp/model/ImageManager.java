@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,8 +28,6 @@ public class ImageManager {
 
     private static final String AUTHORITY = "app.estat.mob.fileprovider";
 
-    private static final String TAG = ImageManager.class.getName();
-
     private String mUserImageTempPath;
 
     private Uri mUserImageTempUri;
@@ -38,6 +35,10 @@ public class ImageManager {
     private String mFarmImageTempPath;
 
     private Uri mFarmImageTempUri;
+
+    public boolean isFarmImageExists(Context context) {
+        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FARM_IMAGE_NAME).exists();
+    }
 
     public boolean isUserImageExists(Context context) {
         return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), USER_IMAGE_NAME).exists();
@@ -53,7 +54,8 @@ public class ImageManager {
             sourceFile = new File(mUserImageTempPath);
             destFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), USER_IMAGE_NAME);
         } else if (imageType == FARM_IMAGE) {
-
+            sourceFile = new File(mFarmImageTempPath);
+            destFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FARM_IMAGE_NAME);
         }
 
         sourceChannel = new FileInputStream(sourceFile).getChannel();
@@ -107,15 +109,21 @@ public class ImageManager {
     }
 
     public Uri getUserImageUri(Context context) {
-        File directory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = new File(directory, USER_IMAGE_NAME);
+        return getImageUri(context, USER_IMAGE);
+    }
 
-        try {
-            if (image.createNewFile()) {
-                Log.d(TAG, "New empty file created [" + image.getAbsolutePath() + "]");
-            }
-        } catch (IOException e) {
-            Log.w(TAG, "Unable to create file for photo", e);
+    public Uri getFarmImageUri(Context context) {
+        return getImageUri(context, FARM_IMAGE);
+    }
+
+    private Uri getImageUri(Context context, int imageType) {
+        File directory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = null;
+
+        if (imageType == USER_IMAGE) {
+            image = new File(directory, USER_IMAGE_NAME);
+        } else if (imageType == FARM_IMAGE) {
+            image = new File(directory, FARM_IMAGE_NAME);
         }
 
         return FileProvider.getUriForFile(context, AUTHORITY, image);

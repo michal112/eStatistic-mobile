@@ -277,6 +277,7 @@
     <color name="black">#000000</color>
     <color name="blackIcon">#26000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="drawerTextColor">#36FFFFFF</color>
 
     <color name="colorPrimary">@color/indigo_500</color>
     <color name="colorPrimaryDark">@color/indigo_700</color>

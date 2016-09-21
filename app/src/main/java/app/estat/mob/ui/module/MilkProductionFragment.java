@@ -1,5 +1,6 @@
 package app.estat.mob.ui.module;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,7 +32,7 @@ public class MilkProductionFragment extends MvpBaseFragment<MilkProductionFragme
 
     @NonNull
     @Override
-    public MilkProductionFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new MilkProductionFragmentPresenter(applicationComponent);
+    public MilkProductionFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new MilkProductionFragmentPresenter(context, applicationComponent);
     }
 }

@@ -30,11 +30,6 @@
 
         <activity android:name=".ui.module.MilkProductionActivity" />
 
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
         <provider
             android:authorities="app.estat.mob.fileprovider"
             android:name="android.support.v4.content.FileProvider"

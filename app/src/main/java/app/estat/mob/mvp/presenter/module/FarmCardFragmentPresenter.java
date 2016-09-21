@@ -26,8 +26,8 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
 
     private ImageHandlerThread mHandlerThread;
 
-    public FarmCardFragmentPresenter(ApplicationComponent applicationComponent) {
-        super(applicationComponent);
+    public FarmCardFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
+        super(context, applicationComponent);
 
         mHandlerThread = new ImageHandlerThread();
         mHandlerThread.start();

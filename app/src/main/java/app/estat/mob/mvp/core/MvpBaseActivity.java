@@ -1,5 +1,6 @@
 package app.estat.mob.mvp.core;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import app.estat.mob.ApplicationCore;
 import app.estat.mob.R;
@@ -28,7 +31,17 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
     @BindView(R.id.activity_navigation_view)
     NavigationView mNavigationView;
 
+    ImageView mFarmPhoto;
+
+    ProgressBar mFarmPhotoProgress;
+
     ImageView mUserImage;
+
+    ProgressBar mUserImageProgress;
+
+    TextView mUserName;
+
+    TextView mFarmAddress;
 
     private P presenter;
 
@@ -41,7 +54,7 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
     public abstract int getLayoutResId();
 
     @NonNull
-    public abstract P createPresenter(ApplicationComponent applicationComponent);
+    public abstract P createPresenter(Context context, ApplicationComponent applicationComponent);
 
     @Override
     @SuppressWarnings("unchecked")
@@ -49,26 +62,53 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
+
         View headerView = mNavigationView.getHeaderView(0);
         mUserImage = ButterKnife.findById(headerView, R.id.drawer_user_avatar);
+        mUserImageProgress = ButterKnife.findById(headerView, R.id.drawer_user_progress);
+        mUserName = ButterKnife.findById(headerView, R.id.drawer_user_name);
+        mFarmAddress = ButterKnife.findById(headerView, R.id.drawer_farm_address);
+        mFarmPhoto = ButterKnife.findById(headerView, R.id.drawer_farm_photo);
+        mFarmPhotoProgress = ButterKnife.findById(headerView, R.id.drawer_farm_photo_progress);
 
         setSupportActionBar(mToolbar);
         displayActionBarTittle(false);
 
-        presenter = createPresenter(((ApplicationCore) getApplication()).getApplicationComponent());
+        presenter = createPresenter(this, ((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);
-        requestUserImage();
+
+        refreshDrawerData();
     }
 
     @Override
-    public void refreshUserImage() {
+    public void refreshDrawerData() {
         requestUserImage();
+        requestFarmImage();
+
+        mUserName.setText(getPresenter().getUserName());
+        String farmAddress = getPresenter().getFarmAddress();
+        if (!farmAddress.isEmpty()) {
+            mFarmAddress.setText(farmAddress);
+            mFarmAddress.setVisibility(View.VISIBLE);
+        } else {
+            mFarmAddress.setVisibility(View.GONE);
+        }
     }
 
-    protected void requestUserImage() {
-        if (presenter.isUserImageExists(this)) {
-            ViewUtils.insertImage(this, presenter.getUserImageUri(this),
-                    R.drawable.ic_account_circle, mUserImage);
+    private void requestUserImage() {
+        if (presenter.isUserImageExists()) {
+            ViewUtils.showProgress(mUserImage, mUserImageProgress);
+            ViewUtils.insertImage(this, presenter.getUserImageUri(),
+                    R.drawable.ic_account_circle, mUserImage, mUserImageProgress);
+        }
+    }
+
+    private void requestFarmImage() {
+        if (presenter.isFarmImageExists()) {
+            ViewUtils.showProgress(mFarmPhoto, mFarmPhotoProgress);
+            ViewUtils.insertImage(this, presenter.getFarmImageUri(),
+                    R.drawable.farm_photo, mFarmPhoto, mUserImageProgress);
+            ViewUtils.showProgress(mFarmPhoto, mFarmPhotoProgress);
         }
     }
 
@@ -91,7 +131,7 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         presenter.detachView();
     }
 
-    public Toolbar getMainToolbar() {
+    protected Toolbar getMainToolbar() {
         return mToolbar;
     }
 

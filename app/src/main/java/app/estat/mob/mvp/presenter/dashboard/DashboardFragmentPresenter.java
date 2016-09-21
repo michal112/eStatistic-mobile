@@ -1,5 +1,7 @@
 package app.estat.mob.mvp.presenter.dashboard;
 
+import android.content.Context;
+
 import java.util.List;
 
 import app.estat.mob.component.ApplicationComponent;
@@ -10,8 +12,8 @@ import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 public class DashboardFragmentPresenter extends MvpBaseFragmentPresenter<DashboardFragmentView> {
     private List<Module> mModules;
 
-    public DashboardFragmentPresenter(ApplicationComponent applicationComponent) {
-        super(applicationComponent);
+    public DashboardFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
+        super(context, applicationComponent);
 
         mModules = getModuleWrapper().getDbCache().getModules();
     }

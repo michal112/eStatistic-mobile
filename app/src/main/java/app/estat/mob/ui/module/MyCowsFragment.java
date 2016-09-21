@@ -1,5 +1,6 @@
 package app.estat.mob.ui.module;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,7 +32,7 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
 
     @NonNull
     @Override
-    public MyCowsFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new MyCowsFragmentPresenter(applicationComponent);
+    public MyCowsFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new MyCowsFragmentPresenter(context, applicationComponent);
     }
 }

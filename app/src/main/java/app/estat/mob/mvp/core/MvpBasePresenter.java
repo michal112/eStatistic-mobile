@@ -14,10 +14,14 @@ import app.estat.mob.component.ApplicationComponent;
 abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private WeakReference<V> view;
 
+    private final Context mContext;
+
     private final ModuleWrapper mModuleWrapper;
 
-    public MvpBasePresenter(ApplicationComponent applicationComponent) {
+    public MvpBasePresenter(Context context, ApplicationComponent applicationComponent) {
         mModuleWrapper = new ModuleWrapper(applicationComponent);
+
+        this.mContext = context;
     }
 
     @Override
@@ -67,12 +71,24 @@ abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
         return mModuleWrapper;
     }
 
-    public Uri getUserImageUri(Context context) {
-        return getModuleWrapper().getImageManager().getUserImageUri(context);
+    public Context getContext() {
+        return mContext;
     }
 
-    public boolean isUserImageExists(Context context) {
-        return getModuleWrapper().getImageManager().isUserImageExists(context);
+    public Uri getUserImageUri() {
+        return getModuleWrapper().getImageManager().getUserImageUri(mContext);
+    }
+
+    public Uri getFarmImageUri() {
+        return getModuleWrapper().getImageManager().getFarmImageUri(mContext);
+    }
+
+    public boolean isFarmImageExists() {
+        return getModuleWrapper().getImageManager().isFarmImageExists(mContext);
+    }
+
+    public boolean isUserImageExists() {
+        return getModuleWrapper().getImageManager().isUserImageExists(mContext);
     }
 
     @Subscribe

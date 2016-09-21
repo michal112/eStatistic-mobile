@@ -21,4 +21,9 @@ public class SharedPreferencesManager {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, context.getResources().getString(defVal));
     }
+
+    public String getStringValue(Context context, String key, String defVal) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, defVal);
+    }
 }

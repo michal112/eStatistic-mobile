@@ -55,8 +55,8 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
 
     @NonNull
     @Override
-    public ModuleActivityPresenter createPresenter(ApplicationComponent applicationComponent) {
-        return new ModuleActivityPresenter(applicationComponent);
+    public ModuleActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new ModuleActivityPresenter(context, applicationComponent);
     }
 
     @Override
