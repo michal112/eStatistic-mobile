@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--farm card module-->
+    <string name="fragment_farm_card_farm_number">Barn number</string>
     <string name="activity_farm_card_menu_done">DONE</string>
     <string name="fragment_farm_card_user_tab">Owner</string>
     <string name="fragment_farm_card_user_hint">Name</string>
@@ -8,4 +9,5 @@
     <string name="fragment_farm_card_context_photo_button">Take a photo</string>
     <string name="fragment_farm_card_context_choose_button">Choose a photo</string>
     <string name="fragment_farm_card_form_icon_alpha">0.54</string>
+    <string name="fragment_farm_card_address_hint">Address</string>
 </resources>

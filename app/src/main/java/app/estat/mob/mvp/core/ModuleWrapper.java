@@ -8,6 +8,7 @@ import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
 import app.estat.mob.mvp.model.ImageManager;
+import app.estat.mob.mvp.model.SharedPreferencesManager;
 
 public class ModuleWrapper {
     @Inject
@@ -21,6 +22,9 @@ public class ModuleWrapper {
 
     @Inject
     ImageManager mImageManager;
+
+    @Inject
+    SharedPreferencesManager mPreferencesManager;
 
     public ModuleWrapper(ApplicationComponent applicationComponent) {
         applicationComponent.inject(this);
@@ -40,5 +44,9 @@ public class ModuleWrapper {
 
     public ImageManager getImageManager() {
         return mImageManager;
+    }
+
+    public SharedPreferencesManager getPreferencesManager() {
+        return mPreferencesManager;
     }
 }

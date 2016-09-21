@@ -14,8 +14,11 @@ import java.io.IOException;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.FormImageChangeStartEvent;
 import app.estat.mob.event.FormImageChangeEndEvent;
+import app.estat.mob.module.PreferencesModule;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
+import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
+import app.estat.mob.mvp.model.SharedPreferencesManager;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
 
 public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCardFragmentView> {
@@ -88,6 +91,15 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
                 }
             }
         });
+    }
+
+    public void saveFarmData(Context context, FarmData farmData) {
+        getModuleWrapper().getPreferencesManager()
+            .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, farmData.getUserName());
+        getModuleWrapper().getPreferencesManager()
+                .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmData.getFarmAddress());
+        getModuleWrapper().getPreferencesManager()
+                .saveStringValue(context, SharedPreferencesManager.BARN_NUMBER_KEY, farmData.getBarnNumber());
     }
 
 

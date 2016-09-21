@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
+import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
 import app.estat.mob.mvp.presenter.module.FarmCardFragmentPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
@@ -51,11 +53,30 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     Button mUserButton;
 
     @BindView(R.id.fragment_farm_card_user_name)
-    TextView mUserName;
+    EditText mUserName;
+
+    @BindView(R.id.fragment_farm_card_farm_image_progress)
+    ProgressBar mFarmImageProgress;
+
+    @BindView(R.id.fragment_farm_card_farm_image)
+    ImageView mFarmImage;
+
+    @BindView(R.id.fragment_farm_card_farm_image_button)
+    Button mFarmButton;
+
+    @BindView(R.id.fragment_farm_card_barn_number)
+    EditText mBarnNumber;
+
+    @BindView(R.id.fragment_farm_card_farm_address)
+    EditText mFarmAddress;
 
     private PopupMenu mUserPopupMenu;
 
     private PopupMenu mUserPhotoPopupMenu;
+
+    private PopupMenu mFarmPopupMenu;
+
+    private PopupMenu mFarmPhotoPopupMenu;
 
     public static FarmCardFragment newInstance() {
         return new FarmCardFragment();
@@ -85,7 +106,12 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.activity_farm_card_menu_done:
-                getPresenter().saveFarmData();
+                FarmData farmData = new FarmData.Builder()
+                        .userName(mUserName.getText().toString())
+                        .barnNumber(mBarnNumber.getText().toString())
+                        .farmAddress(mFarmAddress.getText().toString())
+                        .build();
+                getPresenter().saveFarmData(getActivity(), farmData);
                 break;
             default:
                 Log.d(TAG, "Unknown option was clicked");
