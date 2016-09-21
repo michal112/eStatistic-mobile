@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--farm card module-->
+    <string name="activity_farm_card_menu_done">DONE</string>
     <string name="fragment_farm_card_user_tab">Owner</string>
     <string name="fragment_farm_card_user_hint">Name</string>
     <string name="fragment_farm_card_button_text">CHANGE</string>

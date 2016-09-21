@@ -35,6 +35,7 @@
     <dimen name="fragment_farm_card_image_right_margin">16dp</dimen>
     <dimen name="fragment_farm_card_image_left_margin">10dp</dimen>
     <dimen name="fragment_farm_card_card_user_height">212dp</dimen>
+    <dimen name="fragment_farm_card_card_user_margin_bottom">16dp</dimen>
     <dimen name="fragment_farm_card_card_user_image_height">24dp</dimen>
     <dimen name="fragment_farm_card_card_user_image_width">24dp</dimen>
     <dimen name="fragment_farm_card_image_thumbnail_left_margin">4dp</dimen>

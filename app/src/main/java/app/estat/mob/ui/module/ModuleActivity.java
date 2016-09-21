@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -23,8 +22,6 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
     private final static String ICON_LOGO_KEY = "app.estat.mob.ui.module.ModuleActivity.ICON_LOGO_KEY";
 
     private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.module.ModuleActivity.TOOLBAR_TEXT_KEY";
-
-    private static final String TAG = ModuleActivity.class.getName();
 
     @BindView(R.id.smooth_app_bar_layout)
     SmoothAppBarLayout mAppBarLayout;
@@ -69,21 +66,9 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
         switch (item.getItemId()) {
             case android.R.id.home:
                 supportFinishAfterTransition();
-                break;
+                return true;
             default:
-                Log.d(TAG, "Unknown option was clicked");
-                break;
-        }
-
-        return true;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FarmCardFragment.REQUEST_USER_IMAGE_CAPTURE) {
-            if (resultCode == Activity.RESULT_OK) {
-                getPresenter().scaleUserImage(this, getPresenter().getUserImageUri(this));
-            }
+                return false;
         }
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/blackIcon"/>
+        </shape>
+    </item>
+    <item android:gravity="center" android:top="@dimen/fragment_farm_card_image_padding" android:bottom="@dimen/fragment_farm_card_image_padding"
+        android:right="@dimen/fragment_farm_card_image_padding" android:left="@dimen/fragment_farm_card_image_padding">
+        <bitmap android:src="@drawable/ic_farm_white"/>
+    </item>
+</layer-list>

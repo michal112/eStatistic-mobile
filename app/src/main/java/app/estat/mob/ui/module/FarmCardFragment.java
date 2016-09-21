@@ -1,5 +1,6 @@
 package app.estat.mob.ui.module;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,28 +9,37 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
+import app.estat.mob.mvp.model.ImageManager;
 import app.estat.mob.mvp.presenter.module.FarmCardFragmentPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter, FarmCardFragmentView>
         implements FarmCardFragmentView {
     private static final String TAG = FarmCardFragment.class.getName();
 
-    private static final String USER_IMAGE_URI_KEY = "app.estat.mob.ui.module.USER_IMAGE_URI_KEY";
+    private static final int REQUEST_USER_IMAGE_CAPTURE = 0;
 
-    public static int REQUEST_USER_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_FARM_IMAGE_CAPTURE = 1;
+
+    private static final float IMAGE_LOADING_ALPHA = 0.5f;
+
+    private static final float IMAGE_LOADED_ALPHA = 1f;
 
     @BindView(R.id.fragment_farm_card_user_image_progress)
     ProgressBar mUserImageProgress;
@@ -40,19 +50,15 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @BindView(R.id.fragment_farm_card_user_image_button)
     Button mUserButton;
 
+    @BindView(R.id.fragment_farm_card_user_name)
+    TextView mUserName;
+
     private PopupMenu mUserPopupMenu;
 
     private PopupMenu mUserPhotoPopupMenu;
 
-    private Uri mUserImageUri;
-
-    public static FarmCardFragment newInstance(Uri userImageUri) {
-        Bundle args = new Bundle();
-        args.putParcelable(USER_IMAGE_URI_KEY, userImageUri);
-        FarmCardFragment fragment = new FarmCardFragment();
-        fragment.setArguments(args);
-
-        return fragment;
+    public static FarmCardFragment newInstance() {
+        return new FarmCardFragment();
     }
 
     @OnClick(R.id.fragment_farm_card_user_image_button)
@@ -63,15 +69,30 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        mUserImageUri = getArguments().getParcelable(USER_IMAGE_URI_KEY);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_farm_card, container, false);
+        ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
+        initPopups();
+        return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        initPopups();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.activity_farm_card_menu_done:
+                getPresenter().saveFarmData();
+                break;
+            default:
+                Log.d(TAG, "Unknown option was clicked");
+                break;
+        }
 
-        requestUserImage();
+        return true;
     }
 
     private void initPopups() {
@@ -82,7 +103,7 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.fragment_farm_card_photo_menu:
-                        takePhoto();
+                        takePhoto(ImageManager.USER_IMAGE);
                         break;
                     case R.id.fragment_farm_card_choose_menu:
                         break;
@@ -96,45 +117,86 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     }
 
     @Override
-    public void refreshUserImage() {
-        hideProgress(mUserImage, mUserImageProgress);
-        requestUserImage();
+    public void refreshImage(int imageType, Uri imageUri) {
+        if (imageType == ImageManager.USER_IMAGE) {
+            hideProgress(mUserImage, mUserImageProgress);
+            ViewUtils.insertImage(getActivity(), imageUri, mUserImage);
+        } else if (imageType == ImageManager.FARM_IMAGE) {
+
+        }
     }
 
     private void hideProgress(ImageView imageView, ProgressBar imageProgress) {
-        imageView.setAlpha(0.6f);
-        imageProgress.setVisibility(View.VISIBLE);
+        imageView.setAlpha(IMAGE_LOADED_ALPHA);
+        imageProgress.setVisibility(View.GONE);
     }
 
     @Override
-    public void showUserImageProgress() {
-        showProgress(mUserImage, mUserImageProgress);
+    public void showImageProgress(int imageType) {
+        if (imageType == ImageManager.USER_IMAGE) {
+            showProgress(mUserImage, mUserImageProgress);
+        } else if (imageType == ImageManager.FARM_IMAGE) {
+
+        }
     }
 
     private void showProgress(ImageView imageView, ProgressBar imageProgress) {
-        imageView.setAlpha(0.6f);
+        imageView.setAlpha(IMAGE_LOADING_ALPHA);
         imageProgress.setVisibility(View.VISIBLE);
     }
 
+    private void requestImage(int imageType) {
+        if (imageType == ImageManager.USER_IMAGE) {
+            showProgress(mUserImage, mUserImageProgress);
+            if (getPresenter().isUserImageExists(getActivity())) {
+                ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
+                        R.drawable.fragment_farm_card_form_user_image, mUserImage);
+            }
+            hideProgress(mUserImage, mUserImageProgress);
+        } else if (imageType == ImageManager.FARM_IMAGE) {
 
-    protected void requestUserImage() {
-        if (getPresenter().isUserImageExists(getActivity())) {
-            ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(getActivity()),
-                    R.drawable.fragment_farm_card_form_user_image, mUserImage);
         }
     }
 
-    private void takePhoto() {
+    private void takePhoto(int imageType) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mUserImageUri);
-            getActivity().startActivityForResult(intent, REQUEST_USER_IMAGE_CAPTURE);
+            Uri imageTempUri;
+            if (imageType == ImageManager.USER_IMAGE) {
+                imageTempUri = getPresenter().createUserImageTemp(getActivity());
+                if (imageTempUri == null) {
+                    return;
+                }
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageTempUri);
+                startActivityForResult(intent, REQUEST_USER_IMAGE_CAPTURE);
+            } else if (imageType == ImageManager.FARM_IMAGE) {
+                imageTempUri = getPresenter().createFarmImageTemp(getActivity());
+                if (imageTempUri == null) {
+                    return;
+                }
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageTempUri);
+                startActivityForResult(intent, REQUEST_FARM_IMAGE_CAPTURE);
+            }
         }
     }
 
     @Override
-    public int getLayoutResId() {
-        return R.layout.fragment_farm_card;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_USER_IMAGE_CAPTURE:
+                if (resultCode == Activity.RESULT_OK) {
+                    getPresenter().scaleImageTemp(getActivity(), ImageManager.USER_IMAGE);
+                }
+                break;
+            case REQUEST_FARM_IMAGE_CAPTURE:
+                if (resultCode == Activity.RESULT_OK) {
+                    getPresenter().scaleImageTemp(getActivity(), ImageManager.FARM_IMAGE);
+                }
+                break;
+            default:
+                Log.d(TAG, "Unknown activity request code received");
+                break;
+        }
     }
 
     @NonNull

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Menu;
+
 import app.estat.mob.R;
 
 public class FarmCardActivity extends ModuleActivity {
@@ -15,7 +17,12 @@ public class FarmCardActivity extends ModuleActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container,
-                FarmCardFragment.newInstance(getPresenter().getUserImageUri(this)), false);
+        addFragment(R.id.activity_module_container, FarmCardFragment.newInstance(), false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_farm_card_menu, menu);
+        return true;
     }
 }

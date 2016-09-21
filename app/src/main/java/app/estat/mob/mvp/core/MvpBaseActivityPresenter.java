@@ -4,7 +4,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.event.UserImageChangedEvent;
+import app.estat.mob.event.FormImageChangeEndEvent;
 
 public class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends MvpBasePresenter<V> {
     public MvpBaseActivityPresenter(ApplicationComponent applicationComponent) {
@@ -12,7 +12,7 @@ public class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends Mvp
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onUserImageChangedEvent(UserImageChangedEvent userImageChangedEvent) {
+    public void onUserImageChangedEvent(FormImageChangeEndEvent userImageChangedEvent) {
         if (!isViewAttached()) {
             return;
         }

@@ -21,8 +21,15 @@ public abstract class ViewUtils {
 
     private final static String DIR_FONT_NAME = "font";
 
+    public static void insertImage(Context context, Uri imageUri, ImageView destView) {
+        getBuilder(context).build().load(imageUri).centerCrop().fit().into(destView);
+    }
+
     public static void insertImage(Context context, Uri imageUri, @DrawableRes int errorImage, ImageView destView) {
-        Log.d("df", String.valueOf(destView));
+        getBuilder(context).build().load(imageUri).error(errorImage).centerCrop().fit().into(destView);
+    }
+
+    private static Picasso.Builder getBuilder(Context context) {
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.listener(new Picasso.Listener() {
             @Override
@@ -30,8 +37,9 @@ public abstract class ViewUtils {
                 Log.d(TAG, "Unable to load image", exception);
             }
         });
-        builder.build().load(imageUri).error(errorImage).centerCrop().fit().into(destView);
+        return builder;
     }
+
     public static int getResId(Context context, String res) {
         return context.getResources().getIdentifier(res.substring(res.indexOf(".", 2) + 1),
                 res.substring(res.indexOf(".") + 1, res.indexOf(".", 2)), context.getPackageName());

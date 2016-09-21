@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -26,6 +28,7 @@ import app.estat.mob.ui.module.MilkProductionActivity;
 import app.estat.mob.ui.module.MyCowsActivity;
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresenter, DashboardFragmentView>
         implements DashboardFragmentView {
@@ -81,29 +84,20 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
         return new DashboardFragment();
     }
 
+    @Nullable
     @Override
-    public int getLayoutResId() {
-        return R.layout.fragment_dashboard;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        ButterKnife.bind(this, view);
+
+        getPresenter().requestModules();
+        return view;
     }
 
     @NonNull
     @Override
     public DashboardFragmentPresenter createPresenter(ApplicationComponent applicationComponent) {
         return new DashboardFragmentPresenter(applicationComponent);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-Log.d("sd","sdd");
-        getPresenter().requestModules();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        Log.d("sd","sdtred");
     }
 
     @Override

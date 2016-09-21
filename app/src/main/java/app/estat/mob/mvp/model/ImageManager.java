@@ -9,53 +9,106 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class ImageManager {
-    private static final float MAX_USER_IMAGE_SIZE = 512;
+    public static final int USER_IMAGE = 0;
 
-    private static final int IMAGE_SAVE_QUALITY = 85;
+    public static final int FARM_IMAGE = 1;
 
-    private static final String FILE_NAME = "user_image.jpg";
+    private static final float MAX_USER_IMAGE_SIZE = 768;
+
+    private static final int IMAGE_SAVE_QUALITY = 75;
+
+    private static final String USER_IMAGE_NAME = "user_image.jpg";
+
+    private static final String FARM_IMAGE_NAME = "farm_image.jpg";
 
     private static final String AUTHORITY = "app.estat.mob.fileprovider";
 
     private static final String TAG = ImageManager.class.getName();
 
+    private String mUserImageTempPath;
+
+    private Uri mUserImageTempUri;
+
+    private String mFarmImageTempPath;
+
+    private Uri mFarmImageTempUri;
+
     public boolean isUserImageExists(Context context) {
-        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILE_NAME).exists();
+        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), USER_IMAGE_NAME).exists();
     }
 
-    public void scaleUserImage(Context context, Uri imageUri) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
-            float ratio = Math.min(MAX_USER_IMAGE_SIZE / bitmap.getWidth(), MAX_USER_IMAGE_SIZE / bitmap.getHeight());
-            int width = Math.round(ratio * bitmap.getWidth());
-            int height = Math.round(ratio * bitmap.getHeight());
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+    public void copyTempImage(Context context, int imageType) throws IOException {
+        FileChannel sourceChannel;
+        FileChannel destChannel;
+        File sourceFile = null;
+        File destFile = null;
 
-            File image = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILE_NAME);
-            fileOutputStream = new FileOutputStream(image);
-            scaledBitmap.compress(Bitmap.CompressFormat.PNG, IMAGE_SAVE_QUALITY, fileOutputStream);
-            fileOutputStream.flush();
-        } catch (IOException e) {
-            Log.w(TAG, "Unable to scale image", e);
-        }  finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    Log.w(TAG, "Unable to close stream", e);
-                }
-            }
+        if (imageType == USER_IMAGE) {
+            sourceFile = new File(mUserImageTempPath);
+            destFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), USER_IMAGE_NAME);
+        } else if (imageType == FARM_IMAGE) {
+
         }
+
+        sourceChannel = new FileInputStream(sourceFile).getChannel();
+        destChannel = new FileOutputStream(destFile).getChannel();
+        destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        sourceChannel.close();
+        destChannel.close();
+    }
+
+    public void scaleImage(Context context, int imageType) throws IOException {
+        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(),
+                imageType == USER_IMAGE ? mUserImageTempUri :
+                        (imageType == FARM_IMAGE) ? mFarmImageTempUri : null);
+        float ratio = Math.min(MAX_USER_IMAGE_SIZE / bitmap.getWidth(),
+                MAX_USER_IMAGE_SIZE / bitmap.getHeight());
+        int width = Math.round(ratio * bitmap.getWidth());
+        int height = Math.round(ratio * bitmap.getHeight());
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(imageType == USER_IMAGE ?
+                mUserImageTempPath : (imageType == FARM_IMAGE) ? mFarmImageTempPath : "");
+        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, IMAGE_SAVE_QUALITY, fileOutputStream);
+        fileOutputStream.flush();
+        fileOutputStream.close();
+    }
+
+    public Uri createUserImageTemp(Context context) throws IOException {
+        File imageTempFile = File.createTempFile(USER_IMAGE_NAME, null,
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        mUserImageTempPath = imageTempFile.getAbsolutePath();
+        mUserImageTempUri = FileProvider.getUriForFile(context, AUTHORITY, imageTempFile);
+
+        return mUserImageTempUri;
+    }
+
+    public Uri createFarmImageTemp(Context context) throws IOException {
+        File imageTempFile = File.createTempFile(FARM_IMAGE_NAME, null,
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        mFarmImageTempPath = imageTempFile.getAbsolutePath();
+        mFarmImageTempUri = FileProvider.getUriForFile(context, AUTHORITY, imageTempFile);
+
+        return mFarmImageTempUri;
+    }
+
+    public Uri getUserImageTempUri() {
+        return mUserImageTempUri;
+    }
+
+    public Uri getFarmImageTempUri() {
+        return mFarmImageTempUri;
     }
 
     public Uri getUserImageUri(Context context) {
         File directory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = new File(directory, FILE_NAME);
+        File image = new File(directory, USER_IMAGE_NAME);
 
         try {
             if (image.createNewFile()) {
