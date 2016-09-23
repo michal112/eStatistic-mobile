@@ -7,7 +7,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.event.FormImageChangeEndEvent;
+import app.estat.mob.event.FarmDataChangedEvent;
 import app.estat.mob.mvp.model.SharedPreferencesManager;
 
 public class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends MvpBasePresenter<V> {
@@ -16,12 +16,12 @@ public class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends Mvp
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserImageChangedEvent(FormImageChangeEndEvent userImageChangedEvent) {
+    public void onFarmDataChangedEvent(FarmDataChangedEvent farmDataChangedEvent) {
         if (!isViewAttached()) {
             return;
         }
 
-        //getView().refreshDrawerData();
+        getView().refreshDrawerData();
     }
 
     public String getUserName() {

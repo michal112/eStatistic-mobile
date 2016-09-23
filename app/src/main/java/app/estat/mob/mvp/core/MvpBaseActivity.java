@@ -100,7 +100,6 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
             ViewUtils.showProgress(mUserImage, mUserImageProgress);
             ViewUtils.insertImage(this, presenter.getUserImageUri(),
                     R.drawable.ic_account_circle, mUserImage, mUserImageProgress);
-            ViewUtils.hideProgress(mUserImage, mUserImageProgress);
         }
     }
 
@@ -108,8 +107,7 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         if (presenter.isFarmImageExists()) {
             ViewUtils.showProgress(mFarmPhoto, mFarmPhotoProgress);
             ViewUtils.insertImage(this, presenter.getFarmImageUri(),
-                    R.drawable.farm_photo, mFarmPhoto, mUserImageProgress);
-            ViewUtils.hideProgress(mFarmPhoto, mFarmPhotoProgress);
+                    R.drawable.farm_photo, mFarmPhoto, mFarmPhotoProgress);
         }
     }
 

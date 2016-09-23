@@ -12,9 +12,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.IOException;
 
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.event.FarmDataChangedEvent;
 import app.estat.mob.event.FormImageChangeStartEvent;
 import app.estat.mob.event.FormImageChangeEndEvent;
-import app.estat.mob.module.PreferencesModule;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
@@ -93,15 +93,36 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
         });
     }
 
-    public void saveFarmData(Context context, FarmData farmData) {
-        getModuleWrapper().getPreferencesManager()
-            .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, farmData.getUserName());
-        getModuleWrapper().getPreferencesManager()
-                .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmData.getFarmAddress());
-        getModuleWrapper().getPreferencesManager()
-                .saveStringValue(context, SharedPreferencesManager.BARN_NUMBER_KEY, farmData.getBarnNumber());
+    public void saveFarmData(final Context context, final FarmData farmData) {
+        mHandlerThread.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String userName = farmData.getUserName();
+                    if (!userName.isEmpty()) {
+                        getModuleWrapper().getPreferencesManager()
+                                .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, userName);
+                    }
+                    String farmAddress = farmData.getFarmAddress();
+                    if (!farmAddress.isEmpty()) {
+                        getModuleWrapper().getPreferencesManager()
+                                .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmAddress);
+                    }
+                    String barnNumber = farmData.getBarnNumber();
+                    if (!barnNumber.isEmpty()) {
+                        getModuleWrapper().getPreferencesManager()
+                                .saveStringValue(context, SharedPreferencesManager.BARN_NUMBER_KEY, barnNumber);
+                    }
+                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.FARM_IMAGE);
+                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.USER_IMAGE);
+                } catch (IOException e) {
+                    Log.d(TAG, "Unable to copy temporary image", e);
+                } finally {
+                    getModuleWrapper().getEventBus().post(new FarmDataChangedEvent());
+                }
+            }
+        });
     }
-
 
     private class ImageHandlerThread extends HandlerThread {
         private Handler mHandler;

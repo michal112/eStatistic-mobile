@@ -51,9 +51,15 @@ public class ImageManager {
         File destFile = null;
 
         if (imageType == USER_IMAGE) {
+            if (mUserImageTempPath == null || mUserImageTempPath.isEmpty()) {
+                return;
+            }
             sourceFile = new File(mUserImageTempPath);
             destFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), USER_IMAGE_NAME);
         } else if (imageType == FARM_IMAGE) {
+            if (mFarmImageTempPath == null || mFarmImageTempPath.isEmpty()) {
+                return;
+            }
             sourceFile = new File(mFarmImageTempPath);
             destFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FARM_IMAGE_NAME);
         }

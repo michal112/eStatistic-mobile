@@ -159,13 +159,11 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @Override
     public void refreshImage(int imageType, Uri imageUri) {
         if (imageType == ImageManager.USER_IMAGE) {
-            ViewUtils.hideProgress(mUserImage, mUserImageProgress);
             ViewUtils.insertImage(getActivity(), imageUri,
                     R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
-            ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
             ViewUtils.insertImage(getActivity(), imageUri,
-                    R.drawable.fragment_farm_card_form_farm_image, mUserImage, mUserImageProgress);
+                    R.drawable.fragment_farm_card_form_farm_image, mFarmImage, mFarmImageProgress);
         }
     }
 
@@ -185,14 +183,16 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
             if (getPresenter().isUserImageExists()) {
                 ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
                         R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
+            } else {
+                ViewUtils.hideProgress(mUserImage, mUserImageProgress);
             }
-            ViewUtils.hideProgress(mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
             if (getPresenter().isFarmImageExists()) {
                 ViewUtils.insertImage(getActivity(), getPresenter().getFarmImageUri(),
                         R.drawable.fragment_farm_card_form_farm_image, mFarmImage, mFarmImageProgress);
+            } else {
+                ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
             }
-            ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
         }
     }
 
