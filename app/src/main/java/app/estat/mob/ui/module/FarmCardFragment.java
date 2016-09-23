@@ -48,9 +48,6 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @BindView(R.id.fragment_farm_card_user_image_button)
     Button mUserButton;
 
-    @BindView(R.id.fragment_farm_card_user_name)
-    EditText mUserName;
-
     @BindView(R.id.fragment_farm_card_farm_image_progress)
     ProgressBar mFarmImageProgress;
 
@@ -60,6 +57,9 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @BindView(R.id.fragment_farm_card_farm_image_button)
     Button mFarmButton;
 
+    @BindView(R.id.fragment_farm_card_user_name)
+    EditText mUserName;
+
     @BindView(R.id.fragment_farm_card_barn_number)
     EditText mBarnNumber;
 
@@ -68,24 +68,20 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
 
     private PopupMenu mUserPopupMenu;
 
-    private PopupMenu mUserPhotoPopupMenu;
-
     private PopupMenu mFarmPopupMenu;
-
-    private PopupMenu mFarmPhotoPopupMenu;
 
     public static FarmCardFragment newInstance() {
         return new FarmCardFragment();
     }
 
     @OnClick(R.id.fragment_farm_card_user_image_button)
-    public void onClick() {
+    public void onUserButtonClick() {
         mUserPopupMenu.show();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @OnClick(R.id.fragment_farm_card_farm_image_button)
+    public void onFarmButtonClick() {
+        mFarmPopupMenu.show();
     }
 
     @Nullable
@@ -95,6 +91,10 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         initPopups();
+
+        requestImage(ImageManager.USER_IMAGE);
+        requestImage(ImageManager.FARM_IMAGE);
+
         return view;
     }
 
@@ -136,6 +136,24 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
                 return true;
             }
         });
+        mFarmPopupMenu = new PopupMenu(getActivity(), mFarmButton);
+        mFarmPopupMenu.inflate(R.menu.fragment_farm_card_context_menu);
+        mFarmPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.fragment_farm_card_photo_menu:
+                        takePhoto(ImageManager.FARM_IMAGE);
+                        break;
+                    case R.id.fragment_farm_card_choose_menu:
+                        break;
+                    default:
+                        Log.d(TAG, "Unknown item selected");
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -151,8 +169,6 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         }
     }
 
-
-
     @Override
     public void showImageProgress(int imageType) {
         if (imageType == ImageManager.USER_IMAGE) {
@@ -162,18 +178,21 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         }
     }
 
-
-
     private void requestImage(int imageType) {
+        showImageProgress(imageType);
+
         if (imageType == ImageManager.USER_IMAGE) {
-            ViewUtils.showProgress(mUserImage, mUserImageProgress);
             if (getPresenter().isUserImageExists()) {
                 ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
                         R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
             }
             ViewUtils.hideProgress(mUserImage, mUserImageProgress);
         } else if (imageType == ImageManager.FARM_IMAGE) {
-
+            if (getPresenter().isFarmImageExists()) {
+                ViewUtils.insertImage(getActivity(), getPresenter().getFarmImageUri(),
+                        R.drawable.fragment_farm_card_form_farm_image, mFarmImage, mFarmImageProgress);
+            }
+            ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
         }
     }
 
