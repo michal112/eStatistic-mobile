@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">eStatistic</string>
+    <string name="empty"/>
     <string name="drawer_user_unknown">Unknown user</string>
     <string name="splash_screen_text">Manage your dairy farm easy!</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="transition_module_image">Module icon</string>
+    <string name="farm_card_data_successfully_saved">Farm card data successfully saved</string>
+    <string name="farm_card_data_save_error">Unable to save farm data</string>
 </resources>

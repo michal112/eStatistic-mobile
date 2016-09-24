@@ -11,10 +11,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.FarmDataChangedEvent;
-import app.estat.mob.event.FormImageChangeStartEvent;
 import app.estat.mob.event.FormImageChangeEndEvent;
+import app.estat.mob.event.FormImageChangeStartEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
@@ -34,6 +35,21 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
         mHandlerThread.getLooper();
     }
 
+    @Override
+    public String getUserName() {
+        return getModuleWrapper().getPreferencesManager().getStringValue(
+                getContext(), SharedPreferencesManager.USER_NAME_KEY, R.string.empty);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFarmDataChangedEvent(FarmDataChangedEvent farmDataChangedEvent) {
+        if (!isViewAttached()) {
+            return;
+        }
+
+        getView().setActivityResult(farmDataChangedEvent.getStatus());
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFormImageChangeStartEvent(FormImageChangeStartEvent formImageChangeStartEvent) {
         if (!isViewAttached()) {
@@ -49,7 +65,7 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
             return;
         }
 
-        getView().refreshImage(formImageChangeEndEvent.getImageType(), formImageChangeEndEvent.getImageUri());
+        getView().showImage(formImageChangeEndEvent.getImageType(), formImageChangeEndEvent.getImageUri());
     }
 
     public Uri createUserImageTemp(Context context) {
@@ -98,27 +114,25 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
             @Override
             public void run() {
                 try {
+                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.FARM_IMAGE);
+                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.USER_IMAGE);
                     String userName = farmData.getUserName();
                     if (!userName.isEmpty()) {
                         getModuleWrapper().getPreferencesManager()
                                 .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, userName);
+                    } else {
+                        getModuleWrapper().getPreferencesManager().removeValue(context, SharedPreferencesManager.USER_NAME_KEY);
                     }
-                    String farmAddress = farmData.getFarmAddress();
-                    if (!farmAddress.isEmpty()) {
-                        getModuleWrapper().getPreferencesManager()
-                                .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmAddress);
-                    }
-                    String barnNumber = farmData.getBarnNumber();
-                    if (!barnNumber.isEmpty()) {
-                        getModuleWrapper().getPreferencesManager()
-                                .saveStringValue(context, SharedPreferencesManager.BARN_NUMBER_KEY, barnNumber);
-                    }
-                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.FARM_IMAGE);
-                    getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.USER_IMAGE);
+                    getModuleWrapper().getPreferencesManager()
+                            .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmData.getFarmAddress());
+                    getModuleWrapper().getPreferencesManager()
+                            .saveStringValue(context, SharedPreferencesManager.BARN_NUMBER_KEY, farmData.getBarnNumber());
+
+                    getModuleWrapper().getEventBus().post(new FarmDataChangedEvent(FarmDataChangedEvent.Status.SUCCESS));
                 } catch (IOException e) {
                     Log.d(TAG, "Unable to copy temporary image", e);
-                } finally {
-                    getModuleWrapper().getEventBus().post(new FarmDataChangedEvent());
+
+                    getModuleWrapper().getEventBus().post(new FarmDataChangedEvent(FarmDataChangedEvent.Status.FAILURE));
                 }
             }
         });

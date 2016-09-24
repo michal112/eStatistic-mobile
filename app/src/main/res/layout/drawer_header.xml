@@ -14,18 +14,30 @@
         android:scaleType="centerCrop"
         android:src="@drawable/farm_photo"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:background="?attr/colorPrimary"/>
+
     <ProgressBar
         android:id="@+id/drawer_farm_photo_progress"
         android:layout_width="@dimen/drawer_header_photo_progress_width"
         android:layout_height="@dimen/drawer_header_photo_progress_height"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:layout_gravity="center"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="?attr/colorPrimary"/>
+    <TextView
+        android:id="@+id/drawer_barn_number"
+        android:layout_width="@dimen/drawer_header_barn_number_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:gravity="end"
+        android:maxLines="1"
+        android:paddingEnd="@dimen/drawer_header_barn_number_right_margin"
+        android:paddingRight="@dimen/drawer_header_barn_number_right_margin"
+        android:textColor="@color/grey_300"
+        android:textSize="@dimen/drawer_header_text_size"
+        tools:text="Barn number"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,44 +48,44 @@
         android:paddingRight="@dimen/drawer_horizontal_margin"
         android:paddingStart="@dimen/drawer_horizontal_margin">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/drawer_header_avatar_layout_height"
-            android:gravity="center_vertical">
+            android:orientation="horizontal">
 
             <FrameLayout
                 android:layout_width="@dimen/drawer_header_user_avatar_width"
-                android:layout_height="@dimen/drawer_header_user_avatar_height">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_gravity="center_vertical"
-                android:id="@+id/drawer_user_avatar"
-                android:layout_width="@dimen/drawer_header_user_avatar_width"
                 android:layout_height="@dimen/drawer_header_user_avatar_height"
-                android:src="@drawable/ic_account_circle"/>
+                android:layout_gravity="center_vertical|start">
 
-            <ProgressBar
-                android:id="@+id/drawer_user_progress"
-                android:layout_width="@dimen/drawer_header_user_progress_width"
-                android:layout_height="@dimen/drawer_header_user_progress_height"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/drawer_user_avatar"
+                    android:layout_width="@dimen/drawer_header_user_avatar_width"
+                    android:layout_height="@dimen/drawer_header_user_avatar_height"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_account_circle"/>
+
+                <ProgressBar
+                    android:id="@+id/drawer_user_progress"
+                    android:layout_width="@dimen/drawer_header_user_progress_width"
+                    android:layout_height="@dimen/drawer_header_user_progress_height"
+                    android:layout_gravity="center"/>
 
             </FrameLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/drawer_header_user_layout_height"
-            android:layout_gravity="bottom"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/drawer_user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:text="@string/drawer_user_unknown"
                 android:textColor="@color/white"
                 android:textSize="@dimen/drawer_header_text_size"
@@ -82,9 +94,10 @@
 
             <TextView
                 android:id="@+id/drawer_farm_address"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/drawerTextColor"
+                android:maxLines="1"
+                android:textColor="@color/grey_300"
                 android:textSize="@dimen/drawer_header_text_size"
                 tools:text="os.Wł.Łokietka 3/1 Poznań"/>
 

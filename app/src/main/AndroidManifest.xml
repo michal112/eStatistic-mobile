@@ -12,23 +12,27 @@
 
         <activity
             android:name=".ui.SplashScreenActivity"
-            android:label="@string/application_name"
-            android:theme="@style/ApplicationTheme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.dashboard.DashboardActivity" />
+        <activity android:name=".ui.dashboard.DashboardActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.FarmCardActivity" />
+        <activity android:name=".ui.module.FarmCardActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.AverageProductivityActivity" />
+        <activity android:name=".ui.module.AverageProductivityActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.MyCowsActivity" />
+        <activity android:name=".ui.module.MyCowsActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.MilkProductionActivity" />
+        <activity android:name=".ui.module.MilkProductionActivity"
+                  android:screenOrientation="portrait"/>
 
         <provider
             android:authorities="app.estat.mob.fileprovider"

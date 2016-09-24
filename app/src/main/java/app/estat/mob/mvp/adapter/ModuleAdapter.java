@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import app.estat.mob.R;
 import app.estat.mob.db.entity.Module;
-
 import app.estat.mob.mvp.util.ViewUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

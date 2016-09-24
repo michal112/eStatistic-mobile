@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">eStatystyk</string>
+    <string name="empty"/>
     <string name="drawer_user_unknown">Nieznany użytkownik</string>
     <string name="splash_screen_text">Łatwo zarządzaj swoim gospodarstwem!</string>
     <string name="drawer_open">Otwórz nawigację</string>
     <string name="drawer_close">Zamknij nawigację</string>
     <string name="transition_module_image">Ikona modułu</string>
+    <string name="farm_card_data_successfully_saved">Dane gospodarstwa zostały zapisane</string>
+    <string name="farm_card_data_save_error">Błąd zapisu danych gospodarstwa</string>
 </resources>

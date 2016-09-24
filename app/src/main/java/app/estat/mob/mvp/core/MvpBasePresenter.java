@@ -9,7 +9,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.lang.ref.WeakReference;
 
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.mvp.model.SharedPreferencesManager;
 
 abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private WeakReference<V> view;
@@ -89,6 +91,21 @@ abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     public boolean isUserImageExists() {
         return getModuleWrapper().getImageManager().isUserImageExists(mContext);
+    }
+
+    public String getUserName() {
+        return getModuleWrapper().getPreferencesManager().getStringValue(
+                getContext(), SharedPreferencesManager.USER_NAME_KEY, R.string.drawer_user_unknown);
+    }
+
+    public String getFarmAddress() {
+        return getModuleWrapper().getPreferencesManager().getStringValue(
+                getContext(), SharedPreferencesManager.FARM_ADDRESS_KEY, R.string.empty);
+    }
+
+    public String getBarnNumber() {
+        return getModuleWrapper().getPreferencesManager().getStringValue(
+                getContext(), SharedPreferencesManager.BARN_NUMBER_KEY, R.string.empty);
     }
 
     @Subscribe

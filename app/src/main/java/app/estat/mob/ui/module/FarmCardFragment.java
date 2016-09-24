@@ -21,10 +21,12 @@ import android.widget.ProgressBar;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.event.FarmDataChangedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
 import app.estat.mob.mvp.presenter.module.FarmCardFragmentPresenter;
+import app.estat.mob.mvp.util.ActivityUtil;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
 import butterknife.BindView;
@@ -94,8 +96,15 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
 
         requestImage(ImageManager.USER_IMAGE);
         requestImage(ImageManager.FARM_IMAGE);
+        initFormData();
 
         return view;
+    }
+
+    private void initFormData() {
+        mUserName.setText(getPresenter().getUserName());
+        mBarnNumber.setText(getPresenter().getBarnNumber());
+        mFarmAddress.setText(getPresenter().getFarmAddress());
     }
 
     @Override
@@ -127,8 +136,6 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
                     case R.id.fragment_farm_card_photo_menu:
                         takePhoto(ImageManager.USER_IMAGE);
                         break;
-                    case R.id.fragment_farm_card_choose_menu:
-                        break;
                     default:
                         Log.d(TAG, "Unknown item selected");
                         break;
@@ -145,8 +152,6 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
                     case R.id.fragment_farm_card_photo_menu:
                         takePhoto(ImageManager.FARM_IMAGE);
                         break;
-                    case R.id.fragment_farm_card_choose_menu:
-                        break;
                     default:
                         Log.d(TAG, "Unknown item selected");
                         break;
@@ -157,7 +162,7 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     }
 
     @Override
-    public void refreshImage(int imageType, Uri imageUri) {
+    public void showImage(int imageType, Uri imageUri) {
         if (imageType == ImageManager.USER_IMAGE) {
             ViewUtils.insertImage(getActivity(), imageUri,
                     R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
@@ -174,6 +179,16 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         } else if (imageType == ImageManager.FARM_IMAGE) {
             ViewUtils.showProgress(mFarmImage, mFarmImageProgress);
         }
+    }
+
+    @Override
+    public void setActivityResult(FarmDataChangedEvent.Status status) {
+        if (status == FarmDataChangedEvent.Status.SUCCESS) {
+            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVED);
+        } else if (status == FarmDataChangedEvent.Status.FAILURE) {
+            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVE_ERROR);
+        }
+        getActivity().supportFinishAfterTransition();
     }
 
     private void requestImage(int imageType) {

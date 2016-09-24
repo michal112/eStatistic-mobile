@@ -1,237 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_farm_card_nested_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    android:paddingTop="@dimen/activity_app_bar_height"
     android:paddingEnd="@dimen/fragment_farm_card_padding_horizontal"
     android:paddingLeft="@dimen/fragment_farm_card_padding_horizontal"
     android:paddingRight="@dimen/fragment_farm_card_padding_horizontal"
-    android:paddingStart="@dimen/fragment_farm_card_padding_horizontal">
+    android:paddingStart="@dimen/fragment_farm_card_padding_horizontal"
+    android:paddingTop="@dimen/activity_app_bar_height">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/fragment_farm_card_vertical_margin"
+        android:paddingTop="@dimen/fragment_farm_card_vertical_margin">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/fragment_farm_card_card_user_margin_bottom">
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fragment_farm_card_card_user_margin_bottom"
+            android:layout_marginTop="@dimen/fragment_farm_card_card_user_margin_top">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
-                android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/fragment_farm_card_card_padding">
 
-                <ImageView
-                    android:layout_width="@dimen/fragment_farm_card_card_user_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_card_user_image_height"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
-                    android:alpha="@string/fragment_farm_card_form_icon_alpha"
-                    android:src="@drawable/ic_person" />
-
-                <EditText
-                    android:id="@+id/fragment_farm_card_user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/fragment_farm_card_user_hint" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
-                android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
-
-                <ImageView
-                    android:layout_width="@dimen/fragment_farm_card_card_user_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_card_user_image_height"
-                    android:layout_gravity="top"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
-                    android:alpha="@string/fragment_farm_card_form_icon_alpha"
-                    android:src="@drawable/ic_camera" />
-
-                <FrameLayout
-                    android:layout_width="@dimen/fragment_farm_card_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_image_height"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_thumbnail_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_thumbnail_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_thumbnail_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_thumbnail_left_margin">
-
-                    <ImageView
-                        android:id="@+id/fragment_farm_card_user_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/fragment_farm_card_form_user_image" />
-
-                    <ProgressBar
-                        android:id="@+id/fragment_farm_card_user_image_progress"
-                        android:layout_width="@dimen/fragment_farm_card_image_progress_width"
-                        android:layout_height="@dimen/fragment_farm_card_image_progress_height"
-                        android:layout_gravity="center"
-                        android:visibility="gone"/>
-
-                </FrameLayout>
-
-                <Button
-                    android:id="@+id/fragment_farm_card_user_image_button"
-                    style="@style/FlatButton"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fragment_farm_card_row_button_margin"
-                    android:text="@string/fragment_farm_card_button_text" />
+                    android:layout_gravity="top|end"
+                    android:text="@string/fragment_farm_card_user_tab"
+                    android:textSize="@dimen/fragment_farm_card_card_header_text_size"
+                    android:textStyle="bold"/>
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
-                android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
-
-                <ImageView
-                    android:layout_width="@dimen/fragment_farm_card_card_user_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_card_user_image_height"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
-                    android:alpha="@string/fragment_farm_card_form_icon_alpha"
-                    android:src="@drawable/ic_home" />
-
-                <EditText
-                    android:id="@+id/fragment_farm_card_barn_number"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/fragment_farm_card_farm_number" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
-                android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
-
-                <ImageView
-                    android:layout_width="@dimen/fragment_farm_card_card_user_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_card_user_image_height"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
-                    android:alpha="@string/fragment_farm_card_form_icon_alpha"
-                    android:src="@drawable/ic_location" />
-
-                <EditText
-                    android:id="@+id/fragment_farm_card_farm_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:lines="2"
-                    android:hint="@string/fragment_farm_card_address_hint" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
-                android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
-                android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
-
-                <ImageView
-                    android:layout_width="@dimen/fragment_farm_card_card_user_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_card_user_image_height"
-                    android:layout_gravity="top"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
-                    android:alpha="@string/fragment_farm_card_form_icon_alpha"
-                    android:src="@drawable/ic_camera" />
-
-                <FrameLayout
-                    android:layout_width="@dimen/fragment_farm_card_image_width"
-                    android:layout_height="@dimen/fragment_farm_card_image_height"
-                    android:layout_marginEnd="@dimen/fragment_farm_card_image_thumbnail_right_margin"
-                    android:layout_marginLeft="@dimen/fragment_farm_card_image_thumbnail_left_margin"
-                    android:layout_marginRight="@dimen/fragment_farm_card_image_thumbnail_right_margin"
-                    android:layout_marginStart="@dimen/fragment_farm_card_image_thumbnail_left_margin">
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
+                    android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
 
                     <ImageView
-                        android:id="@+id/fragment_farm_card_farm_image"
+                        android:layout_width="@dimen/fragment_farm_card_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_card_image_height"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
+                        android:alpha="@string/fragment_farm_card_form_icon_alpha"
+                        android:src="@drawable/ic_person"/>
+
+                    <EditText
+                        android:id="@+id/fragment_farm_card_user_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/fragment_farm_card_form_farm_image" />
+                        android:layout_height="wrap_content"
+                        android:hint="@string/fragment_farm_card_user_name"
+                        android:lines="1"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"/>
 
-                    <ProgressBar
-                        android:id="@+id/fragment_farm_card_farm_image_progress"
-                        android:layout_width="@dimen/fragment_farm_card_image_progress_width"
-                        android:layout_height="@dimen/fragment_farm_card_image_progress_height"
-                        android:layout_gravity="center"
-                        android:visibility="gone"/>
+                </LinearLayout>
 
-                </FrameLayout>
-
-                <Button
-                    android:id="@+id/fragment_farm_card_farm_image_button"
-                    style="@style/FlatButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fragment_farm_card_row_button_margin"
-                    android:text="@string/fragment_farm_card_button_text" />
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
+                    android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
+
+                    <ImageView
+                        android:layout_width="@dimen/fragment_farm_card_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_card_image_height"
+                        android:layout_gravity="top"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
+                        android:alpha="@string/fragment_farm_card_form_icon_alpha"
+                        android:src="@drawable/ic_camera"/>
+
+                    <FrameLayout
+                        android:layout_width="@dimen/fragment_farm_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_image_height"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_thumbnail_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_thumbnail_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_thumbnail_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_thumbnail_left_margin">
+
+                        <ImageView
+                            android:id="@+id/fragment_farm_card_user_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/fragment_farm_card_form_user_image"/>
+
+                        <ProgressBar
+                            android:id="@+id/fragment_farm_card_user_image_progress"
+                            android:layout_width="@dimen/fragment_farm_card_image_progress_width"
+                            android:layout_height="@dimen/fragment_farm_card_image_progress_height"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <Button
+                        android:id="@+id/fragment_farm_card_user_image_button"
+                        style="@style/FlatButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragment_farm_card_row_button_margin"
+                        android:text="@string/fragment_farm_card_button_text"/>
+
+                </LinearLayout>
 
             </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fragment_farm_card_card_farm_margin_bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/fragment_farm_card_card_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:text="@string/fragment_farm_card_farm_tab"
+                    android:textSize="@dimen/fragment_farm_card_card_header_text_size"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
+                    android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
+
+                    <ImageView
+                        android:layout_width="@dimen/fragment_farm_card_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_card_image_height"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
+                        android:alpha="@string/fragment_farm_card_form_icon_alpha"
+                        android:src="@drawable/ic_home"/>
+
+                    <EditText
+                        android:id="@+id/fragment_farm_card_barn_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/fragment_farm_card_farm_number"
+                        android:lines="1"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
+                    android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
+
+                    <ImageView
+                        android:layout_width="@dimen/fragment_farm_card_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_card_image_height"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
+                        android:alpha="@string/fragment_farm_card_form_icon_alpha"
+                        android:src="@drawable/ic_location"/>
+
+                    <EditText
+                        android:id="@+id/fragment_farm_card_farm_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/fragment_farm_card_address_hint"
+                        android:lines="1"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/fragment_farm_card_row_padding_bottom"
+                    android:paddingEnd="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingRight="@dimen/fragment_farm_card_row_padding_right"
+                    android:paddingTop="@dimen/fragment_farm_card_row_padding_top">
+
+                    <ImageView
+                        android:layout_width="@dimen/fragment_farm_card_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_card_image_height"
+                        android:layout_gravity="top"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_left_margin"
+                        android:alpha="@string/fragment_farm_card_form_icon_alpha"
+                        android:src="@drawable/ic_camera"/>
+
+                    <FrameLayout
+                        android:layout_width="@dimen/fragment_farm_card_image_width"
+                        android:layout_height="@dimen/fragment_farm_card_image_height"
+                        android:layout_marginEnd="@dimen/fragment_farm_card_image_thumbnail_right_margin"
+                        android:layout_marginLeft="@dimen/fragment_farm_card_image_thumbnail_left_margin"
+                        android:layout_marginRight="@dimen/fragment_farm_card_image_thumbnail_right_margin"
+                        android:layout_marginStart="@dimen/fragment_farm_card_image_thumbnail_left_margin">
+
+                        <ImageView
+                            android:id="@+id/fragment_farm_card_farm_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/fragment_farm_card_form_farm_image"/>
+
+                        <ProgressBar
+                            android:id="@+id/fragment_farm_card_farm_image_progress"
+                            android:layout_width="@dimen/fragment_farm_card_image_progress_width"
+                            android:layout_height="@dimen/fragment_farm_card_image_progress_height"
+                            android:layout_gravity="center"
+                            android:visibility="gone"/>
+
+                    </FrameLayout>
+
+                    <Button
+                        android:id="@+id/fragment_farm_card_farm_image_button"
+                        style="@style/FlatButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragment_farm_card_row_button_margin"
+                        android:text="@string/fragment_farm_card_button_text"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>
