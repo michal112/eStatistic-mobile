@@ -5,8 +5,4 @@
         android:id="@+id/fragment_farm_card_photo_menu"
         android:title="@string/fragment_farm_card_context_photo_button"/>
 
-    <item
-        android:id="@+id/fragment_farm_card_choose_menu"
-        android:title="@string/fragment_farm_card_context_choose_button"/>
-
 </menu>

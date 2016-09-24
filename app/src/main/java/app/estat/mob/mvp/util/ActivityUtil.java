@@ -1,13 +1,17 @@
 package app.estat.mob.mvp.util;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
 
 public abstract class ActivityUtil {
-    public static void animateModuleActivity(FragmentActivity activity, Intent intent,
+    public static final int RESULT_FARM_CARD_SAVED = 1;
+
+    public static final int RESULT_FARM_CARD_SAVE_ERROR = 2;
+
+    public static void animateModuleActivity(Activity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptionsCompat activityOptionsCompat =
@@ -15,6 +19,17 @@ public abstract class ActivityUtil {
             activity.startActivity(intent, activityOptionsCompat.toBundle());
         } else {
             activity.startActivity(intent);
+        }
+    }
+
+    public static void animateModuleActivityForResult(Activity activity, Intent intent,
+                                             ImageView imageView, String transitionName, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptionsCompat activityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, transitionName);
+            activity.startActivityForResult(intent, requestCode, activityOptionsCompat.toBundle());
+        } else {
+            activity.startActivityForResult(intent, requestCode);
         }
     }
 }

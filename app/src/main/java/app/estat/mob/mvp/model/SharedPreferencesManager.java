@@ -22,8 +22,8 @@ public class SharedPreferencesManager {
         return preferences.getString(key, context.getResources().getString(defVal));
     }
 
-    public String getStringValue(Context context, String key, String defVal) {
+    public void removeValue(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(key, defVal);
+        preferences.edit().remove(key).apply();
     }
 }

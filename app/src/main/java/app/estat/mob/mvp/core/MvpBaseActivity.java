@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -43,6 +44,8 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
 
     TextView mFarmAddress;
 
+    TextView mBarnNumber;
+
     private P presenter;
 
     @NonNull
@@ -70,6 +73,7 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         mFarmAddress = ButterKnife.findById(headerView, R.id.drawer_farm_address);
         mFarmPhoto = ButterKnife.findById(headerView, R.id.drawer_farm_photo);
         mFarmPhotoProgress = ButterKnife.findById(headerView, R.id.drawer_farm_photo_progress);
+        mBarnNumber = ButterKnife.findById(headerView, R.id.drawer_barn_number);
 
         setSupportActionBar(mToolbar);
         displayActionBarTittle(false);
@@ -81,34 +85,46 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
     }
 
     @Override
+    public void showMessage(@StringRes int resId) {
+         Snackbar snackbar = Snackbar.make(getWindow()
+                 .getDecorView().findViewById(android.R.id.content), resId, Snackbar.LENGTH_LONG);
+         snackbar.show();
+    }
+
     public void refreshDrawerData() {
         requestUserImage();
         requestFarmImage();
 
         mUserName.setText(getPresenter().getUserName());
-        String farmAddress = getPresenter().getFarmAddress();
-        if (!farmAddress.isEmpty()) {
-            mFarmAddress.setText(farmAddress);
-            mFarmAddress.setVisibility(View.VISIBLE);
+        showOrHideField(getPresenter().getFarmAddress(), mFarmAddress);
+        showOrHideField(getPresenter().getBarnNumber(), mBarnNumber);
+    }
+
+    private void showOrHideField(String value, TextView view) {
+        if (!value.isEmpty()) {
+            view.setText(value);
+            view.setVisibility(View.VISIBLE);
         } else {
-            mFarmAddress.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         }
     }
 
     private void requestUserImage() {
+        ViewUtils.showProgress(mUserImage, mUserImageProgress);
         if (presenter.isUserImageExists()) {
-            ViewUtils.showProgress(mUserImage, mUserImageProgress);
             ViewUtils.insertImage(this, presenter.getUserImageUri(),
                     R.drawable.ic_account_circle, mUserImage, mUserImageProgress);
+        } else {
             ViewUtils.hideProgress(mUserImage, mUserImageProgress);
         }
     }
 
     private void requestFarmImage() {
+        ViewUtils.showProgress(mFarmPhoto, mFarmPhotoProgress);
         if (presenter.isFarmImageExists()) {
-            ViewUtils.showProgress(mFarmPhoto, mFarmPhotoProgress);
             ViewUtils.insertImage(this, presenter.getFarmImageUri(),
-                    R.drawable.farm_photo, mFarmPhoto, mUserImageProgress);
+                    R.drawable.farm_photo, mFarmPhoto, mFarmPhotoProgress);
+        } else {
             ViewUtils.hideProgress(mFarmPhoto, mFarmPhotoProgress);
         }
     }

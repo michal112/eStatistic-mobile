@@ -22,7 +22,6 @@ import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.dashboard.DashboardFragmentPresenter;
 import app.estat.mob.mvp.util.ActivityUtil;
 import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
-
 import app.estat.mob.ui.module.AverageProductivityActivity;
 import app.estat.mob.ui.module.FarmCardActivity;
 import app.estat.mob.ui.module.MilkProductionActivity;
@@ -34,6 +33,8 @@ import butterknife.ButterKnife;
 public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresenter, DashboardFragmentView>
         implements DashboardFragmentView {
     private static final String TAG = DashboardFragment.class.getName();
+
+    public static final int FARM_CARD_EDIT = 0;
 
     @BindString(R.string.transition_module_image)
     String mTransitionName;
@@ -56,9 +57,9 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
         switch (module.getActivity()) {
             case FARM_CARD:
-                ActivityUtil.animateModuleActivity(getActivity(),
+                ActivityUtil.animateModuleActivityForResult(getActivity(),
                     FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
-                        module.getNameRes()), imageView, mTransitionName);
+                        module.getNameRes()), imageView, mTransitionName, FARM_CARD_EDIT);
                 break;
             case AVERAGE_PRODUCTIVITY:
                 ActivityUtil.animateModuleActivity(getActivity(),

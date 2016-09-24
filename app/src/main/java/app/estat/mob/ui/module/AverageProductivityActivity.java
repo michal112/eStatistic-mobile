@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import app.estat.mob.R;
 
 public class AverageProductivityActivity extends ModuleActivity {
