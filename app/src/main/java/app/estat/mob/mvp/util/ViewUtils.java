@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
 
 public abstract class ViewUtils {
     private final static String TAG = ViewUtils.class.getName();
@@ -72,7 +71,7 @@ public abstract class ViewUtils {
     }
 
     public static <A extends MvpBaseActivity> AppBarLayout.OnOffsetChangedListener getAppBarOffsetListener(
-            final A activity, final SmoothAppBarLayout mAppBarLayout) {
+            final A activity, final AppBarLayout mAppBarLayout) {
         return new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

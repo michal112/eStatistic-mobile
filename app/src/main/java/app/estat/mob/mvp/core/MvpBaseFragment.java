@@ -10,7 +10,7 @@ import android.support.v4.app.Fragment;
 import app.estat.mob.ApplicationCore;
 import app.estat.mob.component.ApplicationComponent;
 
-public abstract class MvpBaseFragment<P extends MvpBasePresenter<V>, V extends MvpBaseFragmentView>
+public abstract class MvpBaseFragment<P extends MvpBaseFragmentPresenter<V>, V extends MvpBaseFragmentView>
         extends Fragment implements MvpBaseFragmentView {
     private P presenter;
 

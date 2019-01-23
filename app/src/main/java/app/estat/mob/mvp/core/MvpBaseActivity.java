@@ -32,18 +32,24 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
     @BindView(R.id.activity_navigation_view)
     NavigationView mNavigationView;
 
+    @BindView(R.id.drawer_farm_photo)
     ImageView mFarmPhoto;
 
+    @BindView(R.id.drawer_farm_photo_progress)
     ProgressBar mFarmPhotoProgress;
 
     ImageView mUserImage;
 
+    @BindView(R.id.drawer_user_progress)
     ProgressBar mUserImageProgress;
 
+    @BindView(R.id.drawer_user_name)
     TextView mUserName;
 
+    @BindView(R.id.drawer_farm_address)
     TextView mFarmAddress;
 
+    @BindView(R.id.drawer_barn_number)
     TextView mBarnNumber;
 
     private P presenter;
@@ -67,13 +73,7 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         ButterKnife.bind(this);
 
         View headerView = mNavigationView.getHeaderView(0);
-        mUserImage = ButterKnife.findById(headerView, R.id.drawer_user_avatar);
-        mUserImageProgress = ButterKnife.findById(headerView, R.id.drawer_user_progress);
-        mUserName = ButterKnife.findById(headerView, R.id.drawer_user_name);
-        mFarmAddress = ButterKnife.findById(headerView, R.id.drawer_farm_address);
-        mFarmPhoto = ButterKnife.findById(headerView, R.id.drawer_farm_photo);
-        mFarmPhotoProgress = ButterKnife.findById(headerView, R.id.drawer_farm_photo_progress);
-        mBarnNumber = ButterKnife.findById(headerView, R.id.drawer_barn_number);
+        ButterKnife.bind(this, headerView);
 
         setSupportActionBar(mToolbar);
         displayActionBarTittle(false);

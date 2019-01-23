@@ -4,19 +4,30 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.db.entity.Cow;
+import app.estat.mob.mvp.adapter.ComponentAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyCowsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyCowsFragmentView>
         implements MyCowsFragmentView {
+
+    @BindView(R.id.fragment_my_cows_recycler_view)
+    RecyclerView mRecyclerView;
+
     public static MyCowsFragment newInstance() {
         return new MyCowsFragment();
     }
@@ -27,6 +38,7 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
         View view = inflater.inflate(R.layout.fragment_my_cows, container, false);
         ButterKnife.bind(this, view);
 
+        getPresenter().requestCows();
         return view;
     }
 
@@ -34,5 +46,12 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
     @Override
     public MyCowsFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
         return new MyCowsFragmentPresenter(context, applicationComponent);
+    }
+
+    @Override
+    public void showCows(List<Cow> cows) {
+        ComponentAdapter<Cow> componentAdapter = new ComponentAdapter(getActivity(), cows);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(componentAdapter);
     }
 }

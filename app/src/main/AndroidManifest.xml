@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.estat.mob">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -8,7 +9,9 @@
         android:name="app.estat.mob.ApplicationCore"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name"
-        android:theme="@style/ApplicationTheme">
+        android:theme="@style/ApplicationTheme"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="">
 
         <activity
             android:name=".ui.SplashScreenActivity"

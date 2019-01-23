@@ -1,7 +1,9 @@
 package app.estat.mob.db.entity;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -11,17 +13,15 @@ import java.util.Date;
 import java.util.List;
 
 import app.estat.mob.db.converter.BookConverter;
-import app.estat.mob.db.type.Book;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
-import app.estat.mob.db.dao.DaoSession;
-import app.estat.mob.db.dao.MateDao;
-import app.estat.mob.db.dao.LactationDao;
-import app.estat.mob.db.dao.SireDao;
 import app.estat.mob.db.dao.CowDao;
+import app.estat.mob.db.dao.DaoSession;
+import app.estat.mob.db.dao.LactationDao;
+import app.estat.mob.db.dao.MateDao;
+import app.estat.mob.db.dao.SireDao;
+import app.estat.mob.db.type.Book;
 
 @Entity(nameInDb = "COW")
-public class Cow {
+public class Cow implements Item {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;

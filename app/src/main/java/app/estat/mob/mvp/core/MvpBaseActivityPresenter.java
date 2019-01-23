@@ -4,7 +4,7 @@ import android.content.Context;
 
 import app.estat.mob.component.ApplicationComponent;
 
-public class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends MvpBasePresenter<V> {
+public abstract class MvpBaseActivityPresenter<V extends MvpBaseActivityView> extends MvpBasePresenter<V> {
     public MvpBaseActivityPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
     }

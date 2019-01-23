@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -17,7 +18,6 @@ import app.estat.mob.mvp.util.ActivityUtil;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.dashboard.DashboardActivityView;
 import butterknife.BindView;
-import me.henrytao.smoothappbarlayout.SmoothAppBarLayout;
 
 public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresenter, DashboardActivityView>
         implements DashboardActivityView {
@@ -27,7 +27,7 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
     DrawerLayout mDrawerLayout;
 
     @BindView(R.id.smooth_app_bar_layout)
-    SmoothAppBarLayout mAppBarLayout;
+    AppBarLayout mAppBarLayout;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
