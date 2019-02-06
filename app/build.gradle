@@ -3,10 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     defaultConfig {
         applicationId "app.estat.mob"
         minSdkVersion 16
@@ -27,32 +23,27 @@ android {
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
     //Android support library
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
-
     //Picasso (Image operations library)
     implementation 'com.squareup.picasso:picasso:2.5.2'
-
     //Circle Image Library
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-
     //Butter Knife
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //Event Bus
     implementation 'org.greenrobot:eventbus:3.0.0'
-
     //Dagger
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
     implementation 'com.google.dagger:dagger:2.10'
-    compileOnly 'javax.annotation:jsr250-api:1.0'
-
+    annotationProcessor 'javax.annotation:jsr250-api:1.0'
     //Application db project
-    api project(path: ':db', configuration: 'default')
+    implementation project(path: ':db')
+    //Application custom components project
+    implementation project(path: ':comp')
 }

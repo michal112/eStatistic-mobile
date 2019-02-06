@@ -1,6 +1,6 @@
 package app.estat.mob.db.entity;
 
-public interface Item {
+public interface ModuleItem {
     String getName();
     String getNumber();
 }

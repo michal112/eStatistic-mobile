@@ -86,7 +86,7 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
                 }
                 break;
             default:
-                Log.d(TAG, "Unknown activity code3 received");
+                Log.d(TAG, "Unknown activity code received");
                 break;
         }
     }

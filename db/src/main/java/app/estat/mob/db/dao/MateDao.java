@@ -188,16 +188,16 @@ public class MateDao extends AbstractDao<Mate, Long> {
     }
 
     /** Internal query to resolve the "mates" to-many relationship of Cow. */
-    public List<Mate> _queryCow_Mates(Long id) {
+    public List<Mate> _queryCow_Mates(Long cowId) {
         synchronized (this) {
             if (cow_MatesQuery == null) {
                 QueryBuilder<Mate> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.Id.eq(null));
+                queryBuilder.where(Properties.CowId.eq(null));
                 cow_MatesQuery = queryBuilder.build();
             }
         }
         Query<Mate> query = cow_MatesQuery.forCurrentThread();
-        query.setParameter(0, id);
+        query.setParameter(0, cowId);
         return query.list();
     }
 

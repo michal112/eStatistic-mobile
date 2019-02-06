@@ -2,7 +2,7 @@
 <resources>
     <!--farm card module-->
     <string name="fragment_farm_card_farm_number">Numer obory</string>
-    <string name="activity_farm_card_menu_done">DONE</string>
+    <string name="activity_farm_card_menu_done">ZAPISZ</string>
     <string name="fragment_farm_card_user_tab">Dane właściciela</string>
     <string name="fragment_farm_card_farm_tab">Dane gospodarstwa</string>
     <string name="fragment_farm_card_user_name">Imię i nazwisko</string>
@@ -10,4 +10,11 @@
     <string name="fragment_farm_card_context_photo_button">Zrób zdjecie</string>
     <string name="fragment_farm_card_form_icon_alpha">0.54</string>
     <string name="fragment_farm_card_address_hint">Adres</string>
+    <!--my cows module-->
+    <!--add cow fragment-->
+    <string name="activity_my_cows_menu_add">DODAJ</string>
+    <string name="fragment_add_cow_name_hint">Nazwa krowy</string>
+    <string name="fragment_add_cow_number_hint">Numer krowy</string>
+    <string name="fragment_add_cow_book_hint">Wybierz księgę</string>
+    <string name="fragment_add_cow_birthday_hint">Data urodzenia</string>
 </resources>

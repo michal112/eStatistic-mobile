@@ -1,14 +1,16 @@
 package app.estat.mob.db.entity;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToMany;
+
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
-import app.estat.mob.db.dao.DaoSession;
+
 import app.estat.mob.db.dao.CowDao;
+import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.dao.SireDao;
 
 @Entity(nameInDb = "SIRE")
@@ -23,7 +25,7 @@ public class Sire {
     @Property(nameInDb = "NUMBER")
     private String number;
 
-    @ToMany(referencedJoinProperty = "id")
+    @ToMany(referencedJoinProperty = "sireId")
     private List<Cow> children;
 
     /** Used to resolve relations */

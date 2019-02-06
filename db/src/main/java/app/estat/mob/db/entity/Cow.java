@@ -21,7 +21,7 @@ import app.estat.mob.db.dao.SireDao;
 import app.estat.mob.db.type.Book;
 
 @Entity(nameInDb = "COW")
-public class Cow implements Item {
+public class Cow implements ModuleItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;
@@ -36,6 +36,7 @@ public class Cow implements Item {
     @Property(nameInDb = "BOOK")
     private Book book;
 
+    @Property(nameInDb = "SIRE_ID")
     private Long sireId;
 
     @ToOne(joinProperty = "sireId")
@@ -44,10 +45,10 @@ public class Cow implements Item {
     @Property(nameInDb = "BIRTHDAY")
     private Date birthday;
 
-    @ToMany(referencedJoinProperty = "id")
+    @ToMany(referencedJoinProperty = "cowId")
     private List<Lactation> lactations;
 
-    @ToMany(referencedJoinProperty = "id")
+    @ToMany(referencedJoinProperty = "cowId")
     private List<Mate> mates;
 
     /** Used to resolve relations */

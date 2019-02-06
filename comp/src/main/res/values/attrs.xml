@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- recycler view -->
+    <declare-styleable name="ModuleRecyclerView">
+        <attr name="iconName" format="integer"/>
+    </declare-styleable>
+</resources>

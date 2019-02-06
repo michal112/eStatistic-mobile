@@ -203,16 +203,16 @@ public class CowDao extends AbstractDao<Cow, Long> {
     }
     
     /** Internal query to resolve the "children" to-many relationship of Sire. */
-    public List<Cow> _querySire_Children(Long id) {
+    public List<Cow> _querySire_Children(Long sireId) {
         synchronized (this) {
             if (sire_ChildrenQuery == null) {
                 QueryBuilder<Cow> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.Id.eq(null));
+                queryBuilder.where(Properties.SireId.eq(null));
                 sire_ChildrenQuery = queryBuilder.build();
             }
         }
         Query<Cow> query = sire_ChildrenQuery.forCurrentThread();
-        query.setParameter(0, id);
+        query.setParameter(0, sireId);
         return query.list();
     }
 

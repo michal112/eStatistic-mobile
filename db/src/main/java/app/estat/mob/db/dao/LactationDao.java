@@ -172,16 +172,16 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
     }
     
     /** Internal query to resolve the "lactations" to-many relationship of Cow. */
-    public List<Lactation> _queryCow_Lactations(Long id) {
+    public List<Lactation> _queryCow_Lactations(Long cowId) {
         synchronized (this) {
             if (cow_LactationsQuery == null) {
                 QueryBuilder<Lactation> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.Id.eq(null));
+                queryBuilder.where(Properties.CowId.eq(null));
                 cow_LactationsQuery = queryBuilder.build();
             }
         }
         Query<Lactation> query = cow_LactationsQuery.forCurrentThread();
-        query.setParameter(0, id);
+        query.setParameter(0, cowId);
         return query.list();
     }
 

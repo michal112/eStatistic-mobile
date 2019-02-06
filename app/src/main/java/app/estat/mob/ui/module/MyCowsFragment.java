@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,19 @@ import java.util.List;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Cow;
-import app.estat.mob.mvp.adapter.ComponentAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyCowsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.com.app.comp.view.recycler.ModuleAdapter;
+import pl.com.app.comp.view.recycler.ModuleRecyclerView;
 
 public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyCowsFragmentView>
         implements MyCowsFragmentView {
 
     @BindView(R.id.fragment_my_cows_recycler_view)
-    RecyclerView mRecyclerView;
+    ModuleRecyclerView mRecyclerView;
 
     public static MyCowsFragment newInstance() {
         return new MyCowsFragment();
@@ -50,8 +50,13 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
 
     @Override
     public void showCows(List<Cow> cows) {
-        ComponentAdapter<Cow> componentAdapter = new ComponentAdapter(getActivity(), cows);
+        ModuleAdapter<Cow> myCowsAdapter = new ModuleAdapter(cows, new ModuleAdapter.ModuleItemClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(componentAdapter);
+        mRecyclerView.setAdapter(myCowsAdapter);
     }
 }

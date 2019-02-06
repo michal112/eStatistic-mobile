@@ -22,7 +22,7 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
 
     private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.module.ModuleActivity.TOOLBAR_TEXT_KEY";
 
-    @BindView(R.id.smooth_app_bar_layout)
+    @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
 
     @BindView(R.id.activity_app_bar_logo)
