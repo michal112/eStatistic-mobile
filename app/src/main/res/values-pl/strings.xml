@@ -9,4 +9,12 @@
     <string name="transition_module_image">Ikona modułu</string>
     <string name="farm_card_data_successfully_saved">Dane gospodarstwa zostały zapisane</string>
     <string name="farm_card_data_save_error">Błąd zapisu danych gospodarstwa</string>
+    <string name="new_cow_successfully_saved">Nowa krowa została zapisana</string>
+    <string name="new_cow_save_error">Błąd zapisu krowy</string>
+    <string name="activity_add_cow_toolbar_title">Dodaj nową krowę</string>
+    <string name="activity_add_cow_menu_done">ZAPISZ</string>
+    <string name="fragment_add_cow_basic_data_title">Dane krowy</string>
+    <string name="main_book_cow">Księga główna</string>
+    <string name="introductory_book_cow">Księga wstepna</string>
+    <string name="unknown_book_cow">Nieznana</string>
 </resources>

@@ -76,7 +76,6 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         mBarnNumber = ButterKnife.findById(headerView, R.id.drawer_barn_number);
 
         setSupportActionBar(mToolbar);
-        displayActionBarTittle(false);
 
         presenter = createPresenter(this, ((ApplicationCore) getApplication()).getApplicationComponent());
         presenter.attachView((V) this);

@@ -1,20 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="component_form_edit_text_image_vertical_margin">10dp</dimen>
-    <dimen name="component_form_edit_text_image_height">24dp</dimen>
-    <dimen name="component_form_edit_text_image_width">24dp</dimen>
-
     <!-- recycler view -->
     <dimen name="component_recycler_view_item_height">72dp</dimen>
-    <dimen name="component_recycler_view_item_image_height">36dp</dimen>
-    <dimen name="component_recycler_view_item_image_width">36dp</dimen>
-    <dimen name="component_recycler_view_item_image_vertical_margin">12dp</dimen>
+    <dimen name="component_recycler_view_item_image_height">40dp</dimen>
+    <dimen name="component_recycler_view_item_image_width">40dp</dimen>
+    <dimen name="component_recycler_view_item_image_vertical_margin">16dp</dimen>
     <dimen name="component_recycler_view_item_elevation">2dp</dimen>
     <dimen name="component_recycler_view_item_vertical_margin">4dp</dimen>
     <dimen name="component_recycler_view_item_radius">4dp</dimen>
     <dimen name="component_recycler_view_item_name_text_size">16sp</dimen>
-    <dimen name="component_recycler_view_item_book_name_text_size">8sp</dimen>
-    <dimen name="component_recycler_view_item_guideline_start">72dp</dimen>
-    <dimen name="component_recycler_view_item_number_margin_right">4dp</dimen>
-    <dimen name="component_recycler_view_item_name_margin_left">24dp</dimen>
+    <dimen name="component_recycler_view_item_number_text_size">16sp</dimen>
+    <dimen name="component_recycler_view_item_guideline_start">80dp</dimen>
+    <dimen name="component_recycler_view_item_number_margin_right">8dp</dimen>
+    <dimen name="component_recycler_view_item_name_margin_left">8dp</dimen>
+
+    <!-- form card view -->
+    <dimen name="component_form_card_view_container_margin_right">8dp</dimen>
+    <dimen name="component_form_card_view_container_margin_bottom">16dp</dimen>
+    <dimen name="component_form_card_view_padding">8dp</dimen>
+    <dimen name="component_form_card_view_container_margin_top">8dp</dimen>
+    <dimen name="component_form_card_view_name_text_size">16sp</dimen>
+
+    <!-- form edit text -->
+    <dimen name="component_form_edit_text_height">48dp</dimen>
+    <dimen name="component_form_edit_text_image_height">24dp</dimen>
+    <dimen name="component_form_edit_text_image_width">24dp</dimen>
+    <dimen name="component_form_edit_text_guideline_start">56dp</dimen>
+    <dimen name="component_form_edit_text_size">16sp</dimen>
+
+    <!-- form spinner -->
+    <dimen name="component_form_spinner_height">48dp</dimen>
+    <dimen name="component_form_spinner_image_height">24dp</dimen>
+    <dimen name="component_form_spinner_image_width">24dp</dimen>
+    <dimen name="component_form_spinner_guideline_start">56dp</dimen>
+
+    <!-- form spinner item -->
+    <dimen name="component_form_spinner_text_height">48dp</dimen>
+    <dimen name="component_form_spinner_text_margin_left">8dp</dimen>
+    <dimen name="component_form_spinner_text_size">17sp</dimen>
+
+    <!-- form date picker -->
+    <dimen name="component_form_date_picker_height">48dp</dimen>
+    <dimen name="component_form_date_picker_image_height">24dp</dimen>
+    <dimen name="component_form_date_picker_image_width">24dp</dimen>
+    <dimen name="component_form_date_picker_guideline_start">56dp</dimen>
+    <dimen name="component_form_date_picker_text_size">17sp</dimen>
+    <dimen name="component_form_date_picker_text_margin_left">8dp</dimen>
+
 </resources>

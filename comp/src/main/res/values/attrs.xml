@@ -4,4 +4,8 @@
     <declare-styleable name="ModuleRecyclerView">
         <attr name="iconName" format="integer"/>
     </declare-styleable>
+    <!-- card view -->
+    <declare-styleable name="FormCardView">
+        <attr name="groupTitle" format="reference|string"/>
+    </declare-styleable>
 </resources>

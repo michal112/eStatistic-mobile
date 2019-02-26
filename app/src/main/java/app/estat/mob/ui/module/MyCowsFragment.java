@@ -59,4 +59,9 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(myCowsAdapter);
     }
+
+    @Override
+    public void refreshAdapter() {
+        getPresenter().requestCows();
+    }
 }

@@ -37,6 +37,9 @@
         <activity android:name=".ui.module.MilkProductionActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.module.AddCowActivity"
+                  android:screenOrientation="portrait"/>
+
         <provider
             android:authorities="app.estat.mob.fileprovider"
             android:name="android.support.v4.content.FileProvider"

@@ -44,6 +44,7 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        displayActionBarTittle(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAppBarLayout.addOnOffsetChangedListener(ViewUtils.getAppBarOffsetListener(this, mAppBarLayout));
 

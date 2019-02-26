@@ -30,11 +30,15 @@ public class DbCache {
         prefetchCows(session);
     }
 
-    private void prefetchCows(DaoSession session) {
+    public void prefetchCows(DaoSession session) {
         mCows = mCowService.getAll(session);
     }
 
     private void prefetchModules(DaoSession session) {
         mModules = mModuleService.getAll(session);
+    }
+
+    public long saveCow(DaoSession session, Cow cow) {
+        return mCowService.save(session, cow);
     }
 }

@@ -48,4 +48,8 @@ public class FormEditText extends ConstraintLayout {
     public void setIcon(@DrawableRes int icon) {
         mImageView.setImageResource(icon);
     }
+
+    public String getInput() {
+        return mEditText.getText().toString();
+    }
 }

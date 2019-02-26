@@ -11,6 +11,10 @@ public abstract class ActivityUtil {
 
     public static final int RESULT_FARM_CARD_SAVE_ERROR = 2;
 
+    public static final int RESULT_COW_SAVED = 3;
+
+    public static final int RESULT_COW_SAVE_ERROR = 4;
+
     public static void animateModuleActivity(Activity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

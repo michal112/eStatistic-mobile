@@ -3,38 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/component_form_edit_text_height">
+    android:layout_height="@dimen/component_form_spinner_height">
 
     <ImageView
-        android:id="@+id/component_form_edit_text_icon"
-        android:layout_width="@dimen/component_form_edit_text_image_width"
-        android:layout_height="@dimen/component_form_edit_text_image_height"
+        android:id="@+id/component_form_spinner_icon"
+        android:layout_width="@dimen/component_form_spinner_image_width"
+        android:layout_height="@dimen/component_form_spinner_image_height"
         android:layout_gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/component_form_edit_text_guideline"
+        app:layout_constraintEnd_toStartOf="@id/component_form_spinner_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/component_form_edit_text"
+    <Spinner
+        android:id="@+id/component_form_spinner"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
-        android:inputType="text"
-        android:lines="1"
-        android:textSize="@dimen/component_form_edit_text_size"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/component_form_edit_text_guideline"
+        app:layout_constraintStart_toStartOf="@id/component_form_spinner_guideline"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/full_names"
+        android:textSize="16sp"/>
 
     <android.support.constraint.Guideline
-        android:id="@+id/component_form_edit_text_guideline"
+        android:id="@+id/component_form_spinner_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/component_form_edit_text_guideline_start" />
+        app:layout_constraintGuide_begin="@dimen/component_form_spinner_guideline_start" />
 
 </android.support.constraint.ConstraintLayout>

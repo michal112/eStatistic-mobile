@@ -10,4 +10,8 @@ public class CowService implements Service<Cow> {
     public List<Cow> getAll(DaoSession daoSession) {
         return daoSession.getCowDao().queryBuilder().list();
     }
+
+    public long save(DaoSession daoSession, Cow cow) {
+        return daoSession.insert(cow);
+    }
 }

@@ -2,10 +2,14 @@ package app.estat.mob.mvp.presenter.module;
 
 import android.content.Context;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Cow;
+import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
 
@@ -13,8 +17,11 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
 
     private List<Cow> mCows;
 
+    private Context mContext;
+
     public MyCowsFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
+        mContext = context;
 
         mCows = getModuleWrapper().getDbCache().getCows();
     }
@@ -25,6 +32,17 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
         }
 
         getView().showCows(mCows);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAdapterRefreshEvent(AdapterRefreshEvent adapterRefreshEvent) {
+        if (!isViewAttached()) {
+            return;
+        }
+
+        getModuleWrapper().getDbCache().prefetchCows(getModuleWrapper().getDbManager().getDaoSession(mContext));
+        mCows = getModuleWrapper().getDbCache().getCows();
+        getView().refreshAdapter();
     }
 
     public Cow getCow(int position) {
