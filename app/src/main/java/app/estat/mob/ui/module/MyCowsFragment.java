@@ -17,6 +17,7 @@ import app.estat.mob.db.entity.Cow;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyCowsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
+import app.estat.mob.ui.action.ManageCowActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.com.app.comp.view.recycler.ModuleAdapter;
@@ -53,7 +54,7 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
         ModuleAdapter<Cow> myCowsAdapter = new ModuleAdapter(cows, new ModuleAdapter.ModuleItemClickListener() {
             @Override
             public void onClick(int position) {
-
+                startActivity(ManageCowActivity.newIntent(getActivity(), getPresenter().getCowData(position)));
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -1,8 +1,9 @@
-package app.estat.mob.mvp.presenter.module;
+package app.estat.mob.mvp.presenter.action;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -16,12 +17,13 @@ import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.type.Book;
 import app.estat.mob.db.type.FormSpinnerItem;
 import app.estat.mob.event.CowSavedEvent;
-import app.estat.mob.event.FarmDataChangedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.CowData;
-import app.estat.mob.mvp.view.module.AddCowFragmentView;
+import app.estat.mob.mvp.view.action.AddCowFragmentView;
 
 public class AddCowFragmentPresenter extends MvpBaseFragmentPresenter<AddCowFragmentView> {
+
+    private static final String TAG = AddCowFragmentPresenter.class.getName();
 
     private AddCowHandlerThread mCowHandlerThread;
 
@@ -52,9 +54,13 @@ public class AddCowFragmentPresenter extends MvpBaseFragmentPresenter<AddCowFrag
         mCowHandlerThread.post(new Runnable() {
             @Override
             public void run() {
-                DaoSession daoSession = getModuleWrapper().getDbManager().getDaoSession(context);
-                getModuleWrapper().getDbCache().saveCow(daoSession, cowData.getCow());
-
+                try {
+                    DaoSession daoSession = getModuleWrapper().getDbManager().getDaoSession(context);
+                    getModuleWrapper().getDbCache().saveCow(daoSession, cowData.getCow());
+                } catch (Exception ex) {
+                    Log.e(TAG, "unable to save cow", ex);
+                    getModuleWrapper().getEventBus().post(new CowSavedEvent(CowSavedEvent.Status.FAILURE));
+                }
                 getModuleWrapper().getEventBus().post(new CowSavedEvent(CowSavedEvent.Status.SUCCESS));
             }
         });

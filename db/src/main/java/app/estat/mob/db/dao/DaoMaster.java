@@ -26,7 +26,6 @@ public class DaoMaster extends AbstractDaoMaster {
         LactationDao.createTable(db, ifNotExists);
         MateDao.createTable(db, ifNotExists);
         ModuleDao.createTable(db, ifNotExists);
-        SireDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -36,7 +35,6 @@ public class DaoMaster extends AbstractDaoMaster {
         LactationDao.dropTable(db, ifExists);
         MateDao.dropTable(db, ifExists);
         ModuleDao.dropTable(db, ifExists);
-        SireDao.dropTable(db, ifExists);
     }
 
     /**
@@ -60,7 +58,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(LactationDao.class);
         registerDaoClass(MateDao.class);
         registerDaoClass(ModuleDao.class);
-        registerDaoClass(SireDao.class);
     }
 
     public DaoSession newSession() {

@@ -19,6 +19,9 @@ public class Lactation {
     @Property(nameInDb = "ID")
     private Long id;
 
+    @Property(nameInDb = "PUBLIC_ID")
+    private String publicId;
+
     @Property(nameInDb = "NUMBER")
     private String number;
 
@@ -39,9 +42,10 @@ public class Lactation {
     @Generated(hash = 28312843)
     private transient LactationDao myDao;
 
-    @Generated(hash = 1280455236)
-    public Lactation(Long id, String number, Date date, Long cowId) {
+    @Generated(hash = 926821514)
+    public Lactation(Long id, String publicId, String number, Date date, Long cowId) {
         this.id = id;
+        this.publicId = publicId;
         this.number = number;
         this.date = date;
         this.cowId = cowId;
@@ -156,5 +160,13 @@ public class Lactation {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getLactationDao() : null;
+    }
+
+    public String getPublicId() {
+        return this.publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 }

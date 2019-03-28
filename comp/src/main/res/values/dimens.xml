@@ -11,7 +11,8 @@
     <dimen name="component_recycler_view_item_name_text_size">16sp</dimen>
     <dimen name="component_recycler_view_item_number_text_size">16sp</dimen>
     <dimen name="component_recycler_view_item_guideline_start">80dp</dimen>
-    <dimen name="component_recycler_view_item_number_margin_right">8dp</dimen>
+    <dimen name="component_recycler_view_item_number_margin_right">12dp</dimen>
+    <dimen name="component_recycler_view_item_number_margin_bottom">4dp</dimen>
     <dimen name="component_recycler_view_item_name_margin_left">8dp</dimen>
 
     <!-- form card view -->
@@ -27,6 +28,14 @@
     <dimen name="component_form_edit_text_image_width">24dp</dimen>
     <dimen name="component_form_edit_text_guideline_start">56dp</dimen>
     <dimen name="component_form_edit_text_size">16sp</dimen>
+
+    <!-- form text view -->
+    <dimen name="component_form_text_view_height">56dp</dimen>
+    <dimen name="component_form_text_view_image_height">32dp</dimen>
+    <dimen name="component_form_text_view_image_width">32dp</dimen>
+    <dimen name="component_form_text_view_guideline_start">72dp</dimen>
+    <dimen name="component_form_text_view_size">18sp</dimen>
+    <dimen name="component_form_text_view_label_size">14sp</dimen>//////
 
     <!-- form spinner -->
     <dimen name="component_form_spinner_height">48dp</dimen>

@@ -39,14 +39,13 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ModuleViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.component_recycler_view_item, viewGroup, false));
+                .inflate(R.layout.component_recycler_view_item, viewGroup, false), mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof ModuleAdapter.ModuleViewHolder) {
             T mItem = mData.get(i);
-            ((ModuleViewHolder) viewHolder).setListener(mListener);
             ((ModuleViewHolder) viewHolder).setIcon(mIcon);
             ((ModuleViewHolder) viewHolder).setName(mItem.getName());
             ((ModuleViewHolder) viewHolder).setNumber(mItem.getNumber());
@@ -68,12 +67,15 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
 
         ImageView mIcon;
 
-        public ModuleViewHolder(@NonNull View itemView) {
+        public ModuleViewHolder(@NonNull View itemView, ModuleItemClickListener listener) {
             super(itemView);
 
             mName = itemView.findViewById(R.id.component_recycler_view_item_name);
             mNumber = itemView.findViewById(R.id.component_recycler_view_item_number);
             mIcon = itemView.findViewById(R.id.component_recycler_view_item_icon);
+
+            this.mListener = listener;
+            itemView.setOnClickListener(this);
         }
 
         public void setName(String name) {
@@ -86,10 +88,6 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
 
         public void setIcon(Drawable icon) {
             mIcon.setImageDrawable(icon);
-        }
-
-        public void setListener(ModuleItemClickListener listener) {
-            mListener = listener;
         }
 
         @Override

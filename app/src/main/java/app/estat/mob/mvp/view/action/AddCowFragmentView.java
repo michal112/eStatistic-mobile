@@ -1,4 +1,4 @@
-package app.estat.mob.mvp.view.module;
+package app.estat.mob.mvp.view.action;
 
 import app.estat.mob.event.CowSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentView;

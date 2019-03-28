@@ -17,5 +17,13 @@
     <string name="main_book_cow">Main book</string>
     <string name="introductory_book_cow">Introductory book</string>
     <string name="unknown_book_cow">Unknown</string>
-
+    <string name="new_bull_successfully_saved">Bull successfully save</string>
+    <string name="new_bull_save_error">Unable to save bull</string>
+    <string name="activity_add_bull_menu_done">DONE</string>
+    <string name="activity_add_bull_toolbar_title">Add new bull</string>
+    <string name="fragment_add_bull_basic_data_title">Bull basic data</string>
+    <string name="activity_manage_cow_toolbar_title">Cow preview</string>
+    <string name="fragment_view_cow_basic_data_title">Cow basic data</string>
+    <string name="activity_manage_cow_menu_add_mate">Add mate</string>
+    <string name="activity_manage_cow_menu_add_lactation">Add lactation</string>
 </resources>

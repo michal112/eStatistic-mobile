@@ -17,14 +17,17 @@ import app.estat.mob.db.dao.CowDao;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.dao.LactationDao;
 import app.estat.mob.db.dao.MateDao;
-import app.estat.mob.db.dao.SireDao;
 import app.estat.mob.db.type.Book;
+import app.estat.mob.db.dao.BullDao;
 
 @Entity(nameInDb = "COW")
 public class Cow implements ModuleItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;
+
+    @Property(nameInDb = "PUBLIC_ID")
+    private String publicId;
 
     @Property(nameInDb = "NAME")
     private String name;
@@ -36,11 +39,11 @@ public class Cow implements ModuleItem {
     @Property(nameInDb = "BOOK")
     private Book book;
 
-    @Property(nameInDb = "SIRE_ID")
-    private Long sireId;
+    @Property(nameInDb = "BULL_ID")
+    private Long bullId;
 
-    @ToOne(joinProperty = "sireId")
-    private Sire sire;
+    @ToOne(joinProperty = "bullId")
+    private Bull father;
 
     @Property(nameInDb = "BIRTHDAY")
     private Date birthday;
@@ -59,14 +62,15 @@ public class Cow implements ModuleItem {
     @Generated(hash = 1561406415)
     private transient CowDao myDao;
 
-    @Generated(hash = 1383876463)
-    public Cow(Long id, String name, String number, Book book, Long sireId,
+    @Generated(hash = 950934642)
+    public Cow(Long id, String publicId, String name, String number, Book book, Long bullId,
             Date birthday) {
         this.id = id;
+        this.publicId = publicId;
         this.name = name;
         this.number = number;
         this.book = book;
-        this.sireId = sireId;
+        this.bullId = bullId;
         this.birthday = birthday;
     }
 
@@ -106,14 +110,6 @@ public class Cow implements ModuleItem {
         this.book = book;
     }
 
-    public Long getSireId() {
-        return this.sireId;
-    }
-
-    public void setSireId(Long sireId) {
-        this.sireId = sireId;
-    }
-
     public Date getBirthday() {
         return this.birthday;
     }
@@ -122,37 +118,8 @@ public class Cow implements ModuleItem {
         this.birthday = birthday;
     }
 
-    @Generated(hash = 679223451)
-    private transient Long sire__resolvedKey;
-
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1369052227)
-    public Sire getSire() {
-        Long __key = this.sireId;
-        if (sire__resolvedKey == null || !sire__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            SireDao targetDao = daoSession.getSireDao();
-            Sire sireNew = targetDao.load(__key);
-            synchronized (this) {
-                sire = sireNew;
-                sire__resolvedKey = __key;
-            }
-        }
-        return sire;
-    }
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 456516964)
-    public void setSire(Sire sire) {
-        synchronized (this) {
-            this.sire = sire;
-            sireId = sire == null ? null : sire.getId();
-            sire__resolvedKey = sireId;
-        }
-    }
+    @Generated(hash = 2100996716)
+    private transient Long father__resolvedKey;
 
     /**
      * To-many relationship, resolved on first access (and after reset).
@@ -251,5 +218,50 @@ public class Cow implements ModuleItem {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCowDao() : null;
+    }
+
+    public String getPublicId() {
+        return this.publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
+    }
+
+    public Long getBullId() {
+        return this.bullId;
+    }
+
+    public void setBullId(Long bullId) {
+        this.bullId = bullId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 48047428)
+    public Bull getFather() {
+        Long __key = this.bullId;
+        if (father__resolvedKey == null || !father__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            BullDao targetDao = daoSession.getBullDao();
+            Bull fatherNew = targetDao.load(__key);
+            synchronized (this) {
+                father = fatherNew;
+                father__resolvedKey = __key;
+            }
+        }
+        return father;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 962725852)
+    public void setFather(Bull father) {
+        synchronized (this) {
+            this.father = father;
+            bullId = father == null ? null : father.getId();
+            father__resolvedKey = bullId;
+        }
     }
 }

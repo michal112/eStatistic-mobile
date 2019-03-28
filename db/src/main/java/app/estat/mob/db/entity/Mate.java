@@ -20,6 +20,9 @@ public class Mate {
     @Property(nameInDb = "ID")
     private Long id;
 
+    @Property(nameInDb = "PUBLIC_ID")
+    private String publicId;
+
     @Property(nameInDb = "DATE")
     private Date date;
 
@@ -43,9 +46,10 @@ public class Mate {
     @Generated(hash = 1609347472)
     private transient MateDao myDao;
 
-    @Generated(hash = 1480617541)
-    public Mate(Long id, Date date, Long cowId, Long bullId) {
+    @Generated(hash = 1202772193)
+    public Mate(Long id, String publicId, Date date, Long cowId, Long bullId) {
         this.id = id;
+        this.publicId = publicId;
         this.date = date;
         this.cowId = cowId;
         this.bullId = bullId;
@@ -192,5 +196,13 @@ public class Mate {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getMateDao() : null;
+    }
+
+    public String getPublicId() {
+        return this.publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 }

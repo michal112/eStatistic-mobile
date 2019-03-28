@@ -15,6 +15,10 @@ public abstract class ActivityUtil {
 
     public static final int RESULT_COW_SAVE_ERROR = 4;
 
+    public static final int RESULT_BULL_SAVED = 5;
+
+    public static final int RESULT_BULL_SAVE_ERROR = 6;
+
     public static void animateModuleActivity(Activity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

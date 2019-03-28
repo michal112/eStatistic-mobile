@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import app.estat.mob.R;
 import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.ui.action.ActionActivity;
+import app.estat.mob.ui.action.AddCowActivity;
 
 public class MyCowsActivity extends ModuleActivity {
     private static final String TAG = MyCowsActivity.class.getName();
@@ -24,7 +26,7 @@ public class MyCowsActivity extends ModuleActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container, MyCowsFragment.newInstance(), true);
+        addFragment(R.id.activity_module_container, MyCowsFragment.newInstance(), false);
     }
 
     @Override
@@ -39,7 +41,7 @@ public class MyCowsActivity extends ModuleActivity {
 
         switch (item.getItemId()) {
             case R.id.activity_my_cows_menu_add:
-                startActivityForResult(AddCowActivity.newIntent(this), ADD_COW);
+                startActivityForResult(ActionActivity.newIntent(this, AddCowActivity.class), ADD_COW);
                 break;
             default:
                 Log.d(TAG, "Unknown option was clicked");

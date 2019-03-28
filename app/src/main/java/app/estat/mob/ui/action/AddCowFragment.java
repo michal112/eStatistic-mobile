@@ -1,34 +1,31 @@
-package app.estat.mob.ui.module;
+package app.estat.mob.ui.action;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.util.UUID;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.db.type.FormSpinnerItem;
 import app.estat.mob.event.CowSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.CowData;
-import app.estat.mob.mvp.presenter.module.AddCowFragmentPresenter;
+import app.estat.mob.mvp.presenter.action.AddCowFragmentPresenter;
 import app.estat.mob.mvp.util.ActivityUtil;
-import app.estat.mob.mvp.view.module.AddCowFragmentView;
+import app.estat.mob.mvp.view.action.AddCowFragmentView;
+import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.com.app.comp.view.card.FormCardView;
 import pl.com.app.comp.view.picker.FormDatePicker;
 import pl.com.app.comp.view.spinner.FormSpinner;
-import pl.com.app.comp.view.spinner.FormSpinnerAdapter;
 import pl.com.app.comp.view.text.FormEditText;
 
 public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, AddCowFragmentView>
@@ -63,42 +60,15 @@ public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, Add
     }
 
     private void addComponents() {
-        mNameComponent = getFormEditTextComponent(R.drawable.ic_name, R.string.fragment_add_cow_name_hint);
-        mNumberComponent = getFormEditTextComponent(R.drawable.ic_number, R.string.fragment_add_cow_number_hint);
-        mBookComponent = getFormBookSpinner(R.drawable.ic_book , "R.string.fragment_add_cow_book_hint");
-        mBirthdayComponent = getFormBirthdayComponent(R.drawable.ic_calendar, R.string.fragment_add_cow_birthday_hint);
+        mNameComponent = ComponentFactory.getFormEditTextComponent(getContext(), R.drawable.ic_name, R.string.fragment_add_cow_name_hint);
+        mNumberComponent = ComponentFactory.getFormEditTextComponent(getContext(), R.drawable.ic_number, R.string.fragment_add_cow_number_hint);
+        mBookComponent = ComponentFactory.getFormSpinnerComponent(getContext(), R.drawable.ic_book , "R.string.fragment_add_cow_book_hint", getPresenter().getSpinnerData(), false);
+        mBirthdayComponent = ComponentFactory.getFormDatePickerComponent(getActivity(), R.drawable.ic_calendar, R.string.fragment_add_cow_birthday_hint);
 
         mBasicData.insertView(mNameComponent);
         mBasicData.insertView(mNumberComponent);
         mBasicData.insertView(mBookComponent);
         mBasicData.insertView(mBirthdayComponent);
-    }
-
-    private FormEditText getFormEditTextComponent(@DrawableRes int iconRes, @StringRes int hintRes) {
-        FormEditText component = new FormEditText(getContext());
-        component.setHint(hintRes);
-        component.setIcon(iconRes);
-        return component;
-    }
-
-    private FormSpinner getFormBookSpinner(@DrawableRes int iconRes, String hintRes) {
-        FormSpinner component = new FormSpinner(getContext());
-        component.setIcon(iconRes);
-
-        List<FormSpinnerItem> data = getPresenter().getSpinnerData();
-        FormSpinnerAdapter adapter = new FormSpinnerAdapter(getContext(), data, hintRes);
-        component.getSpinner().setAdapter(adapter);
-        component.getSpinner().setSelection(adapter.getCount());
-
-        return component;
-    }
-
-    private FormDatePicker getFormBirthdayComponent(@DrawableRes int iconRes, @StringRes int hintRes) {
-        FormDatePicker component = new FormDatePicker(getContext());
-        component.setHint(hintRes);
-        component.setIcon(iconRes);
-        component.setFragmentManager(getActivity().getSupportFragmentManager());
-        return component;
     }
 
     @NonNull
@@ -116,6 +86,7 @@ public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, Add
                         .withNumber(mNumberComponent.getInput())
                         .withBook(mBookComponent.getSelectedItem())
                         .withBirthday(mBirthdayComponent.getDate())
+                        .withPublicId(UUID.randomUUID().toString())
                         .build();
                 getPresenter().saveCowData(getActivity(), cowData);
                 break;

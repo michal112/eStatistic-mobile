@@ -1,51 +1,51 @@
-package app.estat.mob.ui.module;
+package app.estat.mob.ui.action;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
-import app.estat.mob.mvp.presenter.module.AddCowActivityPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
-import app.estat.mob.mvp.view.module.AddCowActivityView;
-import app.estat.mob.ui.dashboard.DashboardFragment;
+import app.estat.mob.mvp.presenter.action.ActionActivityPresenter;
+import app.estat.mob.mvp.view.action.ActionActivityView;
 
-public class AddCowActivity extends MvpBaseActivity<AddCowActivityPresenter, AddCowActivityView>
-        implements AddCowActivityView {
+public abstract class ActionActivity extends MvpBaseActivity<ActionActivityPresenter, ActionActivityView>
+        implements ActionActivityView {
 
-    public static Intent newIntent(@NonNull Context context) {
-        return new Intent(context, AddCowActivity.class);
+    public static Intent newIntent(@NonNull Context context, Class clazz) {
+        return new Intent(context, clazz);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        addFragment(R.id.activity_add_cow_container, AddCowFragment.newInstance(), false);
+        getSupportActionBar().setTitle(getTitleRes());
     }
+
+    protected abstract int getTitleRes();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_add_cow_menu, menu);
+        getMenuInflater().inflate(getMenuResId(), menu);
         return true;
     }
 
+    protected abstract int getMenuResId();
+
     @Override
     public int getLayoutResId() {
-        return R.layout.activity_add_cow;
+        return R.layout.activity_action;
     }
 
     @NonNull
     @Override
-    public AddCowActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
-        return new AddCowActivityPresenter(context, applicationComponent);
+    public ActionActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new ActionActivityPresenter(context, applicationComponent);
     }
 
     @Override

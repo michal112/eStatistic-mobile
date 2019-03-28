@@ -17,4 +17,14 @@
     <string name="fragment_add_cow_number_hint">Cow number</string>
     <string name="fragment_add_cow_book_hint">Choose book</string>
     <string name="fragment_add_cow_birthday_hint">Birthday</string>
+    <!--view cow fragment-->
+    <string name="fragment_view_cow_name_hint">Name</string>
+    <string name="fragment_view_cow_number_hint">Number</string>
+    <string name="fragment_view_cow_book_hint">Book</string>
+    <string name="fragment_view_cow_birthday_hint">Birthday</string>
+    <!--my bulls module-->
+    <!--add cow fragment-->
+    <string name="activity_my_bulls_menu_add">ADD</string>
+    <string name="fragment_add_bull_name_hint">Bull name</string>
+    <string name="fragment_add_bull_number_hint">Bull number</string>
 </resources>

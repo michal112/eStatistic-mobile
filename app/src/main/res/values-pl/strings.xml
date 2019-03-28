@@ -17,4 +17,13 @@
     <string name="main_book_cow">Księga główna</string>
     <string name="introductory_book_cow">Księga wstepna</string>
     <string name="unknown_book_cow">Nieznana</string>
+    <string name="new_bull_successfully_saved">Nowy buhaj został zapisany</string>
+    <string name="new_bull_save_error">Błąd zapisu buhaja</string>
+    <string name="activity_add_bull_menu_done">ZAPISZ</string>
+    <string name="activity_add_bull_toolbar_title">Dodaj nowego buhaja</string>
+    <string name="fragment_add_bull_basic_data_title">Dane buhaja</string>
+    <string name="activity_manage_cow_toolbar_title">Podgląd krowy</string>
+    <string name="fragment_view_cow_basic_data_title">Dane krowy</string>
+    <string name="activity_manage_cow_menu_add_mate">Dodaj pokrycie</string>
+    <string name="activity_manage_cow_menu_add_lactation">Dodaj laktację</string>
 </resources>

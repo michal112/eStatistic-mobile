@@ -20,14 +20,20 @@ public class FormSpinnerAdapter extends ArrayAdapter<FormSpinnerItem>  {
 
     private List<FormSpinnerItem> mData;
 
-    public FormSpinnerAdapter(@NonNull Context context, List<FormSpinnerItem> data, final String hint) {
+    private boolean mHasTitle;
+
+    /*
+    * @param hasTitle is true when item has title in string format, false when it's string reference
+     */
+    public FormSpinnerAdapter(@NonNull Context context, List<FormSpinnerItem> data, final String hint, boolean hasTitle) {
         super(context, R.layout.component_spinner_item, R.id.component_spinner_item_title, data);
 
+        this.mHasTitle = hasTitle;
         this.mContext = context;
         this.mData = data;
         this.mData.add(new FormSpinnerItem() {
             @Override
-            public String getTitleRes() {
+            public String getTitle() {
                 return hint;
             }
         });
@@ -49,12 +55,16 @@ public class FormSpinnerAdapter extends ArrayAdapter<FormSpinnerItem>  {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.component_spinner_item, null);
         }
 
-        TextView title = convertView.findViewById(R.id.component_spinner_item_title);
-        String titleRes = mData.get(position).getTitleRes();
+        TextView titleView = convertView.findViewById(R.id.component_spinner_item_title);
+        String title = mData.get(position).getTitle();
         if (position == getCount()) {
-            title.setHint(getTitleResId(mContext, titleRes));
+            titleView.setHint(getTitleResId(mContext, title));
         } else {
-            title.setText(getTitleResId(mContext, titleRes));
+            if (!mHasTitle) {
+                titleView.setText(getTitleResId(mContext, title));
+            } else {
+                titleView.setText(title);
+            }
         }
 
         return convertView;
@@ -66,7 +76,7 @@ public class FormSpinnerAdapter extends ArrayAdapter<FormSpinnerItem>  {
         return count > 0 ? count - 1 : count;
     }
 
-    private static int getTitleResId(Context context, String res) {
+    private int getTitleResId(Context context, String res) {
         return context.getResources().getIdentifier(res.substring(res.indexOf(".", 2) + 1),
                 "string", context.getPackageName());
     }

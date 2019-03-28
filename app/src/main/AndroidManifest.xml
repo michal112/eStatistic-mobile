@@ -31,14 +31,23 @@
         <activity android:name=".ui.module.AverageProductivityActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.module.MilkProductionActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".ui.module.MyCowsActivity"
                   android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.MilkProductionActivity"
+        <activity android:name=".ui.action.AddCowActivity"
                   android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.AddCowActivity"
-                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.action.ManageCowActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.module.MyBullsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.action.AddBullActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:authorities="app.estat.mob.fileprovider"

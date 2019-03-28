@@ -5,14 +5,14 @@ public enum Book implements FormSpinnerItem {
     INTRODUCTORY("R.string.introductory_book_cow"),
     UNKNOWN("R.string.unknown_book_cow");
 
-    private String mTitleRes;
+    private String mTitle;
 
-    Book(String titleRes) {
-        mTitleRes = titleRes;
+    Book(String title) {
+        mTitle = title;
     }
 
     @Override
-    public String getTitleRes() {
-        return mTitleRes;
+    public String getTitle() {
+        return mTitle;
     }
 }

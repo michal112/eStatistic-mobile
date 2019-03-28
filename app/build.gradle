@@ -45,8 +45,11 @@ dependencies {
     annotationProcessor 'javax.annotation:jsr250-api:1.0'
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.5.0'
     //Application db project
     implementation project(path: ':db')
     //Application custom components project
     implementation project(path: ':comp')
+    //cdm
+    implementation 'app.estat.dto:eStatistic-dto:1.0.0-SNAPSHOT'
 }

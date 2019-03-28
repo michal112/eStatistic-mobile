@@ -6,13 +6,14 @@ import app.estat.mob.module.DbModule;
 import app.estat.mob.module.EventBusModule;
 import app.estat.mob.module.ImageModule;
 import app.estat.mob.module.PreferencesModule;
+import app.estat.mob.module.SyncModule;
 import app.estat.mob.mvp.core.ModuleWrapper;
 import app.estat.mob.ui.SplashScreenActivity;
 import dagger.Component;
 
 @Singleton
 @Component(modules = {DbModule.class, EventBusModule.class,
-        ImageModule.class, PreferencesModule.class})
+        ImageModule.class, PreferencesModule.class, SyncModule.class})
 public interface ApplicationComponent {
     void inject(SplashScreenActivity splashScreenActivity);
 
