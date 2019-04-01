@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.AddBullActivity;
 
@@ -55,10 +55,10 @@ public class MyBullsActivity extends ModuleActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case ADD_BULL:
-                if (resultCode == ActivityUtil.RESULT_BULL_SAVED) {
+                if (resultCode == ActivityUtils.RESULT_BULL_SAVED) {
                     showMessage(R.string.new_bull_successfully_saved);
                     getPresenter().sendAdapterRefreshEvent();
-                } else if (resultCode == ActivityUtil.RESULT_BULL_SAVE_ERROR) {
+                } else if (resultCode == ActivityUtils.RESULT_BULL_SAVE_ERROR) {
                     showMessage(R.string.new_bull_save_error);
                 }
                 break;

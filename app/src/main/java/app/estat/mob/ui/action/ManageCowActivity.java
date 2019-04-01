@@ -6,15 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import app.estat.mob.R;
-import app.estat.mob.mvp.model.CowData;
 
 public class ManageCowActivity extends ActionActivity {
 
     private static final String COW_KEY = "app.estat.mob.ui.action.ManageCowActivity.COW_KEY";
 
-    public static Intent newIntent(@NonNull Context context, CowData cowData) {
+    public static Intent newIntent(@NonNull Context context, String cowPublicId) {
         Intent intent = new Intent(context, ManageCowActivity.class);
-        intent.putExtra(COW_KEY, cowData);
+        intent.putExtra(COW_KEY, cowPublicId);
         return intent;
     }
 
@@ -22,7 +21,7 @@ public class ManageCowActivity extends ActionActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_action_container, ViewCowFragment.newInstance((CowData) getIntent().getSerializableExtra(ManageCowActivity.COW_KEY)), false);
+        addFragment(R.id.activity_action_container, ViewCowFragment.newInstance(getIntent().getStringExtra(ManageCowActivity.COW_KEY)), false);
     }
 
     @Override

@@ -34,8 +34,9 @@
     <dimen name="component_form_text_view_image_height">32dp</dimen>
     <dimen name="component_form_text_view_image_width">32dp</dimen>
     <dimen name="component_form_text_view_guideline_start">72dp</dimen>
-    <dimen name="component_form_text_view_size">18sp</dimen>
-    <dimen name="component_form_text_view_label_size">14sp</dimen>//////
+    <dimen name="component_form_text_view_size">16sp</dimen>
+    <dimen name="component_form_text_view_label_size">12sp</dimen>
+    <dimen name="component_form_text_view_label_padding_left">2dp</dimen>
 
     <!-- form spinner -->
     <dimen name="component_form_spinner_height">48dp</dimen>

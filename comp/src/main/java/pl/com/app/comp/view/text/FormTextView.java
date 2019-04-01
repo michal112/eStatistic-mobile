@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import pl.com.app.comp.R;
 
@@ -19,6 +20,8 @@ public class FormTextView extends ConstraintLayout {
     private static final float ICON_ALPHA = 0.54f;
 
     private Context mContext;
+
+    TextView mTextView;
 
     TextInputLayout mTextInputLayout;
 
@@ -43,6 +46,7 @@ public class FormTextView extends ConstraintLayout {
         mTextInputLayout = view.findViewById(R.id.component_form_text_view_text_input_layout);
         mTextInputEditText = view.findViewById(R.id.component_form_text_view_text_input_edit_text_layout);
         mImageView = view.findViewById(R.id.component_form_text_view_icon);
+        mTextView = view.findViewById(R.id.component_form_text_view_label);
 
         mImageView.setAlpha(ICON_ALPHA);
         mTextInputLayout.setEnabled(false);
@@ -50,7 +54,7 @@ public class FormTextView extends ConstraintLayout {
     }
 
     public void setHint(@StringRes int hint) {
-        mTextInputLayout.setHint(mContext.getString(hint));
+        mTextView.setText(mContext.getString(hint));
     }
 
     public void setIcon(@DrawableRes int icon) {

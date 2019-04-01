@@ -60,4 +60,30 @@ public class DbCache {
     public long saveBull(DaoSession session, Bull bull) {
         return mBullService.save(session, bull);
     }
+
+    public Cow findCowByPublicId(DaoSession session, String publicId) {
+        return mCowService.findByPublicId(session, publicId);
+    }
+
+    public Cow findCowByPublicId(String publicId) {
+        for (Cow cow : mCows) {
+            if (publicId.equals(cow.getPublicId())) {
+                return cow;
+            }
+        }
+        return null;
+    }
+
+    public Bull findBullByPublicId(DaoSession session, String publicId) {
+        return mBullService.findByPublicId(session, publicId);
+    }
+
+    public Bull findBullByPublicId(String publicId) {
+        for (Bull bull : mBulls) {
+            if (publicId.equals(bull.getPublicId())) {
+                return bull;
+            }
+        }
+        return null;
+    }
 }

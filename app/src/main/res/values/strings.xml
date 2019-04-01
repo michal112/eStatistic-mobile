@@ -26,4 +26,6 @@
     <string name="fragment_view_cow_basic_data_title">Cow basic data</string>
     <string name="activity_manage_cow_menu_add_mate">Add mate</string>
     <string name="activity_manage_cow_menu_add_lactation">Add lactation</string>
+    <string name="activity_manage_bull_toolbar_title">Bull preview</string>
+    <string name="fragment_view_bull_basic_data_title">Bull basic data</string>
 </resources>

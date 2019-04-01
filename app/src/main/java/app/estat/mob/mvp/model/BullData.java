@@ -1,10 +1,8 @@
 package app.estat.mob.mvp.model;
 
-import java.io.Serializable;
-
 import app.estat.mob.db.entity.Bull;
 
-public class BullData implements Serializable {
+public class BullData {
 
     private String mPublicId;
 
@@ -39,26 +37,6 @@ public class BullData implements Serializable {
             bullData.mPublicId = this.mPublicId;
             return bullData;
         }
-    }
-
-    public String getPublicId() {
-        return mPublicId;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public String getNumber() {
-        return mNumber;
-    }
-
-    public static BullData from(Bull bull) {
-        return new BullDataBuilder()
-                .withName(bull.getName())
-                .withNumber(bull.getNumber())
-                .withPublicId(bull.getPublicId())
-                .build();
     }
 
     public Bull getBull() {

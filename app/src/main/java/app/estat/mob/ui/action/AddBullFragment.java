@@ -18,7 +18,7 @@ import app.estat.mob.event.BullSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.BullData;
 import app.estat.mob.mvp.presenter.action.AddBullFragmentPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.view.action.AddBullFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
@@ -90,11 +90,11 @@ public class AddBullFragment extends MvpBaseFragment<AddBullFragmentPresenter, A
     public void setActivityResult(BullSavedEvent.Status status) {
         switch (status) {
             case SUCCESS:
-                getActivity().setResult(ActivityUtil.RESULT_BULL_SAVED);
+                getActivity().setResult(ActivityUtils.RESULT_BULL_SAVED);
                 Log.d(TAG, "New bull saved successfully");
                 break;
             case FAILURE:
-                getActivity().setResult(ActivityUtil.RESULT_BULL_SAVE_ERROR);
+                getActivity().setResult(ActivityUtils.RESULT_BULL_SAVE_ERROR);
                 Log.e(TAG, "Bull save error");
                 break;
         }

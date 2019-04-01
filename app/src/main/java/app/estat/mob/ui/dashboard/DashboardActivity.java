@@ -14,7 +14,7 @@ import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.dashboard.DashboardActivityPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.dashboard.DashboardActivityView;
 import butterknife.BindView;
@@ -79,10 +79,10 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case DashboardFragment.FARM_CARD_EDIT:
-                if (resultCode == ActivityUtil.RESULT_FARM_CARD_SAVED) {
+                if (resultCode == ActivityUtils.RESULT_FARM_CARD_SAVED) {
                     showMessage(R.string.farm_card_data_successfully_saved);
                     refreshDrawerData();
-                } else if (resultCode == ActivityUtil.RESULT_FARM_CARD_SAVE_ERROR) {
+                } else if (resultCode == ActivityUtils.RESULT_FARM_CARD_SAVE_ERROR) {
                     showMessage(R.string.farm_card_data_save_error);
                 }
                 break;

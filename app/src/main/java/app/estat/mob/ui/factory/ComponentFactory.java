@@ -16,6 +16,9 @@ import pl.com.app.comp.view.text.FormTextView;
 
 public class ComponentFactory {
 
+    private ComponentFactory() {
+    }
+
     public static FormEditText getFormEditTextComponent(Context context, @DrawableRes int iconRes, @StringRes int hintRes) {
         FormEditText component = new FormEditText(context);
         component.setHint(hintRes);

@@ -46,11 +46,11 @@ public class MyBullsFragmentPresenter extends MvpBaseFragmentPresenter<MyBullsFr
         getView().refreshAdapter();
     }
 
-    public BullData getBullData(int position) {
+    public String getBullPublicId(int position) {
         if (mBulls.isEmpty()) {
             return null;
         }
 
-        return BullData.from(mBulls.get(position));
+        return mBulls.get(position).getPublicId();
     }
 }

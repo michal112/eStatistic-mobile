@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.db.entity.Cow;
 import app.estat.mob.mvp.core.MvpBaseFragment;
-import app.estat.mob.mvp.model.CowData;
 import app.estat.mob.mvp.presenter.action.ViewCowFragmentPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.action.ViewCowFragmentView;
@@ -37,9 +37,9 @@ public class ViewCowFragment extends MvpBaseFragment<ViewCowFragmentPresenter, V
 
     FormTextView mBirthdayComponent;
 
-    public static ViewCowFragment newInstance(CowData cowData) {
+    public static ViewCowFragment newInstance(String cowPublicId) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(COW_KEY, cowData);
+        bundle.putSerializable(COW_KEY, cowPublicId);
         ViewCowFragment fragment = new ViewCowFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -55,13 +55,13 @@ public class ViewCowFragment extends MvpBaseFragment<ViewCowFragmentPresenter, V
     }
 
     private void addComponents() {
-        CowData cowData = getPresenter().getCowData();
+        Cow cow = getPresenter().getCow();
 
-        mNameComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_name, R.string.fragment_view_cow_name_hint, cowData.getName());
-        mNumberComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_number, R.string.fragment_view_cow_number_hint, cowData.getNumber());
+        mNameComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_name, R.string.fragment_view_cow_name_hint, cow.getName());
+        mNumberComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_number, R.string.fragment_view_cow_number_hint, cow.getNumber());
         mBookComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_book, R.string.fragment_view_cow_book_hint,
-                getActivity().getString(ViewUtils.getResId(getActivity(), cowData.getBook().getTitle())));
-        mBirthdayComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_calendar, R.string.fragment_view_cow_birthday_hint, cowData.getBirthdayAsString());
+                getActivity().getString(ViewUtils.getResId(getActivity(), cow.getBook().getTitle())));
+        mBirthdayComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_calendar, R.string.fragment_view_cow_birthday_hint, ViewUtils.format(cow.getBirthday()));
 
         mBasicData.insertView(mNameComponent);
         mBasicData.insertView(mNumberComponent);
@@ -73,7 +73,7 @@ public class ViewCowFragment extends MvpBaseFragment<ViewCowFragmentPresenter, V
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        getPresenter().setCowData((CowData) bundle.getSerializable(COW_KEY));
+        getPresenter().setCowPublicId(bundle.getString(COW_KEY));
 
         addComponents();
     }

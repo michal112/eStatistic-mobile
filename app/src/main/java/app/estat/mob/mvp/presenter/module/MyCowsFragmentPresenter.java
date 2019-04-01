@@ -46,11 +46,11 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
         getView().refreshAdapter();
     }
 
-    public CowData getCowData(int position) {
+    public String getCowPublicId(int position) {
         if (mCows.isEmpty()) {
             return null;
         }
 
-        return CowData.from(mCows.get(position));
+        return mCows.get(position).getPublicId();
     }
 }

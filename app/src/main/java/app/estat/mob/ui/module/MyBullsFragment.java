@@ -17,6 +17,7 @@ import app.estat.mob.db.entity.Bull;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyBullsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyBullsFragmentView;
+import app.estat.mob.ui.action.ManageBullActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.com.app.comp.view.recycler.ModuleAdapter;
@@ -53,7 +54,7 @@ public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, M
         ModuleAdapter<Bull> myBullsAdapter = new ModuleAdapter(bulls, new ModuleAdapter.ModuleItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(ManageBullActivity.newIntent(getActivity(), getPresenter().getBullData(position)));
+                startActivity(ManageBullActivity.newIntent(getActivity(), getPresenter().getBullPublicId(position)));
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

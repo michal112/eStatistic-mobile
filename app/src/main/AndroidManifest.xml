@@ -49,6 +49,9 @@
         <activity android:name=".ui.action.AddBullActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.action.ManageBullActivity"
+            android:screenOrientation="portrait"/>
+
         <provider
             android:authorities="app.estat.mob.fileprovider"
             android:name="android.support.v4.content.FileProvider"

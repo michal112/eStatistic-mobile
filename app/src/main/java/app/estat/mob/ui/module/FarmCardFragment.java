@@ -26,7 +26,7 @@ import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.FarmData;
 import app.estat.mob.mvp.model.ImageManager;
 import app.estat.mob.mvp.presenter.module.FarmCardFragmentPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
 import butterknife.BindView;
@@ -184,9 +184,9 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     @Override
     public void setActivityResult(FarmDataChangedEvent.Status status) {
         if (status == FarmDataChangedEvent.Status.SUCCESS) {
-            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVED);
+            getActivity().setResult(ActivityUtils.RESULT_FARM_CARD_SAVED);
         } else if (status == FarmDataChangedEvent.Status.FAILURE) {
-            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVE_ERROR);
+            getActivity().setResult(ActivityUtils.RESULT_FARM_CARD_SAVE_ERROR);
         }
         getActivity().supportFinishAfterTransition();
     }

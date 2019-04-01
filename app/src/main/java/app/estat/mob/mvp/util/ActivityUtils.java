@@ -6,7 +6,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.widget.ImageView;
 
-public abstract class ActivityUtil {
+public abstract class ActivityUtils {
     public static final int RESULT_FARM_CARD_SAVED = 1;
 
     public static final int RESULT_FARM_CARD_SAVE_ERROR = 2;

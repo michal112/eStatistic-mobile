@@ -18,7 +18,7 @@ import app.estat.mob.event.CowSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.CowData;
 import app.estat.mob.mvp.presenter.action.AddCowFragmentPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.view.action.AddCowFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
@@ -102,11 +102,11 @@ public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, Add
     public void setActivityResult(CowSavedEvent.Status status) {
         switch (status) {
             case SUCCESS:
-                getActivity().setResult(ActivityUtil.RESULT_COW_SAVED);
+                getActivity().setResult(ActivityUtils.RESULT_COW_SAVED);
                 Log.d(TAG, "New cow saved successfully");
                 break;
             case FAILURE:
-                getActivity().setResult(ActivityUtil.RESULT_COW_SAVE_ERROR);
+                getActivity().setResult(ActivityUtils.RESULT_COW_SAVE_ERROR);
                 Log.e(TAG, "Cow save error");
                 break;
         }

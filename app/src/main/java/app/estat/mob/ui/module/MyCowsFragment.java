@@ -54,7 +54,7 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
         ModuleAdapter<Cow> myCowsAdapter = new ModuleAdapter(cows, new ModuleAdapter.ModuleItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(ManageCowActivity.newIntent(getActivity(), getPresenter().getCowData(position)));
+                startActivity(ManageCowActivity.newIntent(getActivity(), getPresenter().getCowPublicId(position)));
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

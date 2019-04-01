@@ -20,7 +20,7 @@ import app.estat.mob.db.entity.Module;
 import app.estat.mob.mvp.adapter.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.dashboard.DashboardFragmentPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 import app.estat.mob.ui.module.AverageProductivityActivity;
 import app.estat.mob.ui.module.FarmCardActivity;
@@ -58,27 +58,27 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
         switch (module.getActivity()) {
             case FARM_CARD:
-                ActivityUtil.animateModuleActivityForResult(getActivity(),
+                ActivityUtils.animateModuleActivityForResult(getActivity(),
                     FarmCardActivity.newIntent(getActivity(), module.getIconRes(),
                         module.getNameRes()), imageView, mTransitionName, FARM_CARD_EDIT);
                 break;
             case AVERAGE_PRODUCTIVITY:
-                ActivityUtil.animateModuleActivity(getActivity(),
+                ActivityUtils.animateModuleActivity(getActivity(),
                         AverageProductivityActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             case MY_COWS:
-                ActivityUtil.animateModuleActivity(getActivity(),
+                ActivityUtils.animateModuleActivity(getActivity(),
                         MyCowsActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             case MILK_PRODUCTION:
-                ActivityUtil.animateModuleActivity(getActivity(),
+                ActivityUtils.animateModuleActivity(getActivity(),
                         MilkProductionActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             case MY_BULLS:
-                ActivityUtil.animateModuleActivity(getActivity(),
+                ActivityUtils.animateModuleActivity(getActivity(),
                         MyBullsActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;

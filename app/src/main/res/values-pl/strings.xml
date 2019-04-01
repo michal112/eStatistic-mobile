@@ -26,4 +26,6 @@
     <string name="fragment_view_cow_basic_data_title">Dane krowy</string>
     <string name="activity_manage_cow_menu_add_mate">Dodaj pokrycie</string>
     <string name="activity_manage_cow_menu_add_lactation">Dodaj laktację</string>
+    <string name="activity_manage_bull_toolbar_title">Podgląd buhaja</string>
+    <string name="fragment_view_bull_basic_data_title">Dane buhaja</string>
 </resources>

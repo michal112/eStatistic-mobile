@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.AddCowActivity;
 
@@ -55,10 +55,10 @@ public class MyCowsActivity extends ModuleActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case ADD_COW:
-                if (resultCode == ActivityUtil.RESULT_COW_SAVED) {
+                if (resultCode == ActivityUtils.RESULT_COW_SAVED) {
                     showMessage(R.string.new_cow_successfully_saved);
                     getPresenter().sendAdapterRefreshEvent();
-                } else if (resultCode == ActivityUtil.RESULT_COW_SAVE_ERROR) {
+                } else if (resultCode == ActivityUtils.RESULT_COW_SAVE_ERROR) {
                     showMessage(R.string.new_cow_save_error);
                 }
                 break;

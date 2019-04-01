@@ -1,14 +1,12 @@
 package app.estat.mob.mvp.model;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.estat.mob.db.entity.Cow;
 import app.estat.mob.db.type.Book;
 import app.estat.mob.db.type.FormSpinnerItem;
 
-public class CowData implements Serializable {
+public class CowData {
 
     private String mPublicId;
 
@@ -63,40 +61,6 @@ public class CowData implements Serializable {
             cowData.mPublicId = this.mPublicId;
             return cowData;
         }
-    }
-
-    public String getPublicId() {
-        return mPublicId;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public String getNumber() {
-        return mNumber;
-    }
-
-    public Book getBook() {
-        return mBook;
-    }
-
-    public Date getBirthday() {
-        return mBirthday;
-    }
-
-    public String getBirthdayAsString() {
-        return new SimpleDateFormat("dd-MM-yyyy").format(mBirthday);
-    }
-
-    public static CowData from(Cow cow) {
-        return new CowDataBuilder()
-                .withName(cow.getName())
-                .withNumber(cow.getNumber())
-                .withBook(cow.getBook())
-                .withBirthday(cow.getBirthday())
-                .withPublicId(cow.getPublicId())
-                .build();
     }
 
     public Cow getCow() {
