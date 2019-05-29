@@ -5,12 +5,12 @@ import app.estat.mob.communication.retrofit.ServerSettings;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class SyncManager {
+public class SynchronizationManager {
     private ServerService mService;
 
     private ServerSettings mServerSettings;
 
-    public SyncManager() {
+    public SynchronizationManager() {
         mServerSettings = new ServerSettings();
 
         Retrofit retrofit = new Retrofit.Builder()

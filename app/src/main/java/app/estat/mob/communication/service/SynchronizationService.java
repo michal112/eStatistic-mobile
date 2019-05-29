@@ -9,8 +9,7 @@ import app.estat.mob.communication.retrofit.ServerService;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class SyncService extends SimpleJobService {
-
+public class SynchronizationService extends SimpleJobService {
 
     @Override
     public int onRunJob(@NonNull JobParameters job) {
