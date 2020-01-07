@@ -22,6 +22,8 @@
     <string name="fragment_view_cow_number_hint">Numer</string>
     <string name="fragment_view_cow_book_hint">Księga</string>
     <string name="fragment_view_cow_birthday_hint">Data urodzenia</string>
+    <!--my cows fragment-->
+    <string name="fragment_my_cows_no_data">Brak dodanych krów</string>
     <!--my bulls module-->
     <string name="activity_my_bulls_menu_add">DODAJ</string>
     <string name="fragment_add_bull_name_hint">Nazwa buhaja</string>

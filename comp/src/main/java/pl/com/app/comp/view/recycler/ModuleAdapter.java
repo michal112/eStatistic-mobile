@@ -16,11 +16,17 @@ import pl.com.app.comp.R;
 
 public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final int NO_DATA = 0;
+
+    private static final int MODULE_ITEM = 1;
+
     public interface ModuleItemClickListener {
         void onClick(int position);
     }
 
     private Drawable mIcon;
+
+    private String mNoDataText;
 
     private List<T> mData;
 
@@ -31,15 +37,37 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
         mListener = listener;
     }
 
+
+    public void setNoDataText(String noDataText) {
+        mNoDataText = noDataText;
+    }
+
     public void setIcon(Drawable icon) {
         mIcon = icon;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (mData.isEmpty()) {
+            return NO_DATA;
+        } else {
+            return MODULE_ITEM;
+        }
+    }
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ModuleViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.component_recycler_view_item, viewGroup, false), mListener);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        switch (viewType) {
+            case MODULE_ITEM:
+                return new ModuleViewHolder(LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.component_recycler_view_item, viewGroup, false), mListener);
+            case NO_DATA:
+                return new EmptyViewHolder(LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.component_recycler_view_no_items, viewGroup, false));
+            default :
+                return null;
+        }
     }
 
     @Override
@@ -49,12 +77,14 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
             ((ModuleViewHolder) viewHolder).setIcon(mIcon);
             ((ModuleViewHolder) viewHolder).setName(mItem.getName());
             ((ModuleViewHolder) viewHolder).setNumber(mItem.getNumber());
+        } else if (viewHolder instanceof ModuleAdapter.EmptyViewHolder) {
+            ((EmptyViewHolder) viewHolder).setNoDataText(mNoDataText);
         }
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mData.isEmpty() ? 1 : mData.size();
     }
 
     static class ModuleViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener {
@@ -93,6 +123,21 @@ public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<Re
         @Override
         public void onClick(View v) {
             mListener.onClick(getAdapterPosition());
+        }
+    }
+
+    static class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView mNoDataText;
+
+        public EmptyViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mNoDataText = itemView.findViewById(R.id.component_recycler_view_no_items_text);
+        }
+
+        public void setNoDataText(String noDataText) {
+            mNoDataText.setText(noDataText);
         }
     }
 }

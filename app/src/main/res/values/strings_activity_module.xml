@@ -22,6 +22,8 @@
     <string name="fragment_view_cow_number_hint">Number</string>
     <string name="fragment_view_cow_book_hint">Book</string>
     <string name="fragment_view_cow_birthday_hint">Birthday</string>
+    <!--my cows fragment-->
+    <string name="fragment_my_cows_no_data">No cows added</string>
     <!--my bulls module-->
     <!--add cow fragment-->
     <string name="activity_my_bulls_menu_add">ADD</string>

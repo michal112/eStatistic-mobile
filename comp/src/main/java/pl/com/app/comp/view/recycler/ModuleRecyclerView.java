@@ -14,6 +14,8 @@ public class ModuleRecyclerView extends RecyclerView {
 
     private Drawable mIcon;
 
+    private String noDataText;
+
     public ModuleRecyclerView(@NonNull Context context) {
         this(context, null);
     }
@@ -26,6 +28,7 @@ public class ModuleRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
 
         setIcon(context, attrs);
+        setNoDataText(context, attrs);
     }
 
     @Override
@@ -34,12 +37,19 @@ public class ModuleRecyclerView extends RecyclerView {
 
         if (adapter instanceof ModuleAdapter) {
             ((ModuleAdapter) adapter).setIcon(mIcon);
+            ((ModuleAdapter) adapter).setNoDataText(noDataText);
         }
     }
 
     private void setIcon(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ModuleRecyclerView);
         mIcon = typedArray.getDrawable(R.styleable.ModuleRecyclerView_iconName);
+        typedArray.recycle();
+    }
+
+    private void setNoDataText(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ModuleRecyclerView);
+        noDataText = typedArray.getString(R.styleable.ModuleRecyclerView_noDataText);
         typedArray.recycle();
     }
 }

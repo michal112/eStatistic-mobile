@@ -13,7 +13,7 @@ import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.action.ActionActivityPresenter;
 import app.estat.mob.mvp.view.action.ActionActivityView;
 
-public abstract class ActionActivity extends MvpBaseActivity<ActionActivityPresenter, ActionActivityView>
+public abstract class ActionActivity<P extends ActionActivityPresenter> extends MvpBaseActivity<P, ActionActivityView>
         implements ActionActivityView {
 
     public static Intent newIntent(@NonNull Context context, Class clazz) {
@@ -44,9 +44,7 @@ public abstract class ActionActivity extends MvpBaseActivity<ActionActivityPrese
 
     @NonNull
     @Override
-    public ActionActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
-        return new ActionActivityPresenter(context, applicationComponent);
-    }
+    public abstract P createPresenter(Context context, ApplicationComponent applicationComponent);
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/activity_manage_cow_menu_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/activity_manage_cow_menu_delete"
+        app:showAsAction="always">
+    </item>
+
+    <item
         android:id="@+id/activity_manage_cow_menu_add_lactation"
         android:icon="@drawable/ic_lactation"
         android:title="@string/activity_manage_cow_menu_add_lactation"
