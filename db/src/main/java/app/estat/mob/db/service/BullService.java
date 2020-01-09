@@ -23,4 +23,12 @@ public class BullService implements AnimalService<Bull> {
                 .where(BullDao.Properties.PublicId.eq(publicId))
                 .unique();
     }
+
+    @Override
+    public void delete(DaoSession daoSession, String publicId) {
+        daoSession.getBullDao().queryBuilder()
+                .where(BullDao.Properties.PublicId.eq(publicId))
+                .buildDelete()
+                .executeDeleteWithoutDetachingEntities();
+    }
 }

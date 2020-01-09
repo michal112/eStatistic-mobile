@@ -23,4 +23,12 @@ public class CowService implements AnimalService<Cow> {
                 .where(CowDao.Properties.PublicId.eq(publicId))
                 .unique();
     }
+
+    @Override
+    public void delete(DaoSession daoSession, String publicId) {
+        daoSession.getCowDao().queryBuilder()
+                .where(CowDao.Properties.PublicId.eq(publicId))
+                .buildDelete()
+                .executeDeleteWithoutDetachingEntities();
+    }
 }

@@ -15,7 +15,7 @@ import app.estat.mob.db.dao.MateDao;
 import app.estat.mob.db.dao.CowDao;
 
 @Entity(nameInDb = "BULL")
-public class Bull implements ModuleItem {
+public class Bull implements AnimalItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;

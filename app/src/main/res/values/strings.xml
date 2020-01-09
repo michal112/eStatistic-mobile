@@ -11,6 +11,10 @@
     <string name="farm_card_data_save_error">Unable to save farm data</string>
     <string name="new_cow_successfully_saved">Cow successfully saved</string>
     <string name="new_cow_save_error">Unable to save cow</string>
+    <string name="cow_successfully_deleted">Cow successfully deleted</string>
+    <string name="cow_delete_error">Unable to delete cow</string>
+    <string name="bull_successfully_deleted">Bull successfully deleted</string>
+    <string name="bull_delete_error">Unable to delete bull</string>
     <string name="activity_add_cow_toolbar_title">Add new cow</string>
     <string name="activity_add_cow_menu_done">DONE</string>
     <string name="activity_manage_cow_menu_delete">Remove</string>

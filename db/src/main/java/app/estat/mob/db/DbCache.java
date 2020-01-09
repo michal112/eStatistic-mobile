@@ -61,6 +61,14 @@ public class DbCache {
         return mBullService.save(session, bull);
     }
 
+    public void deleteCow(DaoSession session, String cowPublicId) {
+        mCowService.delete(session, cowPublicId);
+    }
+
+    public void deleteBull(DaoSession session, String cowPublicId) {
+        mBullService.delete(session, cowPublicId);
+    }
+
     public Cow findCowByPublicId(DaoSession session, String publicId) {
         return mCowService.findByPublicId(session, publicId);
     }

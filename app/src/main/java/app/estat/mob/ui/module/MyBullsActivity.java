@@ -9,17 +9,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
+import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.mvp.presenter.module.MyBullsActivityPresenter;
 import app.estat.mob.mvp.util.ActivityUtils;
+import app.estat.mob.mvp.view.module.MyBullsActivityView;
 import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.AddBullActivity;
 
-public class MyBullsActivity extends ModuleActivity {
+public class MyBullsActivity extends ModuleActivity<MyBullsActivityPresenter, MyBullsActivityView>
+        implements MyBullsActivityView {
     private static final String TAG = MyBullsActivity.class.getName();
 
     public static final int ADD_BULL = 0;
 
     public static Intent newIntent(@NonNull Context context, String iconRes, String nameRes) {
         return newIntent(context, MyBullsActivity.class, iconRes, nameRes);
+    }
+
+    @NonNull
+    @Override
+    public MyBullsActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new MyBullsActivityPresenter(context, applicationComponent);
     }
 
     @Override

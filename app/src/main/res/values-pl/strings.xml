@@ -11,6 +11,10 @@
     <string name="farm_card_data_save_error">Błąd zapisu danych gospodarstwa</string>
     <string name="new_cow_successfully_saved">Nowa krowa została zapisana</string>
     <string name="new_cow_save_error">Błąd zapisu krowy</string>
+    <string name="cow_successfully_deleted">Krowa została usunięta</string>
+    <string name="cow_delete_error">Bląd podczas usuwania krowy</string>
+    <string name="bull_successfully_deleted">Buhaj został usunięty</string>
+    <string name="bull_delete_error">Błąd podczas usuwania buhaja</string>
     <string name="activity_add_cow_toolbar_title">Dodaj nową krowę</string>
     <string name="activity_add_cow_menu_done">ZAPISZ</string>
     <string name="activity_manage_cow_menu_delete">Usuń</string>

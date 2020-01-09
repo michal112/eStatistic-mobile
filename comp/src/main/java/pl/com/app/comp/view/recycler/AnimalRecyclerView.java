@@ -10,21 +10,21 @@ import android.util.AttributeSet;
 
 import pl.com.app.comp.R;
 
-public class ModuleRecyclerView extends RecyclerView {
+public class AnimalRecyclerView extends RecyclerView {
 
     private Drawable mIcon;
 
     private String noDataText;
 
-    public ModuleRecyclerView(@NonNull Context context) {
+    public AnimalRecyclerView(@NonNull Context context) {
         this(context, null);
     }
 
-    public ModuleRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public AnimalRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ModuleRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public AnimalRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         setIcon(context, attrs);
@@ -35,21 +35,21 @@ public class ModuleRecyclerView extends RecyclerView {
     public void setAdapter(@Nullable Adapter adapter) {
         super.setAdapter(adapter);
 
-        if (adapter instanceof ModuleAdapter) {
-            ((ModuleAdapter) adapter).setIcon(mIcon);
-            ((ModuleAdapter) adapter).setNoDataText(noDataText);
+        if (adapter instanceof AnimalAdapter) {
+            ((AnimalAdapter) adapter).setIcon(mIcon);
+            ((AnimalAdapter) adapter).setNoDataText(noDataText);
         }
     }
 
     private void setIcon(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ModuleRecyclerView);
-        mIcon = typedArray.getDrawable(R.styleable.ModuleRecyclerView_iconName);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AnimalRecyclerView);
+        mIcon = typedArray.getDrawable(R.styleable.AnimalRecyclerView_iconName);
         typedArray.recycle();
     }
 
     private void setNoDataText(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ModuleRecyclerView);
-        noDataText = typedArray.getString(R.styleable.ModuleRecyclerView_noDataText);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AnimalRecyclerView);
+        noDataText = typedArray.getString(R.styleable.AnimalRecyclerView_noDataText);
         typedArray.recycle();
     }
 }

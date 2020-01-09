@@ -9,15 +9,15 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import app.estat.mob.R;
-import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.module.ModuleActivityPresenter;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.module.ModuleActivityView;
 import butterknife.BindView;
 
-public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPresenter, ModuleActivityView>
+public abstract class ModuleActivity<P extends ModuleActivityPresenter<V>, V extends ModuleActivityView> extends MvpBaseActivity<P, V>
         implements ModuleActivityView {
+    
     private final static String ICON_LOGO_KEY = "app.estat.mob.ui.module.ModuleActivity.ICON_LOGO_KEY";
 
     private final static String TOOLBAR_TEXT_KEY = "app.estat.mob.ui.module.ModuleActivity.TOOLBAR_TEXT_KEY";
@@ -51,12 +51,6 @@ public abstract class ModuleActivity extends MvpBaseActivity<ModuleActivityPrese
         Bundle bundle = getIntent().getExtras();
         setActionBarTittle((Integer) bundle.get(TOOLBAR_TEXT_KEY));
         mAppBarLogo.setImageDrawable(getResources().getDrawable((Integer) bundle.get(ICON_LOGO_KEY)));
-    }
-
-    @NonNull
-    @Override
-    public ModuleActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
-        return new ModuleActivityPresenter(context, applicationComponent);
     }
 
     @Override

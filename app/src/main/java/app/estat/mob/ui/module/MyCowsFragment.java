@@ -17,17 +17,17 @@ import app.estat.mob.db.entity.Cow;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyCowsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
-import app.estat.mob.ui.action.ManageCowActivity;
+import app.estat.mob.ui.action.ViewCowActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.recycler.ModuleAdapter;
-import pl.com.app.comp.view.recycler.ModuleRecyclerView;
+import pl.com.app.comp.view.recycler.AnimalAdapter;
+import pl.com.app.comp.view.recycler.AnimalRecyclerView;
 
 public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyCowsFragmentView>
         implements MyCowsFragmentView {
 
     @BindView(R.id.fragment_my_cows_recycler_view)
-    ModuleRecyclerView mRecyclerView;
+    AnimalRecyclerView mRecyclerView;
 
     public static MyCowsFragment newInstance() {
         return new MyCowsFragment();
@@ -51,10 +51,10 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
 
     @Override
     public void showCows(List<Cow> cows) {
-        ModuleAdapter<Cow> myCowsAdapter = new ModuleAdapter(cows, new ModuleAdapter.ModuleItemClickListener() {
+        AnimalAdapter<Cow> myCowsAdapter = new AnimalAdapter(cows, new AnimalAdapter.AnimalItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(ManageCowActivity.newIntent(getActivity(), getPresenter().getCowPublicId(position)));
+                startActivity(ViewCowActivity.newIntent(getActivity(), getPresenter().getCowPublicId(position)));
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

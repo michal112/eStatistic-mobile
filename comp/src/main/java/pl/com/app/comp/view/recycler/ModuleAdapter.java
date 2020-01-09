@@ -1,7 +1,8 @@
 package pl.com.app.comp.view.recycler;
 
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,133 +12,93 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import app.estat.mob.db.entity.ModuleItem;
-import pl.com.app.comp.R;
+import app.estat.mob.R;
+import app.estat.mob.db.entity.Module;
+import app.estat.mob.mvp.util.ViewUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class ModuleAdapter<T extends ModuleItem> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int NO_DATA = 0;
-
-    private static final int MODULE_ITEM = 1;
-
-    public interface ModuleItemClickListener {
-        void onClick(int position);
+public class ModuleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public interface ModuleClickListener {
+        void onClick(ImageView imageView, int position);
     }
 
-    private Drawable mIcon;
+    private final Context mContext;
 
-    private String mNoDataText;
+    private final List<Module> mModules;
 
-    private List<T> mData;
+    private final ModuleClickListener mModuleClickListener;
 
-    private ModuleItemClickListener mListener;
-
-    public ModuleAdapter(List<T> data, ModuleItemClickListener listener) {
-        mData = data;
-        mListener = listener;
-    }
-
-
-    public void setNoDataText(String noDataText) {
-        mNoDataText = noDataText;
-    }
-
-    public void setIcon(Drawable icon) {
-        mIcon = icon;
+    public ModuleAdapter(Context mContext, List<Module> mModules, ModuleClickListener mModuleClickListener) {
+        this.mContext = mContext;
+        this.mModules = mModules;
+        this.mModuleClickListener = mModuleClickListener;
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (mData.isEmpty()) {
-            return NO_DATA;
-        } else {
-            return MODULE_ITEM;
-        }
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        switch (viewType) {
-            case MODULE_ITEM:
-                return new ModuleViewHolder(LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.component_recycler_view_item, viewGroup, false), mListener);
-            case NO_DATA:
-                return new EmptyViewHolder(LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.component_recycler_view_no_items, viewGroup, false));
-            default :
-                return null;
-        }
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ModuleViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.fragment_dashboard_item, parent, false), mModuleClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (viewHolder instanceof ModuleAdapter.ModuleViewHolder) {
-            T mItem = mData.get(i);
-            ((ModuleViewHolder) viewHolder).setIcon(mIcon);
-            ((ModuleViewHolder) viewHolder).setName(mItem.getName());
-            ((ModuleViewHolder) viewHolder).setNumber(mItem.getNumber());
-        } else if (viewHolder instanceof ModuleAdapter.EmptyViewHolder) {
-            ((EmptyViewHolder) viewHolder).setNoDataText(mNoDataText);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ModuleViewHolder) {
+            ModuleViewHolder moduleViewHolder = ((ModuleViewHolder) holder);
+            Module module = mModules.get(position);
+            moduleViewHolder.bindName(getResId(mContext, module.getNameRes()));
+            moduleViewHolder.bindDescription(getResId(mContext, module.getDescriptionRes()));
+            moduleViewHolder.bindImage(getResId(mContext, module.getIconRes()));
         }
+    }
+
+    private int getResId(Context context, String res) {
+        return context.getResources().getIdentifier(res.substring(res.indexOf(".", 2) + 1),
+                res.substring(res.indexOf(".") + 1, res.indexOf(".", 2)), context.getPackageName());
     }
 
     @Override
     public int getItemCount() {
-        return mData.isEmpty() ? 1 : mData.size();
+        return mModules.size();
     }
 
-    static class ModuleViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener {
+    public static class ModuleViewHolder extends RecyclerView.ViewHolder
+            implements RecyclerView.OnClickListener {
 
-        private ModuleItemClickListener mListener;
+        ImageView mImage;
 
         TextView mName;
 
-        TextView mNumber;
+        TextView mDescription;
 
-        ImageView mIcon;
+        private ModuleClickListener mModuleClickListener;
 
-        public ModuleViewHolder(@NonNull View itemView, ModuleItemClickListener listener) {
+        public ModuleViewHolder(View itemView, ModuleClickListener moduleClickListener) {
             super(itemView);
 
-            mName = itemView.findViewById(R.id.component_recycler_view_item_name);
-            mNumber = itemView.findViewById(R.id.component_recycler_view_item_number);
-            mIcon = itemView.findViewById(R.id.component_recycler_view_item_icon);
-
-            this.mListener = listener;
+            mImage = itemView.findViewById(R.id.fragment_dashboard_item_image);
+            mName = itemView.findViewById(R.id.fragment_dashboard_item_name);
+            mDescription = itemView.findViewById(R.id.fragment_dashboard_item_description);
             itemView.setOnClickListener(this);
+
+            this.mModuleClickListener = moduleClickListener;
         }
 
-        public void setName(String name) {
-            mName.setText(name);
+        public void bindName(@StringRes int resId) {
+            mName.setText(resId);
         }
 
-        public void setNumber(String number) {
-            mNumber.setText(number);
+        public void bindDescription(@StringRes int resId) {
+            mDescription.setText(resId);
         }
 
-        public void setIcon(Drawable icon) {
-            mIcon.setImageDrawable(icon);
+        public void bindImage(@DrawableRes int resId) {
+           mImage.setImageResource(resId);
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onClick(getAdapterPosition());
-        }
-    }
-
-    static class EmptyViewHolder extends RecyclerView.ViewHolder {
-
-        TextView mNoDataText;
-
-        public EmptyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mNoDataText = itemView.findViewById(R.id.component_recycler_view_no_items_text);
-        }
-
-        public void setNoDataText(String noDataText) {
-            mNoDataText.setText(noDataText);
+            mModuleClickListener.onClick(mImage, getAdapterPosition() - 1);
         }
     }
 }

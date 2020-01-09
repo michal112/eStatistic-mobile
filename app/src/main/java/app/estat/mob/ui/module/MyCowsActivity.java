@@ -9,17 +9,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
+import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.mvp.presenter.module.MyCowsActivityPresenter;
 import app.estat.mob.mvp.util.ActivityUtils;
+import app.estat.mob.mvp.view.module.MyCowsActivityView;
 import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.AddCowActivity;
 
-public class MyCowsActivity extends ModuleActivity {
+public class MyCowsActivity extends ModuleActivity<MyCowsActivityPresenter, MyCowsActivityView>
+        implements MyCowsActivityView {
     private static final String TAG = MyCowsActivity.class.getName();
 
     public static final int ADD_COW = 0;
 
     public static Intent newIntent(@NonNull Context context, String iconRes, String nameRes) {
         return newIntent(context, MyCowsActivity.class, iconRes, nameRes);
+    }
+
+    @NonNull
+    @Override
+    public MyCowsActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new MyCowsActivityPresenter(context, applicationComponent);
     }
 
     @Override

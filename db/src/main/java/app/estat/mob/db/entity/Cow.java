@@ -21,7 +21,7 @@ import app.estat.mob.db.type.Book;
 import app.estat.mob.db.dao.BullDao;
 
 @Entity(nameInDb = "COW")
-public class Cow implements ModuleItem {
+public class Cow implements AnimalItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;

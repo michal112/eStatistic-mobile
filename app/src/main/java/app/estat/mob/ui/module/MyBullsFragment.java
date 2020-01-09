@@ -17,17 +17,17 @@ import app.estat.mob.db.entity.Bull;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.module.MyBullsFragmentPresenter;
 import app.estat.mob.mvp.view.module.MyBullsFragmentView;
-import app.estat.mob.ui.action.ManageBullActivity;
+import app.estat.mob.ui.action.ViewBullActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.recycler.ModuleAdapter;
-import pl.com.app.comp.view.recycler.ModuleRecyclerView;
+import pl.com.app.comp.view.recycler.AnimalAdapter;
+import pl.com.app.comp.view.recycler.AnimalRecyclerView;
 
 public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, MyBullsFragmentView>
         implements MyBullsFragmentView {
 
     @BindView(R.id.fragment_my_bulls_recycler_view)
-    ModuleRecyclerView mRecyclerView;
+    AnimalRecyclerView mRecyclerView;
 
     public static MyBullsFragment newInstance() {
         return new MyBullsFragment();
@@ -51,10 +51,10 @@ public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, M
 
     @Override
     public void showBulls(List<Bull> bulls) {
-        ModuleAdapter<Bull> myBullsAdapter = new ModuleAdapter(bulls, new ModuleAdapter.ModuleItemClickListener() {
+        AnimalAdapter<Bull> myBullsAdapter = new AnimalAdapter(bulls, new AnimalAdapter.AnimalItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(ManageBullActivity.newIntent(getActivity(), getPresenter().getBullPublicId(position)));
+                startActivity(ViewBullActivity.newIntent(getActivity(), getPresenter().getBullPublicId(position)));
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

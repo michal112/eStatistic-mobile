@@ -8,12 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
-import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 import app.estat.mob.mvp.presenter.action.ActionActivityPresenter;
 import app.estat.mob.mvp.view.action.ActionActivityView;
 
-public abstract class ActionActivity<P extends ActionActivityPresenter> extends MvpBaseActivity<P, ActionActivityView>
+public abstract class ActionActivity<P extends ActionActivityPresenter<V>, V extends ActionActivityView> extends MvpBaseActivity<P, V>
         implements ActionActivityView {
 
     public static Intent newIntent(@NonNull Context context, Class clazz) {
@@ -41,10 +40,6 @@ public abstract class ActionActivity<P extends ActionActivityPresenter> extends 
     public int getLayoutResId() {
         return R.layout.activity_action;
     }
-
-    @NonNull
-    @Override
-    public abstract P createPresenter(Context context, ApplicationComponent applicationComponent);
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -17,7 +17,7 @@ import java.util.List;
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
-import app.estat.mob.mvp.adapter.ModuleAdapter;
+import pl.com.app.comp.view.recycler.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.dashboard.DashboardFragmentPresenter;
 import app.estat.mob.mvp.util.ActivityUtils;
