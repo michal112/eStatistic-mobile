@@ -8,30 +8,28 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.card.FormCardView;
+import app.estat.mob.comp.photo.FormPhotoView;
+import app.estat.mob.comp.text.FormEditText;
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.event.FarmDataChangedEvent;
+import app.estat.mob.event.StatusEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.model.FarmData;
-import app.estat.mob.mvp.model.ImageManager;
+import app.estat.mob.mvp.model.manager.ImageManager;
 import app.estat.mob.mvp.presenter.module.FarmCardFragmentPresenter;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.util.ViewUtils;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
+import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter, FarmCardFragmentView>
         implements FarmCardFragmentView {
@@ -41,49 +39,24 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
 
     private static final int REQUEST_FARM_IMAGE_CAPTURE = 1;
 
-    @BindView(R.id.fragment_farm_card_user_image_progress)
-    ProgressBar mUserImageProgress;
+    @BindView(R.id.fragment_farm_card_user_data)
+    FormCardView mUserDataContainer;
 
-    @BindView(R.id.fragment_farm_card_user_image)
-    ImageView mUserImage;
+    @BindView(R.id.fragment_farm_card_farm_data)
+    FormCardView mFarmDataContainer;
 
-    @BindView(R.id.fragment_farm_card_user_image_button)
-    Button mUserButton;
+    FormEditText mUserNameComponent;
 
-    @BindView(R.id.fragment_farm_card_farm_image_progress)
-    ProgressBar mFarmImageProgress;
+    FormEditText mFarmAddressComponent;
 
-    @BindView(R.id.fragment_farm_card_farm_image)
-    ImageView mFarmImage;
+    FormEditText mBarnNumberComponent;
 
-    @BindView(R.id.fragment_farm_card_farm_image_button)
-    Button mFarmButton;
+    FormPhotoView mUserPhotoComponent;
 
-    @BindView(R.id.fragment_farm_card_user_name)
-    EditText mUserName;
-
-    @BindView(R.id.fragment_farm_card_barn_number)
-    EditText mBarnNumber;
-
-    @BindView(R.id.fragment_farm_card_farm_address)
-    EditText mFarmAddress;
-
-    private PopupMenu mUserPopupMenu;
-
-    private PopupMenu mFarmPopupMenu;
+    FormPhotoView mFarmPhotoComponent;
 
     public static FarmCardFragment newInstance() {
         return new FarmCardFragment();
-    }
-
-    @OnClick(R.id.fragment_farm_card_user_image_button)
-    public void onUserButtonClick() {
-        mUserPopupMenu.show();
-    }
-
-    @OnClick(R.id.fragment_farm_card_farm_image_button)
-    public void onFarmButtonClick() {
-        mFarmPopupMenu.show();
     }
 
     @Nullable
@@ -92,19 +65,36 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         View view = inflater.inflate(R.layout.fragment_farm_card, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
-        initPopups();
+        addComponents();
 
         requestImage(ImageManager.USER_IMAGE);
         requestImage(ImageManager.FARM_IMAGE);
-        initFormData();
+
+        initPopups();
+        initFarmData();
 
         return view;
     }
 
-    private void initFormData() {
-        mUserName.setText(getPresenter().getUserName());
-        mBarnNumber.setText(getPresenter().getBarnNumber());
-        mFarmAddress.setText(getPresenter().getFarmAddress());
+    private void addComponents() {
+        mUserNameComponent = ComponentFactory.getFormEditTextComponent(getContext(), R.drawable.ic_person, R.string.fragment_farm_card_user_name);
+        mBarnNumberComponent = ComponentFactory.getFormEditTextComponent(getContext(), R.drawable.ic_home, R.string.fragment_farm_card_farm_number);
+        mFarmAddressComponent = ComponentFactory.getFormEditTextComponent(getContext(), R.drawable.ic_location, R.string.fragment_farm_card_address_hint);
+        mUserPhotoComponent = ComponentFactory.getFormPhotoViewComponent(getContext(), R.drawable.ic_camera, R.drawable.fragment_farm_card_form_user_image);
+        mFarmPhotoComponent = ComponentFactory.getFormPhotoViewComponent(getContext(), R.drawable.ic_camera, R.drawable.fragment_farm_card_form_farm_image);
+
+        mUserDataContainer.insertView(mUserNameComponent);
+        mUserDataContainer.insertView(mUserPhotoComponent);
+
+        mFarmDataContainer.insertView(mBarnNumberComponent);
+        mFarmDataContainer.insertView(mFarmAddressComponent);
+        mFarmDataContainer.insertView(mFarmPhotoComponent);
+    }
+
+    private void initFarmData() {
+        mBarnNumberComponent.setText(getPresenter().getBarnNumber());
+        mFarmAddressComponent.setText(getPresenter().getFarmAddress());
+        mUserNameComponent.setText(getPresenter().getUserName());
     }
 
     @Override
@@ -112,9 +102,9 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         switch (item.getItemId()) {
             case R.id.activity_farm_card_menu_done:
                 FarmData farmData = new FarmData.Builder()
-                        .userName(mUserName.getText().toString())
-                        .barnNumber(mBarnNumber.getText().toString())
-                        .farmAddress(mFarmAddress.getText().toString())
+                        .userName(mUserNameComponent.getText())
+                        .barnNumber(mBarnNumberComponent.getText())
+                        .farmAddress(mFarmAddressComponent.getText())
                         .build();
                 getPresenter().saveFarmData(getActivity(), farmData);
                 break;
@@ -127,109 +117,64 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
     }
 
     private void initPopups() {
-        mUserPopupMenu = new PopupMenu(getActivity(), mUserButton);
-        mUserPopupMenu.inflate(R.menu.fragment_farm_card_context_menu);
-        mUserPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        mUserPhotoComponent.setClickListener(new FormPhotoView.OnPopupClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.fragment_farm_card_photo_menu:
-                        takePhoto(ImageManager.USER_IMAGE);
-                        break;
-                    default:
-                        Log.d(TAG, "Unknown item selected");
-                        break;
-                }
-                return true;
+            public void onClick() {
+                takePhoto(ImageManager.USER_IMAGE);
             }
         });
-        mFarmPopupMenu = new PopupMenu(getActivity(), mFarmButton);
-        mFarmPopupMenu.inflate(R.menu.fragment_farm_card_context_menu);
-        mFarmPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        mFarmPhotoComponent.setClickListener(new FormPhotoView.OnPopupClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.fragment_farm_card_photo_menu:
-                        takePhoto(ImageManager.FARM_IMAGE);
-                        break;
-                    default:
-                        Log.d(TAG, "Unknown item selected");
-                        break;
-                }
-                return true;
+            public void onClick() {
+                takePhoto(ImageManager.FARM_IMAGE);
             }
         });
+    }
+
+    private void takePhoto(int imageType) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            Uri imageTempUri = getPresenter().createImageTemp(getActivity(), imageType);
+            if (imageTempUri == null) {
+                return;
+            }
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageTempUri);
+            if (ImageManager.USER_IMAGE == imageType) {
+                startActivityForResult(intent, REQUEST_USER_IMAGE_CAPTURE);
+            } else if (ImageManager.FARM_IMAGE == imageType) {
+                startActivityForResult(intent, REQUEST_FARM_IMAGE_CAPTURE);
+            }
+        }
     }
 
     @Override
     public void showImage(int imageType, Uri imageUri) {
         if (imageType == ImageManager.USER_IMAGE) {
             ViewUtils.insertImage(getActivity(), imageUri,
-                    R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
+                    R.drawable.fragment_farm_card_form_user_image, mUserPhotoComponent);
         } else if (imageType == ImageManager.FARM_IMAGE) {
             ViewUtils.insertImage(getActivity(), imageUri,
-                    R.drawable.fragment_farm_card_form_farm_image, mFarmImage, mFarmImageProgress);
+                    R.drawable.fragment_farm_card_form_farm_image, mFarmPhotoComponent);
         }
     }
 
     @Override
-    public void showImageProgress(int imageType) {
-        if (imageType == ImageManager.USER_IMAGE) {
-            ViewUtils.showProgress(mUserImage, mUserImageProgress);
-        } else if (imageType == ImageManager.FARM_IMAGE) {
-            ViewUtils.showProgress(mFarmImage, mFarmImageProgress);
-        }
-    }
-
-    @Override
-    public void setActivityResult(FarmDataChangedEvent.Status status) {
-        if (status == FarmDataChangedEvent.Status.SUCCESS) {
-            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVED);
-        } else if (status == FarmDataChangedEvent.Status.FAILURE) {
-            getActivity().setResult(ActivityUtil.RESULT_FARM_CARD_SAVE_ERROR);
+    public void setActivityResult(StatusEvent.Status status) {
+        if (status == StatusEvent.Status.SUCCESS) {
+            getActivity().setResult(ActivityUtils.RESULT_FARM_CARD_SAVED);
+        } else if (status == StatusEvent.Status.FAILURE) {
+            getActivity().setResult(ActivityUtils.RESULT_FARM_CARD_SAVE_ERROR);
         }
         getActivity().supportFinishAfterTransition();
     }
 
     private void requestImage(int imageType) {
-        showImageProgress(imageType);
-
-        if (imageType == ImageManager.USER_IMAGE) {
-            if (getPresenter().isUserImageExists()) {
-                ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
-                        R.drawable.fragment_farm_card_form_user_image, mUserImage, mUserImageProgress);
-            } else {
-                ViewUtils.hideProgress(mUserImage, mUserImageProgress);
-            }
-        } else if (imageType == ImageManager.FARM_IMAGE) {
-            if (getPresenter().isFarmImageExists()) {
-                ViewUtils.insertImage(getActivity(), getPresenter().getFarmImageUri(),
-                        R.drawable.fragment_farm_card_form_farm_image, mFarmImage, mFarmImageProgress);
-            } else {
-                ViewUtils.hideProgress(mFarmImage, mFarmImageProgress);
-            }
-        }
-    }
-
-    private void takePhoto(int imageType) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            Uri imageTempUri;
-            if (imageType == ImageManager.USER_IMAGE) {
-                imageTempUri = getPresenter().createUserImageTemp(getActivity());
-                if (imageTempUri == null) {
-                    return;
-                }
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageTempUri);
-                startActivityForResult(intent, REQUEST_USER_IMAGE_CAPTURE);
-            } else if (imageType == ImageManager.FARM_IMAGE) {
-                imageTempUri = getPresenter().createFarmImageTemp(getActivity());
-                if (imageTempUri == null) {
-                    return;
-                }
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageTempUri);
-                startActivityForResult(intent, REQUEST_FARM_IMAGE_CAPTURE);
-            }
+        if (imageType == ImageManager.USER_IMAGE && getPresenter().isUserImageExists()) {
+            ViewUtils.insertImage(getActivity(), getPresenter().getUserImageUri(),
+                    R.drawable.fragment_farm_card_form_user_image, mUserPhotoComponent);
+        } else if (imageType == ImageManager.FARM_IMAGE && getPresenter().isFarmImageExists()) {
+            ViewUtils.insertImage(getActivity(), getPresenter().getFarmImageUri(),
+                    R.drawable.fragment_farm_card_form_farm_image, mFarmPhotoComponent);
         }
     }
 
@@ -238,11 +183,13 @@ public class FarmCardFragment extends MvpBaseFragment<FarmCardFragmentPresenter,
         switch (requestCode) {
             case REQUEST_USER_IMAGE_CAPTURE:
                 if (resultCode == Activity.RESULT_OK) {
+                    mUserPhotoComponent.showProgress(true);
                     getPresenter().scaleImageTemp(getActivity(), ImageManager.USER_IMAGE);
                 }
                 break;
             case REQUEST_FARM_IMAGE_CAPTURE:
                 if (resultCode == Activity.RESULT_OK) {
+                    mFarmPhotoComponent.showProgress(true);
                     getPresenter().scaleImageTemp(getActivity(), ImageManager.FARM_IMAGE);
                 }
                 break;

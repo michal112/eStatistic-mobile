@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.mvp.model.SharedPreferencesManager;
+import app.estat.mob.mvp.model.manager.SharedPreferencesManager;
 
 abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private WeakReference<V> view;
@@ -77,25 +77,29 @@ abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
         return mContext;
     }
 
+    @Subscribe
+    public void onNoSubscriberEvent(NoSubscriberEvent noSubscriberEvent) {
+    }
+
     public Uri getUserImageUri() {
-        return getModuleWrapper().getImageManager().getUserImageUri(mContext);
+        return getModuleWrapper().getImageManager().getUserImageUri(getContext());
     }
 
     public Uri getFarmImageUri() {
-        return getModuleWrapper().getImageManager().getFarmImageUri(mContext);
+        return getModuleWrapper().getImageManager().getFarmImageUri(getContext());
     }
 
     public boolean isFarmImageExists() {
-        return getModuleWrapper().getImageManager().isFarmImageExists(mContext);
+        return getModuleWrapper().getImageManager().isFarmImageExists(getContext());
     }
 
     public boolean isUserImageExists() {
-        return getModuleWrapper().getImageManager().isUserImageExists(mContext);
+        return getModuleWrapper().getImageManager().isUserImageExists(getContext());
     }
 
     public String getUserName() {
         return getModuleWrapper().getPreferencesManager().getStringValue(
-                getContext(), SharedPreferencesManager.USER_NAME_KEY, R.string.drawer_user_unknown);
+                getContext(), SharedPreferencesManager.USER_NAME_KEY, R.string.empty);
     }
 
     public String getFarmAddress() {
@@ -106,9 +110,5 @@ abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
     public String getBarnNumber() {
         return getModuleWrapper().getPreferencesManager().getStringValue(
                 getContext(), SharedPreferencesManager.BARN_NUMBER_KEY, R.string.empty);
-    }
-
-    @Subscribe
-    public void onNoSubscriberEvent(NoSubscriberEvent noSubscriberEvent) {
     }
 }

@@ -1,22 +1,27 @@
 package app.estat.mob.db.entity;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToMany;
 
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
+
+import app.estat.mob.db.dao.BullDao;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.dao.MateDao;
-import app.estat.mob.db.dao.BullDao;
+import app.estat.mob.db.dao.CowDao;
 
 @Entity(nameInDb = "BULL")
-public class Bull {
+public class Bull implements AnimalItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;
+
+    @Property(nameInDb = "PUBLIC_ID")
+    private String publicId;
 
     @Property(nameInDb = "NAME")
     private String name;
@@ -24,8 +29,11 @@ public class Bull {
     @Property(nameInDb = "NUMBER")
     private String number;
 
-    @ToMany(referencedJoinProperty = "id")
+    @ToMany(referencedJoinProperty = "bullId")
     private List<Mate> mates;
+
+    @ToMany(referencedJoinProperty = "bullId")
+    private List<Cow> children;
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -35,9 +43,10 @@ public class Bull {
     @Generated(hash = 1107533337)
     private transient BullDao myDao;
 
-    @Generated(hash = 1285736269)
-    public Bull(Long id, String name, String number) {
+    @Generated(hash = 319092204)
+    public Bull(Long id, String publicId, String name, String number) {
         this.id = id;
+        this.publicId = publicId;
         this.name = name;
         this.number = number;
     }
@@ -139,5 +148,41 @@ public class Bull {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getBullDao() : null;
+    }
+
+    public String getPublicId() {
+        return this.publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 657775926)
+    public List<Cow> getChildren() {
+        if (children == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CowDao targetDao = daoSession.getCowDao();
+            List<Cow> childrenNew = targetDao._queryBull_Children(id);
+            synchronized (this) {
+                if (children == null) {
+                    children = childrenNew;
+                }
+            }
+        }
+        return children;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 1590975152)
+    public synchronized void resetChildren() {
+        children = null;
     }
 }

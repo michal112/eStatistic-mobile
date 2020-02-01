@@ -8,6 +8,8 @@ import app.estat.mob.db.type.FormSpinnerItem;
 
 public class CowData {
 
+    private String mPublicId;
+
     private String mName;
 
     private String mNumber;
@@ -17,6 +19,7 @@ public class CowData {
     private Date mBirthday;
 
     public static final class CowDataBuilder {
+        private String mPublicId;
         private String mName;
         private String mNumber;
         private Book mBook;
@@ -44,22 +47,37 @@ public class CowData {
             return this;
         }
 
+        public CowDataBuilder withPublicId(String publicId) {
+            this.mPublicId = publicId;
+            return this;
+        }
+
         public CowData build() {
             CowData cowData = new CowData();
             cowData.mBirthday = this.mBirthday;
             cowData.mName = this.mName;
             cowData.mBook = this.mBook;
             cowData.mNumber = this.mNumber;
+            cowData.mPublicId = this.mPublicId;
             return cowData;
         }
     }
 
     public Cow getCow() {
         Cow cow = new Cow();
-        cow.setBirthday(mBirthday);
+        if (mBirthday != null) {
+            cow.setBirthday(mBirthday);
+        } else {
+            cow.setBirthday(new Date());
+        }
         cow.setName(mName);
-        cow.setBook(mBook);
+        if (mBook != null){
+            cow.setBook(mBook);
+        } else {
+            cow.setBook(Book.UNKNOWN);
+        }
         cow.setNumber(mNumber);
+        cow.setPublicId(mPublicId);
         return cow;
     }
 }

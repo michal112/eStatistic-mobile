@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/component_form_text_view_height">
+
+    <ImageView
+        android:id="@+id/component_form_text_view_icon"
+        android:layout_width="@dimen/component_form_text_view_image_width"
+        android:layout_height="@dimen/component_form_text_view_image_height"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/component_form_text_view_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/component_form_text_view_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/component_form_text_view_text_input_layout"
+        app:layout_constraintStart_toStartOf="@id/component_form_text_view_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/primary_dark_material_light"
+        android:textSize="@dimen/component_form_text_view_label_size"
+        android:paddingLeft="@dimen/component_form_text_view_label_padding_left"
+        android:paddingStart="@dimen/component_form_text_view_label_padding_left"
+        tools:text="@tools:sample/last_names" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/component_form_text_view_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/component_form_text_view_guideline"
+        app:layout_constraintTop_toBottomOf="@id/component_form_text_view_label"
+        android:theme="@style/FormTextViewTheme"
+        app:hintEnabled="false">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/component_form_text_view_text_input_edit_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:textColor="@color/primary_dark_material_light"
+            android:textSize="@dimen/component_form_text_view_size"
+            tools:text="@tools:sample/full_names" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/component_form_text_view_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/component_form_text_view_guideline_start" />
+
+</android.support.constraint.ConstraintLayout>

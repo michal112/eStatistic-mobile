@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/component_recycler_view_module_item_height"
+    android:layout_marginStart="@dimen/component_recycler_view_item_vertical_margin"
+    android:layout_marginLeft="@dimen/component_recycler_view_item_vertical_margin"
+    android:layout_marginEnd="@dimen/component_recycler_view_item_vertical_margin"
+    android:layout_marginRight="@dimen/component_recycler_view_item_vertical_margin"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/component_recycler_view_item_radius"
+    card_view:cardElevation="@dimen/component_recycler_view_item_elevation"
+    card_view:cardUseCompatPadding="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/component_recycler_view_module_item_icon"
+            android:layout_width="@dimen/component_recycler_view_module_item_image_width"
+            android:layout_height="@dimen/component_recycler_view_module_item_image_height"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@id/component_recycler_view_module_item_guideline"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/component_recycler_view_module_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/component_recycler_view_module_item_name_text_size"
+            android:textStyle="bold"
+            card_view:layout_constraintBottom_toTopOf="@id/component_recycler_view_module_item_description"
+            card_view:layout_constraintStart_toStartOf="@id/component_recycler_view_module_item_guideline"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/component_recycler_view_module_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/component_recycler_view_module_item_description_text_size"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@id/component_recycler_view_module_item_guideline"
+            card_view:layout_constraintTop_toBottomOf="@id/component_recycler_view_module_item_name"
+            tools:text="@tools:sample/last_names" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/component_recycler_view_module_item_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_begin="@dimen/component_recycler_view_module_item_guideline_start" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

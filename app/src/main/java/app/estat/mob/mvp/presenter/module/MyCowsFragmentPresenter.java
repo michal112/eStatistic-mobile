@@ -11,6 +11,7 @@ import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Cow;
 import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
+import app.estat.mob.mvp.model.CowData;
 import app.estat.mob.mvp.view.module.MyCowsFragmentView;
 
 public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFragmentView> {
@@ -45,11 +46,11 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
         getView().refreshAdapter();
     }
 
-    public Cow getCow(int position) {
+    public String getCowPublicId(int position) {
         if (mCows.isEmpty()) {
             return null;
         }
 
-        return mCows.get(position);
+        return mCows.get(position).getPublicId();
     }
 }

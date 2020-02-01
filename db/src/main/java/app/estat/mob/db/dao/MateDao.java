@@ -33,9 +33,10 @@ public class MateDao extends AbstractDao<Mate, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property Date = new Property(1, java.util.Date.class, "date", false, "DATE");
-        public final static Property CowId = new Property(2, Long.class, "cowId", false, "COW_ID");
-        public final static Property BullId = new Property(3, Long.class, "bullId", false, "BULL_ID");
+        public final static Property PublicId = new Property(1, String.class, "publicId", false, "PUBLIC_ID");
+        public final static Property Date = new Property(2, java.util.Date.class, "date", false, "DATE");
+        public final static Property CowId = new Property(3, Long.class, "cowId", false, "COW_ID");
+        public final static Property BullId = new Property(4, Long.class, "bullId", false, "BULL_ID");
     }
 
     private DaoSession daoSession;
@@ -57,9 +58,10 @@ public class MateDao extends AbstractDao<Mate, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"MATE\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"DATE\" INTEGER," + // 1: date
-                "\"COW_ID\" INTEGER," + // 2: cowId
-                "\"BULL_ID\" INTEGER);"); // 3: bullId
+                "\"PUBLIC_ID\" TEXT," + // 1: publicId
+                "\"DATE\" INTEGER," + // 2: date
+                "\"COW_ID\" INTEGER," + // 3: cowId
+                "\"BULL_ID\" INTEGER);"); // 4: bullId
     }
 
     /** Drops the underlying database table. */
@@ -77,19 +79,24 @@ public class MateDao extends AbstractDao<Mate, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         java.util.Date date = entity.getDate();
         if (date != null) {
-            stmt.bindLong(2, date.getTime());
+            stmt.bindLong(3, date.getTime());
         }
  
         Long cowId = entity.getCowId();
         if (cowId != null) {
-            stmt.bindLong(3, cowId);
+            stmt.bindLong(4, cowId);
         }
  
         Long bullId = entity.getBullId();
         if (bullId != null) {
-            stmt.bindLong(4, bullId);
+            stmt.bindLong(5, bullId);
         }
     }
 
@@ -102,19 +109,24 @@ public class MateDao extends AbstractDao<Mate, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         java.util.Date date = entity.getDate();
         if (date != null) {
-            stmt.bindLong(2, date.getTime());
+            stmt.bindLong(3, date.getTime());
         }
  
         Long cowId = entity.getCowId();
         if (cowId != null) {
-            stmt.bindLong(3, cowId);
+            stmt.bindLong(4, cowId);
         }
  
         Long bullId = entity.getBullId();
         if (bullId != null) {
-            stmt.bindLong(4, bullId);
+            stmt.bindLong(5, bullId);
         }
     }
 
@@ -133,9 +145,10 @@ public class MateDao extends AbstractDao<Mate, Long> {
     public Mate readEntity(Cursor cursor, int offset) {
         Mate entity = new Mate( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)), // date
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // cowId
-            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // bullId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // publicId
+            cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // date
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // cowId
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // bullId
         );
         return entity;
     }
@@ -143,9 +156,10 @@ public class MateDao extends AbstractDao<Mate, Long> {
     @Override
     public void readEntity(Cursor cursor, Mate entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDate(cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)));
-        entity.setCowId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
-        entity.setBullId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setPublicId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setCowId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setBullId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override
@@ -174,16 +188,16 @@ public class MateDao extends AbstractDao<Mate, Long> {
     }
     
     /** Internal query to resolve the "mates" to-many relationship of Bull. */
-    public List<Mate> _queryBull_Mates(Long id) {
+    public List<Mate> _queryBull_Mates(Long bullId) {
         synchronized (this) {
             if (bull_MatesQuery == null) {
                 QueryBuilder<Mate> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.Id.eq(null));
+                queryBuilder.where(Properties.BullId.eq(null));
                 bull_MatesQuery = queryBuilder.build();
             }
         }
         Query<Mate> query = bull_MatesQuery.forCurrentThread();
-        query.setParameter(0, id);
+        query.setParameter(0, bullId);
         return query.list();
     }
 

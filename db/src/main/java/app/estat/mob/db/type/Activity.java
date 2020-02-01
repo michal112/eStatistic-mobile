@@ -5,5 +5,6 @@ public enum Activity {
     MY_COWS,
     AVERAGE_PRODUCTIVITY,
     MILK_PRODUCTION,
+    MY_BULLS,
     UNKNOWN
 }

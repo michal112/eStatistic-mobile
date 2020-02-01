@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/activity_viuew_cow_menu_add_lactation"
+        android:title="@string/activity_view_cow_menu_add"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/activity_view_cow_menu_add_lactation"
+                android:title="@string/activity_view_cow_menu_add_lactation">
+            </item>
+
+            <item
+                android:id="@+id/activity_view_cow_menu_add_mate"
+                android:title="@string/activity_view_cow_menu_add_mate">
+            </item>
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/activity_view_cow_menu_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/activity_view_cow_menu_delete"
+        app:showAsAction="always">
+    </item>
+
+</menu>

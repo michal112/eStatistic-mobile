@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.DbCache;
 import app.estat.mob.db.DbManager;
-import app.estat.mob.mvp.model.ImageManager;
-import app.estat.mob.mvp.model.SharedPreferencesManager;
+import app.estat.mob.mvp.model.manager.ImageManager;
+import app.estat.mob.mvp.model.manager.SharedPreferencesManager;
 
 public class ModuleWrapper {
     @Inject

@@ -15,7 +15,11 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
+import app.estat.mob.comp.photo.FormPhotoView;
 import app.estat.mob.mvp.core.MvpBaseActivity;
 
 public abstract class ViewUtils {
@@ -26,6 +30,8 @@ public abstract class ViewUtils {
     private static final float IMAGE_LOADING_ALPHA = 0.5f;
 
     private static final float IMAGE_LOADED_ALPHA = 1f;
+
+    private static final String DATE_FORMAT = "dd.MM.yyyy";
 
     public static void insertImage(Context context, Uri imageUri, @DrawableRes int errorImage,
                                    final ImageView destView, final ProgressBar imageProgress) {
@@ -46,6 +52,30 @@ public abstract class ViewUtils {
             @Override
             public void onError() {
                 hideProgress(destView, imageProgress);
+            }
+        });
+    }
+
+    public static void insertImage(Context context, Uri imageUri, @DrawableRes int errorImage,
+                                   final FormPhotoView formPhotoView) {
+        formPhotoView.showProgress(true);
+        Picasso.Builder builder = new Picasso.Builder(context);
+        builder.listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                Log.d(TAG, "Unable to load image", exception);
+            }
+        });
+        builder.build().load(imageUri).error(errorImage)
+                .centerCrop().fit().into(formPhotoView.getImageView(), new Callback() {
+            @Override
+            public void onSuccess() {
+                formPhotoView.showProgress(false);
+            }
+
+            @Override
+            public void onError() {
+                formPhotoView.showProgress(false);
             }
         });
     }
@@ -82,5 +112,9 @@ public abstract class ViewUtils {
                 return  Math.abs(verticalOffset) == mAppBarLayout.getTotalScrollRange();
             }
         };
+    }
+
+    public static String format(Date date) {
+        return new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(date);
     }
 }

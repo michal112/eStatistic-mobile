@@ -15,7 +15,7 @@ import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import app.estat.mob.db.converter.BookConverter;
-import app.estat.mob.db.entity.Sire;
+import app.estat.mob.db.entity.Bull;
 import app.estat.mob.db.type.Book;
 
 import app.estat.mob.db.entity.Cow;
@@ -34,17 +34,18 @@ public class CowDao extends AbstractDao<Cow, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Number = new Property(2, String.class, "number", false, "NUMBER");
-        public final static Property Book = new Property(3, String.class, "book", false, "BOOK");
-        public final static Property SireId = new Property(4, Long.class, "sireId", false, "SIRE_ID");
-        public final static Property Birthday = new Property(5, java.util.Date.class, "birthday", false, "BIRTHDAY");
+        public final static Property PublicId = new Property(1, String.class, "publicId", false, "PUBLIC_ID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property Number = new Property(3, String.class, "number", false, "NUMBER");
+        public final static Property Book = new Property(4, String.class, "book", false, "BOOK");
+        public final static Property BullId = new Property(5, Long.class, "bullId", false, "BULL_ID");
+        public final static Property Birthday = new Property(6, java.util.Date.class, "birthday", false, "BIRTHDAY");
     }
 
     private DaoSession daoSession;
 
     private final BookConverter bookConverter = new BookConverter();
-    private Query<Cow> sire_ChildrenQuery;
+    private Query<Cow> bull_ChildrenQuery;
 
     public CowDao(DaoConfig config) {
         super(config);
@@ -60,11 +61,12 @@ public class CowDao extends AbstractDao<Cow, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COW\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"NAME\" TEXT," + // 1: name
-                "\"NUMBER\" TEXT," + // 2: number
-                "\"BOOK\" TEXT," + // 3: book
-                "\"SIRE_ID\" INTEGER," + // 4: sireId
-                "\"BIRTHDAY\" INTEGER);"); // 5: birthday
+                "\"PUBLIC_ID\" TEXT," + // 1: publicId
+                "\"NAME\" TEXT," + // 2: name
+                "\"NUMBER\" TEXT," + // 3: number
+                "\"BOOK\" TEXT," + // 4: book
+                "\"BULL_ID\" INTEGER," + // 5: bullId
+                "\"BIRTHDAY\" INTEGER);"); // 6: birthday
     }
 
     /** Drops the underlying database table. */
@@ -82,29 +84,34 @@ public class CowDao extends AbstractDao<Cow, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(3, number);
+            stmt.bindString(4, number);
         }
  
         Book book = entity.getBook();
         if (book != null) {
-            stmt.bindString(4, bookConverter.convertToDatabaseValue(book));
+            stmt.bindString(5, bookConverter.convertToDatabaseValue(book));
         }
  
-        Long sireId = entity.getSireId();
-        if (sireId != null) {
-            stmt.bindLong(5, sireId);
+        Long bullId = entity.getBullId();
+        if (bullId != null) {
+            stmt.bindLong(6, bullId);
         }
  
         java.util.Date birthday = entity.getBirthday();
         if (birthday != null) {
-            stmt.bindLong(6, birthday.getTime());
+            stmt.bindLong(7, birthday.getTime());
         }
     }
 
@@ -117,29 +124,34 @@ public class CowDao extends AbstractDao<Cow, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(3, number);
+            stmt.bindString(4, number);
         }
  
         Book book = entity.getBook();
         if (book != null) {
-            stmt.bindString(4, bookConverter.convertToDatabaseValue(book));
+            stmt.bindString(5, bookConverter.convertToDatabaseValue(book));
         }
  
-        Long sireId = entity.getSireId();
-        if (sireId != null) {
-            stmt.bindLong(5, sireId);
+        Long bullId = entity.getBullId();
+        if (bullId != null) {
+            stmt.bindLong(6, bullId);
         }
  
         java.util.Date birthday = entity.getBirthday();
         if (birthday != null) {
-            stmt.bindLong(6, birthday.getTime());
+            stmt.bindLong(7, birthday.getTime());
         }
     }
 
@@ -158,11 +170,12 @@ public class CowDao extends AbstractDao<Cow, Long> {
     public Cow readEntity(Cursor cursor, int offset) {
         Cow entity = new Cow( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // number
-            cursor.isNull(offset + 3) ? null : bookConverter.convertToEntityProperty(cursor.getString(offset + 3)), // book
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // sireId
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)) // birthday
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // publicId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // number
+            cursor.isNull(offset + 4) ? null : bookConverter.convertToEntityProperty(cursor.getString(offset + 4)), // book
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // bullId
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)) // birthday
         );
         return entity;
     }
@@ -170,11 +183,12 @@ public class CowDao extends AbstractDao<Cow, Long> {
     @Override
     public void readEntity(Cursor cursor, Cow entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setNumber(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setBook(cursor.isNull(offset + 3) ? null : bookConverter.convertToEntityProperty(cursor.getString(offset + 3)));
-        entity.setSireId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setBirthday(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setPublicId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setNumber(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setBook(cursor.isNull(offset + 4) ? null : bookConverter.convertToEntityProperty(cursor.getString(offset + 4)));
+        entity.setBullId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setBirthday(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
      }
     
     @Override
@@ -202,17 +216,17 @@ public class CowDao extends AbstractDao<Cow, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "children" to-many relationship of Sire. */
-    public List<Cow> _querySire_Children(Long sireId) {
+    /** Internal query to resolve the "children" to-many relationship of Bull. */
+    public List<Cow> _queryBull_Children(Long bullId) {
         synchronized (this) {
-            if (sire_ChildrenQuery == null) {
+            if (bull_ChildrenQuery == null) {
                 QueryBuilder<Cow> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.SireId.eq(null));
-                sire_ChildrenQuery = queryBuilder.build();
+                queryBuilder.where(Properties.BullId.eq(null));
+                bull_ChildrenQuery = queryBuilder.build();
             }
         }
-        Query<Cow> query = sire_ChildrenQuery.forCurrentThread();
-        query.setParameter(0, sireId);
+        Query<Cow> query = bull_ChildrenQuery.forCurrentThread();
+        query.setParameter(0, bullId);
         return query.list();
     }
 
@@ -223,9 +237,9 @@ public class CowDao extends AbstractDao<Cow, Long> {
             StringBuilder builder = new StringBuilder("SELECT ");
             SqlUtils.appendColumns(builder, "T", getAllColumns());
             builder.append(',');
-            SqlUtils.appendColumns(builder, "T0", daoSession.getSireDao().getAllColumns());
+            SqlUtils.appendColumns(builder, "T0", daoSession.getBullDao().getAllColumns());
             builder.append(" FROM COW T");
-            builder.append(" LEFT JOIN SIRE T0 ON T.\"SIRE_ID\"=T0.\"ID\"");
+            builder.append(" LEFT JOIN BULL T0 ON T.\"BULL_ID\"=T0.\"ID\"");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -236,8 +250,8 @@ public class CowDao extends AbstractDao<Cow, Long> {
         Cow entity = loadCurrent(cursor, 0, lock);
         int offset = getAllColumns().length;
 
-        Sire sire = loadCurrentOther(daoSession.getSireDao(), cursor, offset);
-        entity.setSire(sire);
+        Bull father = loadCurrentOther(daoSession.getBullDao(), cursor, offset);
+        entity.setFather(father);
 
         return entity;    
     }

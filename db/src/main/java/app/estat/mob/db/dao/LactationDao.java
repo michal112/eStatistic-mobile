@@ -32,9 +32,10 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property Number = new Property(1, String.class, "number", false, "NUMBER");
-        public final static Property Date = new Property(2, java.util.Date.class, "date", false, "DATE");
-        public final static Property CowId = new Property(3, Long.class, "cowId", false, "COW_ID");
+        public final static Property PublicId = new Property(1, String.class, "publicId", false, "PUBLIC_ID");
+        public final static Property Number = new Property(2, String.class, "number", false, "NUMBER");
+        public final static Property Date = new Property(3, java.util.Date.class, "date", false, "DATE");
+        public final static Property CowId = new Property(4, Long.class, "cowId", false, "COW_ID");
     }
 
     private DaoSession daoSession;
@@ -55,9 +56,10 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"LACTATION\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"NUMBER\" TEXT," + // 1: number
-                "\"DATE\" INTEGER," + // 2: date
-                "\"COW_ID\" INTEGER);"); // 3: cowId
+                "\"PUBLIC_ID\" TEXT," + // 1: publicId
+                "\"NUMBER\" TEXT," + // 2: number
+                "\"DATE\" INTEGER," + // 3: date
+                "\"COW_ID\" INTEGER);"); // 4: cowId
     }
 
     /** Drops the underlying database table. */
@@ -75,19 +77,24 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(2, number);
+            stmt.bindString(3, number);
         }
  
         java.util.Date date = entity.getDate();
         if (date != null) {
-            stmt.bindLong(3, date.getTime());
+            stmt.bindLong(4, date.getTime());
         }
  
         Long cowId = entity.getCowId();
         if (cowId != null) {
-            stmt.bindLong(4, cowId);
+            stmt.bindLong(5, cowId);
         }
     }
 
@@ -100,19 +107,24 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(2, number);
+            stmt.bindString(3, number);
         }
  
         java.util.Date date = entity.getDate();
         if (date != null) {
-            stmt.bindLong(3, date.getTime());
+            stmt.bindLong(4, date.getTime());
         }
  
         Long cowId = entity.getCowId();
         if (cowId != null) {
-            stmt.bindLong(4, cowId);
+            stmt.bindLong(5, cowId);
         }
     }
 
@@ -131,9 +143,10 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
     public Lactation readEntity(Cursor cursor, int offset) {
         Lactation entity = new Lactation( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // number
-            cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // date
-            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // cowId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // publicId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // number
+            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // date
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // cowId
         );
         return entity;
     }
@@ -141,9 +154,10 @@ public class LactationDao extends AbstractDao<Lactation, Long> {
     @Override
     public void readEntity(Cursor cursor, Lactation entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setNumber(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setCowId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setPublicId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setNumber(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setDate(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setCowId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override

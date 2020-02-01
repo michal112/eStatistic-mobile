@@ -94,7 +94,12 @@ public abstract class MvpBaseActivity<P extends MvpBaseActivityPresenter<V>, V e
         requestUserImage();
         requestFarmImage();
 
-        mUserName.setText(getPresenter().getUserName());
+        String userName = getPresenter().getUserName();
+        if (userName.isEmpty()) {
+            mUserName.setText(R.string.drawer_user_unknown);
+        } else {
+            mUserName.setText(userName);
+        }
         showOrHideField(getPresenter().getFarmAddress(), mFarmAddress);
         showOrHideField(getPresenter().getBarnNumber(), mBarnNumber);
     }

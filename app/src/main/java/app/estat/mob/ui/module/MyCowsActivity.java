@@ -9,9 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.estat.mob.R;
-import app.estat.mob.mvp.util.ActivityUtil;
+import app.estat.mob.component.ApplicationComponent;
+import app.estat.mob.mvp.presenter.module.MyCowsActivityPresenter;
+import app.estat.mob.mvp.util.ActivityUtils;
+import app.estat.mob.mvp.view.module.MyCowsActivityView;
+import app.estat.mob.ui.action.ActionActivity;
+import app.estat.mob.ui.action.AddCowActivity;
 
-public class MyCowsActivity extends ModuleActivity {
+public class MyCowsActivity extends ModuleActivity<MyCowsActivityPresenter, MyCowsActivityView>
+        implements MyCowsActivityView {
     private static final String TAG = MyCowsActivity.class.getName();
 
     public static final int ADD_COW = 0;
@@ -20,11 +26,17 @@ public class MyCowsActivity extends ModuleActivity {
         return newIntent(context, MyCowsActivity.class, iconRes, nameRes);
     }
 
+    @NonNull
+    @Override
+    public MyCowsActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new MyCowsActivityPresenter(context, applicationComponent);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container, MyCowsFragment.newInstance(), true);
+        addFragment(R.id.activity_module_container, MyCowsFragment.newInstance(), false);
     }
 
     @Override
@@ -39,7 +51,7 @@ public class MyCowsActivity extends ModuleActivity {
 
         switch (item.getItemId()) {
             case R.id.activity_my_cows_menu_add:
-                startActivityForResult(AddCowActivity.newIntent(this), ADD_COW);
+                startActivityForResult(ActionActivity.newIntent(this, AddCowActivity.class), ADD_COW);
                 break;
             default:
                 Log.d(TAG, "Unknown option was clicked");
@@ -53,11 +65,18 @@ public class MyCowsActivity extends ModuleActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case ADD_COW:
-                if (resultCode == ActivityUtil.RESULT_COW_SAVED) {
+                if (resultCode == ActivityUtils.RESULT_COW_SAVED) {
                     showMessage(R.string.new_cow_successfully_saved);
                     getPresenter().sendAdapterRefreshEvent();
-                } else if (resultCode == ActivityUtil.RESULT_COW_SAVE_ERROR) {
+                } else if (resultCode == ActivityUtils.RESULT_COW_SAVE_ERROR) {
                     showMessage(R.string.new_cow_save_error);
+                }
+                break;
+            case MyCowsFragment.VIEW_COW:
+                if (resultCode == ActivityUtils.RESULT_COW_DELETED) {
+                    showMessage(R.string.cow_successfully_deleted);
+                } if (resultCode == ActivityUtils.RESULT_COW_DELETE_ERROR) {
+                    showMessage(R.string.cow_delete_error);
                 }
                 break;
             default:

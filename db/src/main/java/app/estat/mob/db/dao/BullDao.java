@@ -25,8 +25,9 @@ public class BullDao extends AbstractDao<Bull, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Number = new Property(2, String.class, "number", false, "NUMBER");
+        public final static Property PublicId = new Property(1, String.class, "publicId", false, "PUBLIC_ID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property Number = new Property(3, String.class, "number", false, "NUMBER");
     }
 
     private DaoSession daoSession;
@@ -46,8 +47,9 @@ public class BullDao extends AbstractDao<Bull, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BULL\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"NAME\" TEXT," + // 1: name
-                "\"NUMBER\" TEXT);"); // 2: number
+                "\"PUBLIC_ID\" TEXT," + // 1: publicId
+                "\"NAME\" TEXT," + // 2: name
+                "\"NUMBER\" TEXT);"); // 3: number
     }
 
     /** Drops the underlying database table. */
@@ -65,14 +67,19 @@ public class BullDao extends AbstractDao<Bull, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(3, number);
+            stmt.bindString(4, number);
         }
     }
 
@@ -85,14 +92,19 @@ public class BullDao extends AbstractDao<Bull, Long> {
             stmt.bindLong(1, id);
         }
  
+        String publicId = entity.getPublicId();
+        if (publicId != null) {
+            stmt.bindString(2, publicId);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(3, number);
+            stmt.bindString(4, number);
         }
     }
 
@@ -111,8 +123,9 @@ public class BullDao extends AbstractDao<Bull, Long> {
     public Bull readEntity(Cursor cursor, int offset) {
         Bull entity = new Bull( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // number
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // publicId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // number
         );
         return entity;
     }
@@ -120,8 +133,9 @@ public class BullDao extends AbstractDao<Bull, Long> {
     @Override
     public void readEntity(Cursor cursor, Bull entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setNumber(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPublicId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setNumber(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override
