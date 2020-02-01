@@ -11,6 +11,7 @@ import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.StatusEvent;
 import app.estat.mob.mvp.presenter.action.ViewCowActivityPresenter;
+import app.estat.mob.mvp.util.ActivityUtils;
 import app.estat.mob.mvp.view.action.ViewCowActivityView;
 
 public class ViewCowActivity extends ActionActivity<ViewCowActivityPresenter, ViewCowActivityView>
@@ -38,7 +39,7 @@ public class ViewCowActivity extends ActionActivity<ViewCowActivityPresenter, Vi
 
     @Override
     protected int getTitleRes() {
-        return R.string.activity_manage_cow_toolbar_title;
+        return R.string.activity_view_cow_toolbar_title;
     }
 
     @Override
@@ -72,10 +73,10 @@ public class ViewCowActivity extends ActionActivity<ViewCowActivityPresenter, Vi
     public void deleteCow(StatusEvent.Status status) {
         switch (status) {
             case SUCCESS:
-                showMessage(R.string.cow_successfully_deleted);
+                setResult(ActivityUtils.RESULT_COW_DELETED);
                 break;
             case FAILURE:
-                showMessage(R.string.cow_delete_error);
+                setResult(ActivityUtils.RESULT_COW_DELETE_ERROR);
                 break;
             default:
                 Log.d(TAG, "unknown status returned");

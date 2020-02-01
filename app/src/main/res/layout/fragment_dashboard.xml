@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
+<app.estat.mob.comp.recycler.ModuleRecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_dashboard_recycler_view"
     android:layout_width="match_parent"

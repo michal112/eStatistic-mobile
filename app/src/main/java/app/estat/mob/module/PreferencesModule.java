@@ -2,7 +2,7 @@ package app.estat.mob.module;
 
 import javax.inject.Singleton;
 
-import app.estat.mob.mvp.model.SharedPreferencesManager;
+import app.estat.mob.mvp.model.manager.SharedPreferencesManager;
 import dagger.Module;
 import dagger.Provides;
 

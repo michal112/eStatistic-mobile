@@ -13,14 +13,7 @@
     <dimen name="activity_splash_screen_image_height">136dp</dimen>
     <dimen name="activity_splash_screen_text_size">15sp</dimen>
 
-    <dimen name="fragment_dashboard_item_height">76dp</dimen>
-    <dimen name="fragment_dashboard_item_image_height">48dp</dimen>
-    <dimen name="fragment_dashboard_item_image_width">48dp</dimen>
-    <dimen name="fragment_dashboard_item_elevation">2dp</dimen>
-    <dimen name="fragment_dashboard_item_vertical_margin">4dp</dimen>
-    <dimen name="fragment_dashboard_item_radius">4dp</dimen>
-    <dimen name="fragment_dashboard_item_card_margin">12dp</dimen>
-    <dimen name="fragment_dashboard_item_name_text_size">16sp</dimen>
+
 
     <dimen name="drawer_header_barn_number_width">144dp</dimen>
     <dimen name="drawer_header_barn_number_right_margin">8dp</dimen>

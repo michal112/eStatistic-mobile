@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/component_photo_view_icon"
+        android:layout_width="@dimen/component_form_photo_view_image_width"
+        android:layout_height="@dimen/component_form_photo_view_image_height"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintEnd_toStartOf="@id/component_form_photo_view_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <FrameLayout
+        android:id="@+id/component_form_photo_view_photo_image_container"
+        android:layout_width="@dimen/component_form_photo_view_photo_image_width"
+        android:layout_height="@dimen/component_form_photo_view_photo_image_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/component_form_photo_view_guideline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/component_form_photo_view_photo_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ProgressBar
+            android:id="@+id/component_form_photo_view_photo_progress"
+            android:layout_width="@dimen/component_form_photo_view_photo_progress_width"
+            android:layout_height="@dimen/component_form_photo_view_photo_progress_height"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/component_form_photo_view_button"
+        style="@style/FlatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/component_form_photo_view_button_text"
+        app:layout_constraintStart_toEndOf="@id/component_form_photo_view_guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/component_form_photo_view_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/component_form_photo_view_guideline_start" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/component_form_photo_view_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/component_form_photo_view_guideline2_start" />
+
+</android.support.constraint.ConstraintLayout>

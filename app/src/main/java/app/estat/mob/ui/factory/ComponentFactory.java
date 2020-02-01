@@ -7,16 +7,24 @@ import android.support.v4.app.FragmentActivity;
 
 import java.util.List;
 
+import app.estat.mob.comp.photo.FormPhotoView;
+import app.estat.mob.comp.picker.FormDatePicker;
+import app.estat.mob.comp.spinner.FormSpinner;
+import app.estat.mob.comp.spinner.FormSpinnerAdapter;
+import app.estat.mob.comp.text.FormEditText;
+import app.estat.mob.comp.text.FormTextView;
 import app.estat.mob.db.type.FormSpinnerItem;
-import pl.com.app.comp.view.picker.FormDatePicker;
-import pl.com.app.comp.view.spinner.FormSpinner;
-import pl.com.app.comp.view.spinner.FormSpinnerAdapter;
-import pl.com.app.comp.view.text.FormEditText;
-import pl.com.app.comp.view.text.FormTextView;
 
 public class ComponentFactory {
 
     private ComponentFactory() {
+    }
+
+    public static FormPhotoView getFormPhotoViewComponent(Context context, @DrawableRes int iconRes, @DrawableRes int imageRes) {
+        FormPhotoView component = new FormPhotoView(context);
+        component.setIcon(iconRes);
+        component.setPhotoImage(imageRes);
+        return component;
     }
 
     public static FormEditText getFormEditTextComponent(Context context, @DrawableRes int iconRes, @StringRes int hintRes) {

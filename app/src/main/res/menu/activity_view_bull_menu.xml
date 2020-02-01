@@ -5,7 +5,7 @@
     <item
         android:id="@+id/activity_view_bull_menu_delete"
         android:icon="@drawable/ic_delete"
-        android:title="@string/activity_manage_cow_menu_delete"
+        android:title="@string/activity_view_bull_menu_delete"
         app:showAsAction="always">
     </item>
 

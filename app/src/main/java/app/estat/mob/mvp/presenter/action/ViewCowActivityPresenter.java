@@ -50,7 +50,7 @@ public class ViewCowActivityPresenter extends ActionActivityPresenter<ViewCowAct
                     Log.e(TAG, "unable to delete cow", ex);
                     getModuleWrapper().getEventBus().post(new CowDeletedEvent(StatusEvent.Status.FAILURE));
                 }
-                getModuleWrapper().getEventBus().post(new CowDeletedEvent(StatusEvent.Status.FAILURE));
+                getModuleWrapper().getEventBus().post(new CowDeletedEvent(StatusEvent.Status.SUCCESS));
             }
         });
     }

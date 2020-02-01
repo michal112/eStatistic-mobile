@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.card.FormCardView;
+import app.estat.mob.comp.text.FormTextView;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Cow;
 import app.estat.mob.mvp.core.MvpBaseFragment;
@@ -18,8 +20,6 @@ import app.estat.mob.mvp.view.action.ViewCowFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.card.FormCardView;
-import pl.com.app.comp.view.text.FormTextView;
 
 public class ViewCowFragment extends MvpBaseFragment<ViewCowFragmentPresenter, ViewCowFragmentView>
         implements ViewCowFragmentView {

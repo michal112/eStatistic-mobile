@@ -18,13 +18,6 @@ public class CowService implements AnimalService<Cow> {
     }
 
     @Override
-    public Cow findByPublicId(DaoSession daoSession, String publicId) {
-        return daoSession.getCowDao().queryBuilder()
-                .where(CowDao.Properties.PublicId.eq(publicId))
-                .unique();
-    }
-
-    @Override
     public void delete(DaoSession daoSession, String publicId) {
         daoSession.getCowDao().queryBuilder()
                 .where(CowDao.Properties.PublicId.eq(publicId))

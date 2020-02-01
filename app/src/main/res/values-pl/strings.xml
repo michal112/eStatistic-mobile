@@ -2,11 +2,13 @@
 <resources>
     <string name="application_name">eStatystyk</string>
     <string name="empty"/>
-    <string name="drawer_user_unknown">Nieznany użytkownik</string>
     <string name="splash_screen_text">Łatwo zarządzaj swoim gospodarstwem!</string>
+    <string name="transition_module_image">Ikona modułu</string>
+    <!-- drawer -->
+    <string name="drawer_user_unknown">Nieznany użytkownik</string>
     <string name="drawer_open">Otwórz nawigację</string>
     <string name="drawer_close">Zamknij nawigację</string>
-    <string name="transition_module_image">Ikona modułu</string>
+    <!-- messages -->
     <string name="farm_card_data_successfully_saved">Dane gospodarstwa zostały zapisane</string>
     <string name="farm_card_data_save_error">Błąd zapisu danych gospodarstwa</string>
     <string name="new_cow_successfully_saved">Nowa krowa została zapisana</string>
@@ -15,22 +17,26 @@
     <string name="cow_delete_error">Bląd podczas usuwania krowy</string>
     <string name="bull_successfully_deleted">Buhaj został usunięty</string>
     <string name="bull_delete_error">Błąd podczas usuwania buhaja</string>
+    <string name="new_bull_successfully_saved">Nowy buhaj został zapisany</string>
+    <string name="new_bull_save_error">Błąd zapisu buhaja</string>
+    <!-- toolbar -->
     <string name="activity_add_cow_toolbar_title">Dodaj nową krowę</string>
+    <string name="activity_add_bull_toolbar_title">Dodaj nowego buhaja</string>
+    <string name="activity_view_cow_toolbar_title">Podgląd krowy</string>
+    <string name="activity_view_bull_toolbar_title">Podgląd buhaja</string>
+    <!-- menu -->
     <string name="activity_add_cow_menu_done">ZAPISZ</string>
-    <string name="activity_manage_cow_menu_delete">Usuń</string>
+    <string name="activity_view_cow_menu_delete">USUŃ</string>
+    <string name="activity_add_bull_menu_done">ZAPISZ</string>
+    <string name="activity_view_bull_menu_delete">USUŃ</string>
+    <string name="activity_view_cow_menu_add_mate">Dodaj pokrycie</string>
+    <string name="activity_view_cow_menu_add_lactation">Dodaj laktację</string>
+    <!-- components -->
     <string name="fragment_add_cow_basic_data_title">Dane krowy</string>
     <string name="main_book_cow">Księga główna</string>
     <string name="introductory_book_cow">Księga wstepna</string>
     <string name="unknown_book_cow">Nieznana</string>
-    <string name="new_bull_successfully_saved">Nowy buhaj został zapisany</string>
-    <string name="new_bull_save_error">Błąd zapisu buhaja</string>
-    <string name="activity_add_bull_menu_done">ZAPISZ</string>
-    <string name="activity_add_bull_toolbar_title">Dodaj nowego buhaja</string>
-    <string name="fragment_add_bull_basic_data_title">Dane buhaja</string>
-    <string name="activity_manage_cow_toolbar_title">Podgląd krowy</string>
-    <string name="fragment_view_cow_basic_data_title">Dane krowy</string>
-    <string name="activity_manage_cow_menu_add_mate">Dodaj pokrycie</string>
-    <string name="activity_manage_cow_menu_add_lactation">Dodaj laktację</string>
-    <string name="activity_manage_bull_toolbar_title">Podgląd buhaja</string>
     <string name="fragment_view_bull_basic_data_title">Dane buhaja</string>
+    <string name="fragment_add_bull_basic_data_title">Dane buhaja</string>
+    <string name="fragment_view_cow_basic_data_title">Dane krowy</string>
 </resources>

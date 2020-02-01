@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pl.com.app.comp.view.recycler.AnimalRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<app.estat.mob.comp.recycler.AnimalRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_my_cows_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    widget:iconName="@drawable/ic_my_cows"
-    widget:noDataText="@string/fragment_my_cows_no_data"/>
+    widget:iconName="@drawable/ic_my_cows"/>

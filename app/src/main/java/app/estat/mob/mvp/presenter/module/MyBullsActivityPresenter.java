@@ -9,7 +9,6 @@ import app.estat.mob.mvp.view.module.MyBullsActivityView;
 import app.estat.mob.mvp.view.module.MyCowsActivityView;
 
 public class MyBullsActivityPresenter extends ModuleActivityPresenter<MyBullsActivityView> {
-
     public MyBullsActivityPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
     }

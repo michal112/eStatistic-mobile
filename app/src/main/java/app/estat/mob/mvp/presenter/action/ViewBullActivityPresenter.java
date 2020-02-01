@@ -12,7 +12,6 @@ import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.event.BullDeletedEvent;
-import app.estat.mob.event.CowDeletedEvent;
 import app.estat.mob.event.StatusEvent;
 import app.estat.mob.mvp.view.action.ViewBullActivityView;
 
@@ -48,10 +47,10 @@ public class ViewBullActivityPresenter extends ActionActivityPresenter<ViewBullA
                     DaoSession daoSession = getModuleWrapper().getDbManager().getDaoSession(context);
                     getModuleWrapper().getDbCache().deleteBull(daoSession, bullPublicId);
                 } catch (Exception ex) {
-                    Log.e(TAG, "unable to delete cow", ex);
-                    getModuleWrapper().getEventBus().post(new CowDeletedEvent(StatusEvent.Status.FAILURE));
+                    Log.e(TAG, "unable to delete bull", ex);
+                    getModuleWrapper().getEventBus().post(new BullDeletedEvent(StatusEvent.Status.FAILURE));
                 }
-                getModuleWrapper().getEventBus().post(new CowDeletedEvent(StatusEvent.Status.FAILURE));
+                getModuleWrapper().getEventBus().post(new BullDeletedEvent(StatusEvent.Status.SUCCESS));
             }
         });
     }

@@ -7,7 +7,6 @@ import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.mvp.view.module.MyCowsActivityView;
 
 public class MyCowsActivityPresenter extends ModuleActivityPresenter<MyCowsActivityView> {
-
     public MyCowsActivityPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
     }

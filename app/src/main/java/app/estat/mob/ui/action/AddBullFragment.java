@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import java.util.UUID;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.card.FormCardView;
+import app.estat.mob.comp.text.FormEditText;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.BullSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
@@ -23,8 +25,6 @@ import app.estat.mob.mvp.view.action.AddBullFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.card.FormCardView;
-import pl.com.app.comp.view.text.FormEditText;
 
 public class AddBullFragment extends MvpBaseFragment<AddBullFragmentPresenter, AddBullFragmentView>
         implements AddBullFragmentView {
@@ -72,8 +72,8 @@ public class AddBullFragment extends MvpBaseFragment<AddBullFragmentPresenter, A
         switch (item.getItemId()) {
             case R.id.activity_add_bull_menu_done:
                 BullData bullData = new BullData.BullDataBuilder()
-                        .withName(mNameComponent.getInput())
-                        .withNumber(mNumberComponent.getInput())
+                        .withName(mNameComponent.getText())
+                        .withNumber(mNumberComponent.getText())
                         .withPublicId(UUID.randomUUID().toString())
                         .build();
                 getPresenter().saveBullData(getActivity(), bullData);

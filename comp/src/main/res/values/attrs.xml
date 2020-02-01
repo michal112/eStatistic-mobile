@@ -3,7 +3,6 @@
     <!-- recycler view -->
     <declare-styleable name="AnimalRecyclerView">
         <attr name="iconName" format="integer"/>
-        <attr name="noDataText" format="integer"/>
     </declare-styleable>
     <!-- card view -->
     <declare-styleable name="FormCardView">

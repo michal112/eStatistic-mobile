@@ -65,9 +65,17 @@ public class CowData {
 
     public Cow getCow() {
         Cow cow = new Cow();
-        cow.setBirthday(mBirthday);
+        if (mBirthday != null) {
+            cow.setBirthday(mBirthday);
+        } else {
+            cow.setBirthday(new Date());
+        }
         cow.setName(mName);
-        cow.setBook(mBook);
+        if (mBook != null){
+            cow.setBook(mBook);
+        } else {
+            cow.setBook(Book.UNKNOWN);
+        }
         cow.setNumber(mNumber);
         cow.setPublicId(mPublicId);
         return cow;

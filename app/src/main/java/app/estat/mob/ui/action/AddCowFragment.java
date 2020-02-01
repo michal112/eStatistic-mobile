@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import java.util.UUID;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.card.FormCardView;
+import app.estat.mob.comp.picker.FormDatePicker;
+import app.estat.mob.comp.spinner.FormSpinner;
+import app.estat.mob.comp.text.FormEditText;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.CowSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragment;
@@ -23,10 +27,6 @@ import app.estat.mob.mvp.view.action.AddCowFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.card.FormCardView;
-import pl.com.app.comp.view.picker.FormDatePicker;
-import pl.com.app.comp.view.spinner.FormSpinner;
-import pl.com.app.comp.view.text.FormEditText;
 
 public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, AddCowFragmentView>
         implements AddCowFragmentView {
@@ -82,8 +82,8 @@ public class AddCowFragment extends MvpBaseFragment<AddCowFragmentPresenter, Add
         switch (item.getItemId()) {
             case R.id.activity_add_cow_menu_done:
                 CowData cowData = new CowData.CowDataBuilder()
-                        .withName(mNameComponent.getInput())
-                        .withNumber(mNumberComponent.getInput())
+                        .withName(mNameComponent.getText())
+                        .withNumber(mNumberComponent.getText())
                         .withBook(mBookComponent.getSelectedItem())
                         .withBirthday(mBirthdayComponent.getDate())
                         .withPublicId(UUID.randomUUID().toString())

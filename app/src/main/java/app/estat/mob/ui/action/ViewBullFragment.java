@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.card.FormCardView;
+import app.estat.mob.comp.text.FormTextView;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Bull;
 import app.estat.mob.mvp.core.MvpBaseFragment;
@@ -17,8 +19,6 @@ import app.estat.mob.mvp.view.action.ViewBullFragmentView;
 import app.estat.mob.ui.factory.ComponentFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.card.FormCardView;
-import pl.com.app.comp.view.text.FormTextView;
 
 public class ViewBullFragment extends MvpBaseFragment<ViewBullFragmentPresenter, ViewBullFragmentView>
         implements ViewBullFragmentView {
@@ -52,8 +52,8 @@ public class ViewBullFragment extends MvpBaseFragment<ViewBullFragmentPresenter,
     private void addComponents() {
         Bull bull = getPresenter().getBull();
 
-        mNameComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_name, R.string.fragment_view_cow_name_hint, bull.getName());
-        mNumberComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_number, R.string.fragment_view_cow_number_hint, bull.getNumber());
+        mNameComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_name, R.string.fragment_view_bull_name_hint, bull.getName());
+        mNumberComponent = ComponentFactory.getFormTextViewComponent(getContext(), R.drawable.ic_number, R.string.fragment_view_bull_number_hint, bull.getNumber());
 
         mBasicData.insertView(mNameComponent);
         mBasicData.insertView(mNumberComponent);

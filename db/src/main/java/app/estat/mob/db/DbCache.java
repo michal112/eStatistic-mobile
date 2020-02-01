@@ -69,10 +69,6 @@ public class DbCache {
         mBullService.delete(session, cowPublicId);
     }
 
-    public Cow findCowByPublicId(DaoSession session, String publicId) {
-        return mCowService.findByPublicId(session, publicId);
-    }
-
     public Cow findCowByPublicId(String publicId) {
         for (Cow cow : mCows) {
             if (publicId.equals(cow.getPublicId())) {
@@ -80,10 +76,6 @@ public class DbCache {
             }
         }
         return null;
-    }
-
-    public Bull findBullByPublicId(DaoSession session, String publicId) {
-        return mBullService.findByPublicId(session, publicId);
     }
 
     public Bull findBullByPublicId(String publicId) {

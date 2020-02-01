@@ -2,7 +2,7 @@ package app.estat.mob.module;
 
 import javax.inject.Singleton;
 
-import app.estat.mob.mvp.model.ImageManager;
+import app.estat.mob.mvp.model.manager.ImageManager;
 import dagger.Module;
 import dagger.Provides;
 

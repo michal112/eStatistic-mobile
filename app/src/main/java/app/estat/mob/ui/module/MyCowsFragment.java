@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.recycler.AnimalAdapter;
+import app.estat.mob.comp.recycler.AnimalRecyclerView;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Cow;
 import app.estat.mob.mvp.core.MvpBaseFragment;
@@ -20,11 +22,11 @@ import app.estat.mob.mvp.view.module.MyCowsFragmentView;
 import app.estat.mob.ui.action.ViewCowActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.com.app.comp.view.recycler.AnimalAdapter;
-import pl.com.app.comp.view.recycler.AnimalRecyclerView;
 
 public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyCowsFragmentView>
         implements MyCowsFragmentView {
+
+    public static final int VIEW_COW = 1;
 
     @BindView(R.id.fragment_my_cows_recycler_view)
     AnimalRecyclerView mRecyclerView;
@@ -54,7 +56,7 @@ public class MyCowsFragment extends MvpBaseFragment<MyCowsFragmentPresenter, MyC
         AnimalAdapter<Cow> myCowsAdapter = new AnimalAdapter(cows, new AnimalAdapter.AnimalItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(ViewCowActivity.newIntent(getActivity(), getPresenter().getCowPublicId(position)));
+                getActivity().startActivityForResult(ViewCowActivity.newIntent(getActivity(), getPresenter().getCowPublicId(position)), VIEW_COW);
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

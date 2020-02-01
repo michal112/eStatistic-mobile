@@ -26,7 +26,7 @@ public class DashboardActivity extends MvpBaseActivity<DashboardActivityPresente
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @BindView(R.id.smooth_app_bar_layout)
+    @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
 
     private ActionBarDrawerToggle mDrawerToggle;

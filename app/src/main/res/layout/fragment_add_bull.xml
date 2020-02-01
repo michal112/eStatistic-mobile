@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pl.com.app.comp.view.card.FormCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<app.estat.mob.comp.card.FormCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_add_bull_basic_data"
     android:layout_width="match_parent"

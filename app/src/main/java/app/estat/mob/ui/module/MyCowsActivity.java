@@ -72,6 +72,13 @@ public class MyCowsActivity extends ModuleActivity<MyCowsActivityPresenter, MyCo
                     showMessage(R.string.new_cow_save_error);
                 }
                 break;
+            case MyCowsFragment.VIEW_COW:
+                if (resultCode == ActivityUtils.RESULT_COW_DELETED) {
+                    showMessage(R.string.cow_successfully_deleted);
+                } if (resultCode == ActivityUtils.RESULT_COW_DELETE_ERROR) {
+                    showMessage(R.string.cow_delete_error);
+                }
+                break;
             default:
                 Log.d(TAG, "Unknown activity code received");
                 break;

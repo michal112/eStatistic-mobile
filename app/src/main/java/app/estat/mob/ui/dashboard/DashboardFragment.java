@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,10 @@ import android.widget.ImageView;
 import java.util.List;
 
 import app.estat.mob.R;
+import app.estat.mob.comp.recycler.ModuleAdapter;
+import app.estat.mob.comp.recycler.ModuleRecyclerView;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Module;
-import pl.com.app.comp.view.recycler.ModuleAdapter;
 import app.estat.mob.mvp.core.MvpBaseFragment;
 import app.estat.mob.mvp.presenter.dashboard.DashboardFragmentPresenter;
 import app.estat.mob.mvp.util.ActivityUtils;
@@ -41,15 +41,19 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
     String mTransitionName;
 
     @BindView(R.id.fragment_dashboard_recycler_view)
-    RecyclerView mRecyclerView;
+    ModuleRecyclerView mRecyclerView;
 
-    private final ModuleAdapter.ModuleClickListener
-            mModuleClickListener = new ModuleAdapter.ModuleClickListener() {
+    private final ModuleAdapter.ModuleItemClickListener
+            mModuleItemClickListener = new ModuleAdapter.ModuleItemClickListener() {
         @Override
         public void onClick(ImageView imageView, int position) {
             moduleClicked(imageView, getPresenter().getModule(position));
         }
     };
+
+    public static DashboardFragment newInstance() {
+        return new DashboardFragment();
+    }
 
     private void moduleClicked(ImageView imageView, Module module) {
         if (module == null) {
@@ -88,10 +92,6 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
         }
     }
 
-    public static DashboardFragment newInstance() {
-        return new DashboardFragment();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
 
     @Override
     public void showModules(List<Module> modules) {
-        ModuleAdapter moduleAdapter = new ModuleAdapter(getActivity(), modules, mModuleClickListener);
+        ModuleAdapter moduleAdapter = new ModuleAdapter(getActivity(), modules, mModuleItemClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(moduleAdapter);
     }

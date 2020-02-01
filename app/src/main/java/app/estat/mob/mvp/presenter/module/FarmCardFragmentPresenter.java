@@ -11,15 +11,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
-import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.event.FarmDataChangedEvent;
-import app.estat.mob.event.FormImageChangeEndEvent;
-import app.estat.mob.event.FormImageChangeStartEvent;
+import app.estat.mob.event.FormImageChangedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.FarmData;
-import app.estat.mob.mvp.model.ImageManager;
-import app.estat.mob.mvp.model.SharedPreferencesManager;
+import app.estat.mob.mvp.model.manager.ImageManager;
+import app.estat.mob.mvp.model.manager.SharedPreferencesManager;
 import app.estat.mob.mvp.view.module.FarmCardFragmentView;
 
 public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCardFragmentView> {
@@ -35,12 +33,6 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
         mHandlerThread.getLooper();
     }
 
-    @Override
-    public String getUserName() {
-        return getModuleWrapper().getPreferencesManager().getStringValue(
-                getContext(), SharedPreferencesManager.USER_NAME_KEY, R.string.empty);
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFarmDataChangedEvent(FarmDataChangedEvent farmDataChangedEvent) {
         if (!isViewAttached()) {
@@ -51,35 +43,17 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onFormImageChangeStartEvent(FormImageChangeStartEvent formImageChangeStartEvent) {
+    public void onFormImageChangeEndEvent(FormImageChangedEvent formImageChangedEvent) {
         if (!isViewAttached()) {
             return;
         }
 
-        getView().showImageProgress(formImageChangeStartEvent.getImageType());
+        getView().showImage(formImageChangedEvent.getImageType(), formImageChangedEvent.getImageUri());
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onFormImageChangeEndEvent(FormImageChangeEndEvent formImageChangeEndEvent) {
-        if (!isViewAttached()) {
-            return;
-        }
-
-        getView().showImage(formImageChangeEndEvent.getImageType(), formImageChangeEndEvent.getImageUri());
-    }
-
-    public Uri createUserImageTemp(Context context) {
+    public Uri createImageTemp(Context context, int imageType) {
         try {
-            return getModuleWrapper().getImageManager().createUserImageTemp(context);
-        } catch (IOException e) {
-            Log.d(TAG, "An error occurred while creating image file", e);
-            return null;
-        }
-    }
-
-    public Uri createFarmImageTemp(Context context) {
-        try {
-            return getModuleWrapper().getImageManager().createFarmImageTemp(context);
+            return getModuleWrapper().getImageManager().createImageTemp(context, imageType);
         } catch (IOException e) {
             Log.d(TAG, "An error occurred while creating image file", e);
             return null;
@@ -90,20 +64,19 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
         mHandlerThread.post(new Runnable() {
             @Override
             public void run() {
-                getModuleWrapper().getEventBus().post(new FormImageChangeStartEvent(imageType));
                 Uri imageTempUri = null;
                 try {
                     if (imageType == ImageManager.USER_IMAGE) {
                         imageTempUri = getModuleWrapper().getImageManager().getUserImageTempUri();
-                        getModuleWrapper().getImageManager().scaleImage(context, imageType);
+                        getModuleWrapper().getImageManager().scaleTempImage(context, imageType);
                     } else if (imageType == ImageManager.FARM_IMAGE) {
                         imageTempUri = getModuleWrapper().getImageManager().getFarmImageTempUri();
-                        getModuleWrapper().getImageManager().scaleImage(context, imageType);
+                        getModuleWrapper().getImageManager().scaleTempImage(context, imageType);
                     }
                 } catch (IOException e) {
                     Log.d(TAG, "An error occurred while scaling image", e);
                 } finally {
-                    getModuleWrapper().getEventBus().post(new FormImageChangeEndEvent(imageType, imageTempUri));
+                    getModuleWrapper().getEventBus().post(new FormImageChangedEvent(imageType, imageTempUri));
                 }
             }
         });
@@ -117,12 +90,8 @@ public class FarmCardFragmentPresenter extends MvpBaseFragmentPresenter<FarmCard
                     getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.FARM_IMAGE);
                     getModuleWrapper().getImageManager().copyTempImage(context, ImageManager.USER_IMAGE);
                     String userName = farmData.getUserName();
-                    if (!userName.isEmpty()) {
-                        getModuleWrapper().getPreferencesManager()
-                                .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, userName);
-                    } else {
-                        getModuleWrapper().getPreferencesManager().removeValue(context, SharedPreferencesManager.USER_NAME_KEY);
-                    }
+                    getModuleWrapper().getPreferencesManager()
+                            .saveStringValue(context, SharedPreferencesManager.USER_NAME_KEY, userName);
                     getModuleWrapper().getPreferencesManager()
                             .saveStringValue(context, SharedPreferencesManager.FARM_ADDRESS_KEY, farmData.getFarmAddress());
                     getModuleWrapper().getPreferencesManager()

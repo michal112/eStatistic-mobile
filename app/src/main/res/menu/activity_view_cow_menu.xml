@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/activity_viuew_cow_menu_add_lactation"
+        android:title="@string/activity_view_cow_menu_add"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/activity_view_cow_menu_add_lactation"
+                android:title="@string/activity_view_cow_menu_add_lactation">
+            </item>
+
+            <item
+                android:id="@+id/activity_view_cow_menu_add_mate"
+                android:title="@string/activity_view_cow_menu_add_mate">
+            </item>
+        </menu>
+
+    </item>
+
+    <item
         android:id="@+id/activity_view_cow_menu_delete"
         android:icon="@drawable/ic_delete"
-        android:title="@string/activity_manage_cow_menu_delete"
+        android:title="@string/activity_view_cow_menu_delete"
         app:showAsAction="always">
     </item>
 
-    <item
-        android:id="@+id/activity_view_cow_menu_add_lactation"
-        android:icon="@drawable/ic_lactation"
-        android:title="@string/activity_manage_cow_menu_add_lactation"
-        app:showAsAction="always">
-    </item>
-
-    <item
-        android:id="@+id/activity_view_cow_menu_add_mate"
-        android:icon="@drawable/ic_reproduction"
-        android:title="@string/activity_manage_cow_menu_add_mate"
-        app:showAsAction="always">
-    </item>
 </menu>

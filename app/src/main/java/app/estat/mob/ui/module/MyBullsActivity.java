@@ -72,6 +72,13 @@ public class MyBullsActivity extends ModuleActivity<MyBullsActivityPresenter, My
                     showMessage(R.string.new_bull_save_error);
                 }
                 break;
+            case MyBullsFragment.VIEW_BULL:
+                if (resultCode == ActivityUtils.RESULT_BULL_DELETED) {
+                    showMessage(R.string.bull_successfully_deleted);
+                } if (resultCode == ActivityUtils.RESULT_BULL_DELETE_ERROR) {
+                    showMessage(R.string.bull_delete_error);
+                }
+                break;
             default:
                 Log.d(TAG, "Unknown activity code received");
                 break;
