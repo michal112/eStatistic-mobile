@@ -5,7 +5,7 @@ import java.util.List;
 import app.estat.mob.db.entity.Bull;
 import app.estat.mob.mvp.core.MvpBaseFragmentView;
 
-public interface MyBullsFragmentView extends MvpBaseFragmentView {
+public interface BullsFragmentView extends MvpBaseFragmentView {
     void showBulls(List<Bull> bulls);
 
     void refreshAdapter();

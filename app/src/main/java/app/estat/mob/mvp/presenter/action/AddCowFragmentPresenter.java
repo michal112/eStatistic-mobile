@@ -1,8 +1,6 @@
 package app.estat.mob.mvp.presenter.action;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.Log;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -19,20 +17,19 @@ import app.estat.mob.db.type.FormSpinnerItem;
 import app.estat.mob.event.CowSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.CowData;
+import app.estat.mob.mvp.util.PresenterUtils;
 import app.estat.mob.mvp.view.action.AddCowFragmentView;
 
 public class AddCowFragmentPresenter extends MvpBaseFragmentPresenter<AddCowFragmentView> {
 
     private static final String TAG = AddCowFragmentPresenter.class.getName();
 
-    private AddCowHandlerThread mCowHandlerThread;
+    private PresenterUtils.PresenterHandler mCowHandlerThread;
 
     public AddCowFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
 
-        mCowHandlerThread = new AddCowHandlerThread();
-        mCowHandlerThread.start();
-        mCowHandlerThread.getLooper();
+        mCowHandlerThread = new PresenterUtils.PresenterHandler(AddCowFragmentPresenter.class.getName());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -64,22 +61,5 @@ public class AddCowFragmentPresenter extends MvpBaseFragmentPresenter<AddCowFrag
                 getModuleWrapper().getEventBus().post(new CowSavedEvent(CowSavedEvent.Status.SUCCESS));
             }
         });
-    }
-
-    private class AddCowHandlerThread extends HandlerThread {
-        private Handler mHandler;
-
-        public AddCowHandlerThread() {
-            super(AddCowHandlerThread.class.getName());
-        }
-
-        @Override
-        protected void onLooperPrepared() {
-            mHandler = new Handler(getLooper());
-        }
-
-        public void post(Runnable runnable) {
-            mHandler.post(runnable);
-        }
     }
 }

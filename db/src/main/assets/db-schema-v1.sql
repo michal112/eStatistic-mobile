@@ -40,6 +40,7 @@ CREATE TABLE MATE(
 CREATE TABLE LACTATION(
     ID INTEGER PRIMARY KEY,
     PUBLIC_ID TEXT,
+    NUMBER TEXT,
     DATE TEXT,
     COW_ID INTEGER
 );
@@ -51,6 +52,6 @@ INSERT INTO MODULE(ID, NAME, ICON, DESCRIPTION, ACTIVITY) VALUES (
 INSERT INTO MODULE(ID, NAME, ICON, DESCRIPTION, ACTIVITY) VALUES (
     null, "R.string.my_cows_name", "R.drawable.ic_my_cows", "R.string.my_cows_description", "MY_COWS");
 INSERT INTO MODULE(ID, NAME, ICON, DESCRIPTION, ACTIVITY) VALUES (
-    null, "R.string.my_bulls_name", "R.drawable.ic_my_bulls", "R.string.my_bulls_description", "MY_BULLS");
+    null, "R.string.bulls_name", "R.drawable.ic_bulls", "R.string.bulls_description", "BULLS");
 INSERT INTO MODULE(ID, NAME, ICON, DESCRIPTION, ACTIVITY) VALUES (
     null, "R.string.milk_production", "R.drawable.ic_milk_production", "R.string.milk_production_description", "MILK_PRODUCTION");

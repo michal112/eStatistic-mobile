@@ -20,6 +20,11 @@
     <string name="fragment_view_cow_number_hint">Numer</string>
     <string name="fragment_view_cow_book_hint">Księga</string>
     <string name="fragment_view_cow_birthday_hint">Data urodzenia</string>
+    <!--add mate fragment-->
+    <string name="fragment_add_mate_bull_hint">Wybierz buhaja</string>
+    <string name="fragment_add_mate_date_hint">Data</string>
+    <!--add lactation fragment-->
+    <string name="fragment_add_lactation_number_hint">Numer laktacji</string>
     <!--my bulls module-->
     <!--add bull fragment-->
     <string name="activity_my_bulls_menu_add">DODAJ</string>

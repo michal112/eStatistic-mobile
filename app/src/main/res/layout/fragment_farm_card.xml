@@ -15,14 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/component_form_card_view_margin"
-            widget:groupTitle="@string/fragment_farm_card_user_tab" />
+            widget:formCardViewTitle="@string/fragment_farm_card_user_tab" />
 
         <app.estat.mob.comp.card.FormCardView xmlns:widget="http://schemas.android.com/apk/res-auto"
             android:id="@+id/fragment_farm_card_farm_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/component_form_card_view_margin"
-            widget:groupTitle="@string/fragment_farm_card_farm_tab" />
+            widget:formCardViewTitle="@string/fragment_farm_card_farm_tab" />
 
     </LinearLayout>
 

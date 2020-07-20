@@ -1,32 +1,35 @@
 package app.estat.mob.mvp.presenter.action;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.Log;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.event.CowDeletedEvent;
+import app.estat.mob.event.LactationAdapterRefreshEvent;
+import app.estat.mob.event.LactationDeletedEvent;
+import app.estat.mob.event.MateAdapterRefreshEvent;
+import app.estat.mob.event.MateDeletedEvent;
 import app.estat.mob.event.StatusEvent;
+import app.estat.mob.mvp.util.PresenterUtils;
 import app.estat.mob.mvp.view.action.ViewCowActivityView;
+import app.estat.mob.ui.action.ViewBullActivity;
 
 public class ViewCowActivityPresenter extends ActionActivityPresenter<ViewCowActivityView> {
 
     private static final String TAG = ViewCowActivityPresenter.class.getName();
 
-    private DeleteCowHandlerThread mDeleteCowHandlerThread;
+    private PresenterUtils.PresenterHandler mDeleteCowHandlerThread;
 
     public ViewCowActivityPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
 
-        mDeleteCowHandlerThread = new DeleteCowHandlerThread();
-        mDeleteCowHandlerThread.start();
-        mDeleteCowHandlerThread.getLooper();
+        mDeleteCowHandlerThread = new PresenterUtils.PresenterHandler(ViewBullActivity.class.getName());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -55,20 +58,37 @@ public class ViewCowActivityPresenter extends ActionActivityPresenter<ViewCowAct
         });
     }
 
-    private class DeleteCowHandlerThread extends HandlerThread {
-        private Handler mHandler;
-
-        public DeleteCowHandlerThread() {
-            super(DeleteCowHandlerThread.class.getName());
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMateDeletedEvent(MateDeletedEvent event) {
+        if (!isViewAttached()) {
+            return;
         }
 
-        @Override
-        protected void onLooperPrepared() {
-            mHandler = new Handler(getLooper());
+        if (StatusEvent.Status.SUCCESS.equals(event.getStatus())) {
+            getView().showMessage(R.string.mate_successfully_deleted);
+        } else if (StatusEvent.Status.FAILURE.equals(event.getStatus())) {
+            getView().showMessage(R.string.mate_delete_error);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLactationDeletedEvent(LactationDeletedEvent event) {
+        if (!isViewAttached()) {
+            return;
         }
 
-        public void post(Runnable runnable) {
-            mHandler.post(runnable);
+        if (StatusEvent.Status.SUCCESS.equals(event.getStatus())) {
+            getView().showMessage(R.string.lactation_successfully_deleted);
+        } else if (StatusEvent.Status.FAILURE.equals(event.getStatus())) {
+            getView().showMessage(R.string.lactation_delete_error);
         }
+    }
+
+    public void sendMateAdapterRefreshEvent() {
+        getModuleWrapper().getEventBus().post(new MateAdapterRefreshEvent());
+    }
+
+    public void sendLactationAdapterRefreshEvent() {
+        getModuleWrapper().getEventBus().post(new LactationAdapterRefreshEvent());
     }
 }

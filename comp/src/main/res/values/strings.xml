@@ -2,4 +2,8 @@
 <resources>
     <string name="component_form_photo_view_button_text">CHANGE</string>
     <string name="component_photo_view_popup_menu_photo_text">Take a photo</string>
+    <string name="component_form_recycler_view_name_hint">Name</string>
+    <string name="component_form_recycler_view_date_hint">Birthday</string>
+    <string name="component_form_recycler_view_number_hint">Number</string>
+    <string name="component_form_recycler_view_lactation_date_hint">Date</string>
 </resources>

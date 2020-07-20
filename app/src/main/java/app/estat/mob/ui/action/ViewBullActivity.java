@@ -19,15 +19,7 @@ public class ViewBullActivity extends ActionActivity<ViewBullActivityPresenter, 
 
     private final static String TAG =  ViewBullActivity.class.getName();
 
-    private static final String BULL_KEY = "app.estat.mob.ui.action.ViewBullActivity.BULL_KEY";
-
     private String mBullPublicId;
-
-    public static Intent newIntent(@NonNull Context context, String bullPublicId) {
-        Intent intent = new Intent(context, ViewBullActivity.class);
-        intent.putExtra(BULL_KEY, bullPublicId);
-        return intent;
-    }
 
     @NonNull
     @Override
@@ -39,7 +31,7 @@ public class ViewBullActivity extends ActionActivity<ViewBullActivityPresenter, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBullPublicId = getIntent().getStringExtra(ViewBullActivity.BULL_KEY);
+        mBullPublicId = getIntent().getStringExtra(ActionActivity.VALUE_KEY);
         addFragment(R.id.activity_action_container, ViewBullFragment.newInstance(mBullPublicId), false);
     }
 

@@ -4,4 +4,4 @@
     android:id="@+id/fragment_my_cows_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    widget:iconName="@drawable/ic_my_cows"/>
+    widget:animalRecyclerViewIcon="@drawable/ic_my_cows"/>

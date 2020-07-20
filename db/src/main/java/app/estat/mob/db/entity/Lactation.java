@@ -6,6 +6,7 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.dao.LactationDao;
 
 @Entity(nameInDb = "LACTATION")
-public class Lactation {
+public class Lactation implements FormItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;
@@ -168,5 +169,17 @@ public class Lactation {
 
     public void setPublicId(String publicId) {
         this.publicId = publicId;
+    }
+
+    @NotNull
+    @Override
+    public String getCowName() {
+        throw new UnsupportedOperationException();
+    }
+
+    @NotNull
+    @Override
+    public String getBullName() {
+        throw new UnsupportedOperationException();
     }
 }

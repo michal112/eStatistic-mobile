@@ -42,7 +42,7 @@ public class FormCardView extends CardView {
 
     private void setName(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FormCardView);
-        String string = typedArray.getString(R.styleable.FormCardView_groupTitle);
+        String string = typedArray.getString(R.styleable.FormCardView_formCardViewTitle);
         mName.setText(string);
         typedArray.recycle();
     }

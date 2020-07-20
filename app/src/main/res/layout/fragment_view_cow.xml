@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<app.estat.mob.comp.card.FormCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:widget="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_view_cow_basic_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    widget:groupTitle="@string/fragment_view_cow_basic_data_title"
-    android:layout_margin="@dimen/component_form_card_view_margin" />
+    android:orientation="vertical">
+
+    <app.estat.mob.comp.card.FormCardView
+        android:id="@+id/fragment_view_cow_basic_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        widget:formCardViewTitle="@string/fragment_view_cow_basic_data_title"
+        android:layout_margin="@dimen/component_form_card_view_margin" />
+
+    <app.estat.mob.comp.card.FormCardView
+        android:id="@+id/fragment_view_cow_mates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        widget:formCardViewTitle="@string/fragment_view_cow_mates_title"
+        android:layout_margin="@dimen/component_form_card_view_margin"/>
+
+    <app.estat.mob.comp.card.FormCardView
+        android:id="@+id/fragment_view_cow_lactations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        widget:formCardViewTitle="@string/fragment_view_cow_lactations_title"
+        android:layout_margin="@dimen/component_form_card_view_margin"/>
+
+</LinearLayout>

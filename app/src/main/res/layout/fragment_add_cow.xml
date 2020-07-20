@@ -4,5 +4,5 @@
     android:id="@+id/fragment_add_cow_basic_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    widget:groupTitle="@string/fragment_add_cow_basic_data_title"
+    widget:formCardViewTitle="@string/fragment_add_cow_basic_data_title"
     android:layout_margin="@dimen/component_form_card_view_margin" />

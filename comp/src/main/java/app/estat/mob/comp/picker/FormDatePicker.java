@@ -21,7 +21,6 @@ import java.util.Date;
 
 import app.estat.mob.comp.R;
 
-
 public class FormDatePicker extends ConstraintLayout {
 
     private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");

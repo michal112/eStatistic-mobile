@@ -39,7 +39,7 @@ public class AnimalRecyclerView extends RecyclerView {
 
     private void setIcon(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AnimalRecyclerView);
-        mIcon = typedArray.getDrawable(R.styleable.AnimalRecyclerView_iconName);
+        mIcon = typedArray.getDrawable(R.styleable.AnimalRecyclerView_animalRecyclerViewIcon);
         typedArray.recycle();
     }
 }

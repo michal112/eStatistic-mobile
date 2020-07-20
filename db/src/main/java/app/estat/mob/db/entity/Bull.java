@@ -13,9 +13,10 @@ import app.estat.mob.db.dao.BullDao;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.db.dao.MateDao;
 import app.estat.mob.db.dao.CowDao;
+import app.estat.mob.db.type.FormSpinnerItem;
 
 @Entity(nameInDb = "BULL")
-public class Bull implements AnimalItem {
+public class Bull implements AnimalItem, FormSpinnerItem {
     @Id(autoincrement = true)
     @Property(nameInDb = "ID")
     private Long id;
@@ -184,5 +185,10 @@ public class Bull implements AnimalItem {
     @Generated(hash = 1590975152)
     public synchronized void resetChildren() {
         children = null;
+    }
+
+    @Override
+    public String getTitle() {
+        return name;
     }
 }

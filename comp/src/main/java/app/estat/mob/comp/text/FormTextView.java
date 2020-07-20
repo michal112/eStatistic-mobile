@@ -11,11 +11,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import app.estat.mob.comp.R;
 
-public class FormTextView extends ConstraintLayout {
+public class FormTextView extends LinearLayout {
 
     private static final float ICON_ALPHA = 0.54f;
 

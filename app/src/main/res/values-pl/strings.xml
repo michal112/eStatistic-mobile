@@ -11,27 +11,41 @@
     <!-- messages -->
     <string name="farm_card_data_successfully_saved">Dane gospodarstwa zostały zapisane</string>
     <string name="farm_card_data_save_error">Błąd zapisu danych gospodarstwa</string>
-    <string name="new_cow_successfully_saved">Nowa krowa została zapisana</string>
+    <string name="new_cow_successfully_saved">Krowa została zapisana</string>
     <string name="new_cow_save_error">Błąd zapisu krowy</string>
     <string name="cow_successfully_deleted">Krowa została usunięta</string>
     <string name="cow_delete_error">Bląd podczas usuwania krowy</string>
     <string name="bull_successfully_deleted">Buhaj został usunięty</string>
     <string name="bull_delete_error">Błąd podczas usuwania buhaja</string>
-    <string name="new_bull_successfully_saved">Nowy buhaj został zapisany</string>
+    <string name="new_bull_successfully_saved">Buhaj został zapisany</string>
     <string name="new_bull_save_error">Błąd zapisu buhaja</string>
+    <string name="new_mate_successfully_saved">Pokrycie zostało zapisane</string>
+    <string name="new_mate_save_error">Błąd zapisu pokrycia</string>
+    <string name="mate_successfully_deleted">Pokrycie zostało usunięte</string>
+    <string name="mate_delete_error">Błąd podczas usuwania pokrycia</string>
+    <string name="new_lactation_successfully_saved">Laktacja została zapisana</string>
+    <string name="new_lactation_save_error">Błąd zapisu laktacji</string>
+    <string name="lactation_successfully_deleted">Laktacja została usunięta</string>
+    <string name="lactation_delete_error">Błąd podczas usuwania laktacji</string>
     <!-- toolbar -->
-    <string name="activity_add_cow_toolbar_title">Dodaj nową krowę</string>
-    <string name="activity_add_bull_toolbar_title">Dodaj nowego buhaja</string>
+    <string name="activity_add_cow_toolbar_title">Dodaj krowę</string>
+    <string name="activity_add_bull_toolbar_title">Dodaj buhaja</string>
     <string name="activity_view_cow_toolbar_title">Podgląd krowy</string>
     <string name="activity_view_bull_toolbar_title">Podgląd buhaja</string>
+    <string name="activity_add_mate_toolbar_title">Dodaj pokrycie</string>
+    <string name="activity_add_lactation_toolbar_title">Dodaj laktację</string>
     <!-- menu -->
     <string name="activity_add_cow_menu_done">ZAPISZ</string>
     <string name="activity_view_cow_menu_delete">USUŃ</string>
     <string name="activity_add_bull_menu_done">ZAPISZ</string>
     <string name="activity_view_bull_menu_delete">USUŃ</string>
     <string name="activity_view_cow_menu_add_mate">Dodaj pokrycie</string>
+    <string name="activity_add_mate_menu_done">ZAPISZ</string>
+    <string name="activity_add_lactation_menu_done">ZAPISZ</string>
     <string name="activity_view_cow_menu_add_lactation">Dodaj laktację</string>
     <!-- components -->
+    <string name="fragment_add_mate_title">Pokrycie</string>
+    <string name="fragment_add_lactation_title">Laktacja</string>
     <string name="fragment_add_cow_basic_data_title">Dane krowy</string>
     <string name="main_book_cow">Księga główna</string>
     <string name="introductory_book_cow">Księga wstepna</string>
@@ -39,4 +53,8 @@
     <string name="fragment_view_bull_basic_data_title">Dane buhaja</string>
     <string name="fragment_add_bull_basic_data_title">Dane buhaja</string>
     <string name="fragment_view_cow_basic_data_title">Dane krowy</string>
+    <string name="fragment_view_cow_mates_title">Pokrycia</string>
+    <string name="fragment_view_bull_mates_title">Pokryte krowy</string>
+    <string name="fragment_view_cow_lactations_title">Laktacje</string>
+
 </resources>

@@ -27,6 +27,14 @@ public abstract class ActivityUtils {
 
     public static final int RESULT_COW_DELETED = 10;
 
+    public static final int RESULT_MATE_SAVED = 11;
+
+    public static final int RESULT_MATE_SAVE_ERROR = 12;
+
+    public static final int RESULT_LACTATION_SAVED = 13;
+
+    public static final int RESULT_LACTATION_SAVE_ERROR = 14;
+
     public static void animateModuleActivity(Activity activity, Intent intent,
                                              ImageView imageView, String transitionName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -13,20 +13,19 @@ import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.event.BullSavedEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
 import app.estat.mob.mvp.model.BullData;
+import app.estat.mob.mvp.util.PresenterUtils;
 import app.estat.mob.mvp.view.action.AddBullFragmentView;
 
 public class AddBullFragmentPresenter extends MvpBaseFragmentPresenter<AddBullFragmentView> {
 
     private static final String TAG = AddBullFragmentPresenter.class.getName();
 
-    private AddBullHandlerThread mBullHandlerThread;
+    private PresenterUtils.PresenterHandler mBullHandlerThread;
 
     public AddBullFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
 
-        mBullHandlerThread = new AddBullHandlerThread();
-        mBullHandlerThread.start();
-        mBullHandlerThread.getLooper();
+        mBullHandlerThread = new PresenterUtils.PresenterHandler(AddBullFragmentPresenter.class.getName());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -52,22 +51,5 @@ public class AddBullFragmentPresenter extends MvpBaseFragmentPresenter<AddBullFr
                 getModuleWrapper().getEventBus().post(new BullSavedEvent(BullSavedEvent.Status.SUCCESS));
             }
         });
-    }
-
-    private class AddBullHandlerThread extends HandlerThread {
-        private Handler mHandler;
-
-        public AddBullHandlerThread() {
-            super(AddBullHandlerThread.class.getName());
-        }
-
-        @Override
-        protected void onLooperPrepared() {
-            mHandler = new Handler(getLooper());
-        }
-
-        public void post(Runnable runnable) {
-            mHandler.post(runnable);
-        }
     }
 }

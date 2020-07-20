@@ -8,6 +8,6 @@
     <string name="my_cows_description">Manage your cows</string>
     <string name="milk_production">Production of milk</string>
     <string name="milk_production_description">Information about production of milk in my dairy farm</string>
-    <string name="my_bulls_description">Manage your bulls</string>
-    <string name="my_bulls_name">My bulls</string>
+    <string name="bulls_description">Manage your bulls</string>
+    <string name="bulls_name">My bulls</string>
 </resources>

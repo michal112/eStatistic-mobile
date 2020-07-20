@@ -10,38 +10,38 @@ import android.view.MenuItem;
 
 import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
-import app.estat.mob.mvp.presenter.module.MyBullsActivityPresenter;
+import app.estat.mob.mvp.presenter.module.BullsActivityPresenter;
 import app.estat.mob.mvp.util.ActivityUtils;
-import app.estat.mob.mvp.view.module.MyBullsActivityView;
+import app.estat.mob.mvp.view.module.BullsActivityView;
 import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.AddBullActivity;
 
-public class MyBullsActivity extends ModuleActivity<MyBullsActivityPresenter, MyBullsActivityView>
-        implements MyBullsActivityView {
-    private static final String TAG = MyBullsActivity.class.getName();
+public class BullsActivity extends ModuleActivity<BullsActivityPresenter, BullsActivityView>
+        implements BullsActivityView {
+    private static final String TAG = BullsActivity.class.getName();
 
     public static final int ADD_BULL = 0;
 
     public static Intent newIntent(@NonNull Context context, String iconRes, String nameRes) {
-        return newIntent(context, MyBullsActivity.class, iconRes, nameRes);
+        return newIntent(context, BullsActivity.class, iconRes, nameRes);
     }
 
     @NonNull
     @Override
-    public MyBullsActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
-        return new MyBullsActivityPresenter(context, applicationComponent);
+    public BullsActivityPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new BullsActivityPresenter(context, applicationComponent);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragment(R.id.activity_module_container, MyBullsFragment.newInstance(), false);
+        addFragment(R.id.activity_module_container, BullsFragment.newInstance(), false);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_my_bulls_menu, menu);
+        getMenuInflater().inflate(R.menu.activity_bulls_menu, menu);
         return true;
     }
 
@@ -50,7 +50,7 @@ public class MyBullsActivity extends ModuleActivity<MyBullsActivityPresenter, My
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
-            case R.id.activity_my_bulls_menu_add:
+            case R.id.activity_bulls_menu_add:
                 startActivityForResult(ActionActivity.newIntent(this, AddBullActivity.class), ADD_BULL);
                 break;
             default:
@@ -72,7 +72,7 @@ public class MyBullsActivity extends ModuleActivity<MyBullsActivityPresenter, My
                     showMessage(R.string.new_bull_save_error);
                 }
                 break;
-            case MyBullsFragment.VIEW_BULL:
+            case BullsFragment.VIEW_BULL:
                 if (resultCode == ActivityUtils.RESULT_BULL_DELETED) {
                     showMessage(R.string.bull_successfully_deleted);
                 } if (resultCode == ActivityUtils.RESULT_BULL_DELETE_ERROR) {

@@ -2,10 +2,15 @@
 <resources>
     <!-- recycler view -->
     <declare-styleable name="AnimalRecyclerView">
-        <attr name="iconName" format="integer"/>
+        <attr name="animalRecyclerViewIcon" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="FormRecyclerView">
+        <attr name="formRecyclerViewType" format="reference|string"/>
+        <attr name="formRecyclerViewNameIcon" format="integer"/>
+        <attr name="formRecyclerViewCalendarIcon" format="integer"/>
     </declare-styleable>
     <!-- card view -->
     <declare-styleable name="FormCardView">
-        <attr name="groupTitle" format="reference|string"/>
+        <attr name="formCardViewTitle" format="reference|string"/>
     </declare-styleable>
 </resources>

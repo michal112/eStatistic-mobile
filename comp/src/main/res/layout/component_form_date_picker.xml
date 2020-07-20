@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/component_form_date_picker_height">
+    android:layout_height="@dimen/component_form_date_picker_height"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/component_form_date_picker_icon"
-        android:layout_width="@dimen/component_form_date_picker_image_height"
-        android:layout_height="@dimen/component_form_date_picker_image_height"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/component_form_date_picker_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+    <LinearLayout
+        android:layout_width="@dimen/component_form_date_picker_image_container_width"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/component_form_date_picker_icon"
+            android:layout_width="@dimen/component_form_date_picker_image_height"
+            android:layout_height="@dimen/component_form_date_picker_image_height"
+            tools:src="@tools:sample/avatars" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/component_form_date_picker_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/component_form_date_picker_text_margin_left"
+        android:layout_marginStart="@dimen/component_form_date_picker_text_margin_left"
         android:gravity="center_vertical"
         android:lines="1"
         android:textSize="@dimen/component_form_date_picker_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/component_form_date_picker_guideline"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/component_form_date_picker_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/component_form_date_picker_guideline_start" />
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

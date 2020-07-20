@@ -43,7 +43,13 @@
         <activity android:name=".ui.action.ViewCowActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.module.MyBullsActivity"
+        <activity android:name=".ui.module.BullsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.action.AddMateActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.action.AddLactationActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.action.AddBullActivity"

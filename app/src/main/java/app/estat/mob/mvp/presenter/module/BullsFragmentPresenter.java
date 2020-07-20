@@ -11,18 +11,14 @@ import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Bull;
 import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.mvp.core.MvpBaseFragmentPresenter;
-import app.estat.mob.mvp.model.BullData;
-import app.estat.mob.mvp.view.module.MyBullsFragmentView;
+import app.estat.mob.mvp.view.module.BullsFragmentView;
 
-public class MyBullsFragmentPresenter extends MvpBaseFragmentPresenter<MyBullsFragmentView> {
+public class BullsFragmentPresenter extends MvpBaseFragmentPresenter<BullsFragmentView> {
 
     private List<Bull> mBulls;
 
-    private Context mContext;
-
-    public MyBullsFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
+    public BullsFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
-        mContext = context;
 
         mBulls = getModuleWrapper().getDbCache().getBulls();
     }
@@ -41,8 +37,6 @@ public class MyBullsFragmentPresenter extends MvpBaseFragmentPresenter<MyBullsFr
             return;
         }
 
-        getModuleWrapper().getDbCache().prefetchBulls(getModuleWrapper().getDbManager().getDaoSession(mContext));
-        mBulls = getModuleWrapper().getDbCache().getBulls();
         getView().refreshAdapter();
     }
 

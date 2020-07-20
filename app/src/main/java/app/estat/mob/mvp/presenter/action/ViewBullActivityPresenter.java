@@ -8,25 +8,26 @@ import android.util.Log;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import app.estat.mob.R;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.dao.DaoSession;
 import app.estat.mob.event.AdapterRefreshEvent;
 import app.estat.mob.event.BullDeletedEvent;
+import app.estat.mob.event.MateDeletedEvent;
 import app.estat.mob.event.StatusEvent;
+import app.estat.mob.mvp.util.PresenterUtils;
 import app.estat.mob.mvp.view.action.ViewBullActivityView;
 
 public class ViewBullActivityPresenter extends ActionActivityPresenter<ViewBullActivityView> {
 
     private static final String TAG = ViewBullActivityPresenter.class.getName();
 
-    private DeleteBullHandlerThread mDeleteBullHandlerThread;
+    private PresenterUtils.PresenterHandler mDeleteBullHandlerThread;
 
     public ViewBullActivityPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
 
-        mDeleteBullHandlerThread = new DeleteBullHandlerThread();
-        mDeleteBullHandlerThread.start();
-        mDeleteBullHandlerThread.getLooper();
+        mDeleteBullHandlerThread = new PresenterUtils.PresenterHandler(ViewBullActivityPresenter.class.getName());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -55,20 +56,16 @@ public class ViewBullActivityPresenter extends ActionActivityPresenter<ViewBullA
         });
     }
 
-    private class DeleteBullHandlerThread extends HandlerThread {
-        private Handler mHandler;
-
-        public DeleteBullHandlerThread() {
-            super(DeleteBullHandlerThread.class.getName());
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMateDeletedEvent(MateDeletedEvent event) {
+        if (!isViewAttached()) {
+            return;
         }
 
-        @Override
-        protected void onLooperPrepared() {
-            mHandler = new Handler(getLooper());
-        }
-
-        public void post(Runnable runnable) {
-            mHandler.post(runnable);
+        if (StatusEvent.Status.SUCCESS.equals(event.getStatus())) {
+            getView().showMessage(R.string.mate_successfully_deleted);
+        } else if (StatusEvent.Status.FAILURE.equals(event.getStatus())) {
+            getView().showMessage(R.string.mate_delete_error);
         }
     }
 }

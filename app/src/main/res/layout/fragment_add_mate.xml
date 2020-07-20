@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app.estat.mob.comp.card.FormCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_add_mate"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    widget:formCardViewTitle="@string/fragment_add_mate_title"
+    android:layout_margin="@dimen/component_form_card_view_margin" />

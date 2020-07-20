@@ -15,8 +15,18 @@ import app.estat.mob.mvp.view.action.ActionActivityView;
 public abstract class ActionActivity<P extends ActionActivityPresenter<V>, V extends ActionActivityView> extends MvpBaseActivity<P, V>
         implements ActionActivityView {
 
+    public static final String VALUE_KEY = "app.estat.mob.ui.action.ActionActivity.VALUE_KEY";
+
     public static Intent newIntent(@NonNull Context context, Class clazz) {
-        return new Intent(context, clazz);
+        return newIntent(context, clazz, null);
+    }
+
+    public static Intent newIntent(@NonNull Context context, Class clazz, String value) {
+        Intent intent = new Intent(context, clazz);
+        if (value != null) {
+            intent.putExtra(VALUE_KEY, value);
+        }
+        return intent;
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -17,28 +18,29 @@ import app.estat.mob.comp.recycler.AnimalRecyclerView;
 import app.estat.mob.component.ApplicationComponent;
 import app.estat.mob.db.entity.Bull;
 import app.estat.mob.mvp.core.MvpBaseFragment;
-import app.estat.mob.mvp.presenter.module.MyBullsFragmentPresenter;
-import app.estat.mob.mvp.view.module.MyBullsFragmentView;
+import app.estat.mob.mvp.presenter.module.BullsFragmentPresenter;
+import app.estat.mob.mvp.view.module.BullsFragmentView;
+import app.estat.mob.ui.action.ActionActivity;
 import app.estat.mob.ui.action.ViewBullActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, MyBullsFragmentView>
-        implements MyBullsFragmentView {
+public class BullsFragment extends MvpBaseFragment<BullsFragmentPresenter, BullsFragmentView>
+        implements BullsFragmentView {
 
     public static final int VIEW_BULL = 1;
 
-    @BindView(R.id.fragment_my_bulls_recycler_view)
+    @BindView(R.id.fragment_bulls_recycler_view)
     AnimalRecyclerView mRecyclerView;
 
-    public static MyBullsFragment newInstance() {
-        return new MyBullsFragment();
+    public static BullsFragment newInstance() {
+        return new BullsFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_bulls, container, false);
+        View view = inflater.inflate(R.layout.fragment_bulls, container, false);
         ButterKnife.bind(this, view);
 
         getPresenter().requestBulls();
@@ -47,8 +49,8 @@ public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, M
 
     @NonNull
     @Override
-    public MyBullsFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
-        return new MyBullsFragmentPresenter(context, applicationComponent);
+    public BullsFragmentPresenter createPresenter(Context context, ApplicationComponent applicationComponent) {
+        return new BullsFragmentPresenter(context, applicationComponent);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, M
         AnimalAdapter<Bull> myBullsAdapter = new AnimalAdapter(bulls, new AnimalAdapter.AnimalItemClickListener() {
             @Override
             public void onClick(int position) {
-                getActivity().startActivityForResult(ViewBullActivity.newIntent(getActivity(), getPresenter().getBullPublicId(position)), VIEW_BULL);
+                getActivity().startActivityForResult(ActionActivity.newIntent(getActivity(), ViewBullActivity.class, getPresenter().getBullPublicId(position)), VIEW_BULL);
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -65,6 +67,6 @@ public class MyBullsFragment extends MvpBaseFragment<MyBullsFragmentPresenter, M
 
     @Override
     public void refreshAdapter() {
-        getPresenter().requestBulls();
+        mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 }

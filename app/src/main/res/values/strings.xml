@@ -19,19 +19,33 @@
     <string name="bull_delete_error">Unable to delete bull</string>
     <string name="new_bull_successfully_saved">Bull successfully save</string>
     <string name="new_bull_save_error">Unable to save bull</string>
+    <string name="new_mate_successfully_saved">Mate successfully saved</string>
+    <string name="new_mate_save_error">Unable to save mate</string>
+    <string name="mate_successfully_deleted">Mate successfully deleted</string>
+    <string name="mate_delete_error">Unable to delete mate</string>
+    <string name="new_lactation_successfully_saved">Lactation successfully saved</string>
+    <string name="new_lactation_save_error">Unable to save lactation</string>
+    <string name="lactation_successfully_deleted">Lactation successfully deleted</string>
+    <string name="lactation_delete_error">Unable to delete lactation</string>
     <!-- toolbar -->
-    <string name="activity_add_cow_toolbar_title">Add new cow</string>
-    <string name="activity_add_bull_toolbar_title">Add new bull</string>
+    <string name="activity_add_cow_toolbar_title">Add cow</string>
+    <string name="activity_add_bull_toolbar_title">Add bull</string>
     <string name="activity_view_cow_toolbar_title">Cow preview</string>
     <string name="activity_view_bull_toolbar_title">Bull preview</string>
+    <string name="activity_add_mate_toolbar_title">Add mate</string>
+    <string name="activity_add_lactation_toolbar_title">Add lactation</string>
     <!-- menu -->
     <string name="activity_add_cow_menu_done">DONE</string>
     <string name="activity_view_cow_menu_delete">DELETE</string>
     <string name="activity_add_bull_menu_done">DONE</string>
     <string name="activity_view_bull_menu_delete">DELETE</string>
     <string name="activity_view_cow_menu_add_mate">Add mate</string>
+    <string name="activity_add_mate_menu_done">DONE</string>
+    <string name="activity_add_lactation_menu_done">DONE</string>
     <string name="activity_view_cow_menu_add_lactation">Add lactation</string>
     <!-- components -->
+    <string name="fragment_add_mate_title">Mate</string>
+    <string name="fragment_add_lactation_title">Lactation</string>
     <string name="fragment_add_cow_basic_data_title">Cow basic data</string>
     <string name="main_book_cow">Main book</string>
     <string name="introductory_book_cow">Introductory book</string>
@@ -39,4 +53,8 @@
     <string name="fragment_view_bull_basic_data_title">Bull basic data</string>
     <string name="fragment_add_bull_basic_data_title">Bull basic data</string>
     <string name="fragment_view_cow_basic_data_title">Cow basic data</string>
+    <string name="fragment_view_cow_mates_title">Cow mates</string>
+    <string name="fragment_view_bull_mates_title">Bull mating</string>
+    <string name="fragment_view_cow_lactations_title">Cow lactations</string>
+
 </resources>

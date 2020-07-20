@@ -18,11 +18,8 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
 
     private List<Cow> mCows;
 
-    private Context mContext;
-
     public MyCowsFragmentPresenter(Context context, ApplicationComponent applicationComponent) {
         super(context, applicationComponent);
-        mContext = context;
 
         mCows = getModuleWrapper().getDbCache().getCows();
     }
@@ -41,8 +38,6 @@ public class MyCowsFragmentPresenter extends MvpBaseFragmentPresenter<MyCowsFrag
             return;
         }
 
-        getModuleWrapper().getDbCache().prefetchCows(getModuleWrapper().getDbManager().getDaoSession(mContext));
-        mCows = getModuleWrapper().getDbCache().getCows();
         getView().refreshAdapter();
     }
 

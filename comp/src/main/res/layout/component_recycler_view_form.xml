@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:weightSum="6">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="5">
+
+        <app.estat.mob.comp.text.FormTextView
+            android:id="@+id/component_recycler_view_form_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <app.estat.mob.comp.text.FormTextView
+            android:id="@+id/component_recycler_view_form_item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/component_recycler_view_form_item_delete"
+            android:layout_width="@dimen/component_recycler_view_form_button_width"
+            android:layout_height="@dimen/component_recycler_view_form_button_height"
+            tools:src="@tools:sample/avatars"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+</LinearLayout>

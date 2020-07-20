@@ -25,7 +25,7 @@ import app.estat.mob.mvp.view.dashboard.DashboardFragmentView;
 import app.estat.mob.ui.module.AverageProductivityActivity;
 import app.estat.mob.ui.module.FarmCardActivity;
 import app.estat.mob.ui.module.MilkProductionActivity;
-import app.estat.mob.ui.module.MyBullsActivity;
+import app.estat.mob.ui.module.BullsActivity;
 import app.estat.mob.ui.module.MyCowsActivity;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -81,9 +81,9 @@ public class DashboardFragment extends MvpBaseFragment<DashboardFragmentPresente
                         MilkProductionActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
-            case MY_BULLS:
+            case BULLS:
                 ActivityUtils.animateModuleActivity(getActivity(),
-                        MyBullsActivity.newIntent(getActivity(), module.getIconRes(),
+                        BullsActivity.newIntent(getActivity(), module.getIconRes(),
                                 module.getNameRes()), imageView, mTransitionName);
                 break;
             default:

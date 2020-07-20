@@ -38,6 +38,5 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
 
     @Override
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
-
     }
 }

@@ -13,7 +13,7 @@ public class BullService implements AnimalService<Bull> {
     }
 
     @Override
-    public long save(DaoSession daoSession, Bull bull) {
+    public Long save(DaoSession daoSession, Bull bull) {
         return daoSession.insert(bull);
     }
 

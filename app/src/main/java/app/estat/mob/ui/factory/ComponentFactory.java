@@ -9,6 +9,7 @@ import java.util.List;
 
 import app.estat.mob.comp.photo.FormPhotoView;
 import app.estat.mob.comp.picker.FormDatePicker;
+import app.estat.mob.comp.recycler.FormRecyclerView;
 import app.estat.mob.comp.spinner.FormSpinner;
 import app.estat.mob.comp.spinner.FormSpinnerAdapter;
 import app.estat.mob.comp.text.FormEditText;
@@ -58,6 +59,16 @@ public class ComponentFactory {
         component.setHint(hintRes);
         component.setIcon(iconRes);
         component.setFragmentManager(activity.getSupportFragmentManager());
+        return component;
+    }
+
+    public static FormRecyclerView getFormRecyclerViewComponent(Context context, FormRecyclerView.Type type, @DrawableRes int calendarRes, @DrawableRes int nameRes, @DrawableRes int deleteRes) {
+        FormRecyclerView component = new FormRecyclerView(context);
+        component.setMType(type);
+        component.setMCalendarIcon(calendarRes);
+        component.setMNameIcon(nameRes);
+        component.setMDeleteButton(deleteRes);
+
         return component;
     }
 }
